@@ -11,18 +11,18 @@
       <template slot-scope="scope">
         <slot :scope="scope">
           <el-input
-            v-if="current.row === scope.row && current.column === scope.column.label && label.editType === 'input'"
+            v-if="handleEdit(scope, label, 'input')"
             v-model="scope.row[label.value]"
             size="mini"
           ></el-input>
           <el-select
-            v-else-if="current.row === scope.row && current.column === scope.column.label && label.editType === 'select'"
+            v-else-if="handleEdit(scope, label, 'select')"
             v-model="scope.row[label.value]"
             size="mini"
           >
           </el-select>
           <el-link
-            v-else-if="label.editType === 'link'"
+            v-else-if="handleEdit(scope, label, 'link')"
             type="primary"
           >{{ scope.row[label.value] }}</el-link>
           <span v-else>{{ scope.row[label.value] }}</span>
@@ -58,6 +58,10 @@ export default {
     cellClick(row, column, cell, event) {
       this.current.row = row
       this.current.column = column.label
+    },
+    handleEdit(scope, label, type) {
+      if (type === 'link') return true
+      return this.current.row === scope.row && this.current.column === scope.column.label && label.editType === type
     },
   },
 }
