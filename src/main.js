@@ -1,8 +1,8 @@
 import Vue from 'vue'
 
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-import locale from 'element-ui/lib/locale/lang/en'
+import {
+  Table, TableColumn, Link, Input, Button, Select,
+} from 'element-ui'
 
 import App from './App.vue'
 import router from './router/index'
@@ -11,7 +11,13 @@ import './plugins/element.js'
 
 import 'assets/styles/index.styl'
 
-Vue.use(ElementUI, { locale })
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(Link)
+Vue.use(Input)
+Vue.use(Button)
+Vue.use(Select)
+
 Vue.config.productionTip = false
 
 new Vue({
