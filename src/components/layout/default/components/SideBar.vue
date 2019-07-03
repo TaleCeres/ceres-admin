@@ -1,21 +1,23 @@
 <template>
   <div class="sidebar">
-    <div class="name" v-if="!isCollapse">
+    <div v-if="!isCollapse" class="name">
       <img src="../../../../assets/images/company/name.png" alt="">
     </div>
-    <div class="logo" v-else>
+    <div v-else class="logo">
       <img src="../../../../assets/images/company/logo.png" alt="">
     </div>
-    <el-menu default-active="2" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+    <el-menu default-active="2" :collapse="isCollapse"
+             @open="handleOpen" @close="handleClose">
       <template v-for="item in routes">
 
         <!-- 一级菜单(含二级菜单) -->
-        <el-submenu v-if="item.children" :index="item.name" :key="item.name">
+        <el-submenu v-if="item.children" :key="item.name" :index="item.name">
           <template slot="title">
             <i :class="item.meta.icon"></i>
             <span>{{ item.name }}</span>
           </template>
-          <router-link class="icon-menu" v-for="(subItem) in item.children" :to="subItem.path" :key="subItem.name">
+          <router-link v-for="(subItem) in item.children" :key="subItem.name"
+                       class="icon-menu" :to="subItem.path">
             <el-menu-item :index="subItem.name" style="padding-left: 60px;">
               {{ subItem.name }}
             </el-menu-item>
@@ -23,15 +25,15 @@
           <!-- 二级菜单 -->
         </el-submenu>
 
-          <!-- 一级菜单(不含二级菜单) -->
-          <router-link v-else :to="item.path" :key="item.name">
-            <el-menu-item :index="item.name">
-              <i :class="item.meta.icon"></i>
-              <span slot="title">{{item.name}}</span>
-            </el-menu-item>
-          </router-link>
+        <!-- 一级菜单(不含二级菜单) -->
+        <router-link v-else :key="item.name" :to="item.path">
+          <el-menu-item :index="item.name">
+            <i :class="item.meta.icon"></i>
+            <span slot="title">{{item.name}}</span>
+          </el-menu-item>
+        </router-link>
 
-        </template>
+      </template>
     </el-menu>
   </div>
 </template>
@@ -52,7 +54,6 @@ export default {
     routes() {
       let { routes } = this.$router.options
       let sidebarList = routes.filter(item => item.hidden !== true).map(item => item.children)
-      console.log('sidebarList', sidebarList)
       return flatten(sidebarList)
     },
     isCollapse() {

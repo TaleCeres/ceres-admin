@@ -1,7 +1,8 @@
 <template>
   <nav class="nav-bar">
     <div class="left-menu">
-      <i class="icon-font el-icon-s-fold" :class="{rotate: foldState}" @click="toggleSlidebarState" />
+      <i v-show="true" class="icon-font el-icon-s-fold" :class="{rotate: foldState}"
+         @click="toggleSlidebarState" />
       <Breadcrumb />
     </div>
     <div class="right-menu">
