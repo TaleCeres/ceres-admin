@@ -12,6 +12,11 @@ import {
   Dropdown,
   DropdownMenu,
   DropdownItem,
+  Table,
+  TableColumn,
+  Link,
+  Input,
+  Select,
 } from 'element-ui'
 import { loadPlugins } from '../utils/index'
 
@@ -29,4 +34,9 @@ loadPlugins([
   Dropdown,
   DropdownMenu,
   DropdownItem,
+  Table,
+  TableColumn,
+  Link,
+  Input,
+  Select,
 ])
