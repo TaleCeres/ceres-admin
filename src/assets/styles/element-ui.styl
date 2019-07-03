@@ -1,0 +1,32 @@
+/* layout */
+.el-container
+  height 100%
+
+.el-main
+  padding 0
+
+.el-aside
+  transition all 0.3s linear
+
+/* el-button */
+/* el-menu */
+.el-menu
+  // 二级菜单的默认icon
+  .icon-menu
+    .el-menu-item,
+    .el-menu-item.is-active
+      position relative
+
+      &:before
+        position absolute
+        left 60px
+        top 23px
+        width 4px
+        height 4px
+        content ''
+        border 1px solid grey
+        border-radius 50%
+
+      &.is-active
+        &:before
+          border 1px solid #409EFF
