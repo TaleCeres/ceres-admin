@@ -18,7 +18,10 @@ module.exports = {
     '@vue/airbnb',
   ],
   rules: {
-    /* vue 规范 */ 
+    /* vue 规范
+    Vue风格指南: https://cn.vuejs.org/v2/style-guide/index.html
+    Vue规范文档: https://eslint.vuejs.org/rules
+    */ 
     'vue/order-in-components': ['warn', {
       'order': [ // 组件&实例的选项的顺序(参考: https://cn.vuejs.org/v2/style-guide/index.html#组件-实例的选项的顺序-推荐)
         'el',
@@ -51,12 +54,17 @@ module.exports = {
         'UNIQUE', // 唯一的特性 ref, key, slot, v-slot
         'TWO_WAY_BINDING', // 双向绑定 v-model
         'OTHER_DIRECTIVES', // 其他指令 v-custom-directive
-        'OTHER_ATTR', // 其他属性 custom-prop="foo", v-bind:prop="foo", :prop="foo"
+        'OTHER_ATTR', // 其他特性 custom-prop="foo", v-bind:prop="foo", :prop="foo"
         'EVENTS', // 事件 (组件事件监听器) @click="functionCall", v-on="event"
         'CONTENT' // 内容 (覆写元素的内容) v-html, v-text
       ]
     }],
-    /* js 规范 */ 
+    'vue/prop-name-casing': ['error', 'camelCase'], // prop name 使用小驼峰命名法
+    'vue/attribute-hyphenation': ['error', 'always'], // 特性name 使用连字符: <MyComponent my-prop="prop" />
+
+    /* js 规范 
+    
+    */ 
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off', // 使用控制台
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-unused-vars': process.env.NODE_ENV === 'production' ? 'error' : 'off',
