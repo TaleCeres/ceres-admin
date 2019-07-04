@@ -42,12 +42,12 @@ export default {
     this._drawBack(-1)
   },
   methods: {
-    _drawBack(delay=5000) {
+    _drawBack(delay = 5000) {
       // delay为负数则失效; 默认5秒后跳回原先的页面
-      if (delay <= 0) return 
+      if (delay <= 0) return
       setTimeout(() => this.$router.go(-1), delay)
-    }
-  }
+    },
+  },
 }
 </script>
 

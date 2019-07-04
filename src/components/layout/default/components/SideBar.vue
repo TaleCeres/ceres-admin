@@ -77,7 +77,7 @@ export default {
       console.log('所有路由(含嵌套子路由):', this.$router.options.routes)
       console.log('$route:', this.$route)
       console.log('当前页面的name:', this.$route.name)
-    }
+    },
   },
 }
 

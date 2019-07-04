@@ -1,6 +1,7 @@
 <template>
   <nav class="nav-path">
-    <router-link class="item" v-for="(item) in navList" :key="item.name" :to="item.path">
+    <router-link v-for="(item) in navList" :key="item.name"
+                 class="item" :to="item.path">
       <span>{{item.name}}</span>
     </router-link>
   </nav>
@@ -22,7 +23,7 @@ export default {
       return matched.map(item => ({
         name: item.name,
         title: item.meta.title,
-        path: item.redirect ? item.redirect: item.path
+        path: item.redirect ? item.redirect : item.path,
       }))
     },
   },
