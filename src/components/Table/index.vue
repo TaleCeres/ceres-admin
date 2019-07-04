@@ -60,7 +60,8 @@ export default {
       this.current.column = column.label
     },
     handleEdit(scope, label, type) {
-      if (type === 'link') return true
+      if (!label.editType) return false
+      if (label.editType === type && label.editType === 'link') return true
       return this.current.row === scope.row && this.current.column === scope.column.label && label.editType === type
     },
   },
