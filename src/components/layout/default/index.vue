@@ -17,6 +17,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { mapGetters } from 'vuex'
 import AppMain from './components/AppMain'
 import SideBar from './components/SideBar'
 import NavBar from './components/NavBar/index'
@@ -30,21 +31,24 @@ export default {
   },
   data() {
     return {
-      isCollapse: false, // 左侧菜单栏是否折叠
-      sidebarWidth: '170px', // 左侧菜单栏展开的宽度
       clientWidth: 0, // 页面宽度(body标签)
       clientHeight: 0, // 页面高度
     }
   },
-  computed: {},
-  watch: {
+  computed: {
+    ...mapGetters([
+      'sidebar',
+    ]),
+    // 左侧菜单栏是否折叠
     isCollapse() {
-      this.sideBarWidth = this.isCollapse === false ? '170px' : '64px'
+      return this.sidebar.closed
+    },
+    // 左侧菜单栏展开的宽度
+    sidebarWidth() {
+      return this.isCollapse === false ? '170px' : '64px'
     },
   },
-  mounted() {
-
-  },
+  mounted() { },
   methods: {
     // 响应页面的宽度高度变化
     setResize() {

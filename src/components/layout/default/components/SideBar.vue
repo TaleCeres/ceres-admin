@@ -6,8 +6,7 @@
     <div v-else class="logo">
       <img src="../../../../assets/images/company/logo.png" alt="">
     </div>
-    <el-menu default-active="2" :collapse="isCollapse"
-             @open="handleOpen" @close="handleClose">
+    <el-menu default-active="2" :collapse="isCollapse" @open="handleOpen" @close="handleClose">
       <template v-for="item in routes">
 
         <!-- 一级菜单(含二级菜单) -->
@@ -16,8 +15,7 @@
             <i :class="item.meta.icon"></i>
             <span>{{ item.name }}</span>
           </template>
-          <router-link v-for="(subItem) in item.children" :key="subItem.name"
-                       class="icon-menu" :to="subItem.path">
+          <router-link v-for="(subItem) in item.children" :key="subItem.name" class="icon-menu" :to="subItem.path">
             <el-menu-item :index="subItem.name" style="padding-left: 60px;">
               {{ subItem.name }}
             </el-menu-item>
@@ -86,15 +84,15 @@ export default {
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .sidebar
   .name
-    width $sidebar-width
+    width 100%
     height $header-height
     display flex
     justify-content center
     align-items center
 
     img
-      width 90%
-      transition all 0.3s linear
+      width 148px
+      transition height 0, width 0.3s linear // all 0.3s linear
 
   .logo
     display flex
@@ -102,6 +100,6 @@ export default {
     align-items center
 
     img
-      width 50%
-      transition all 0.3s linear
+      width 40px
+      transition height 0, width 0.3s linear
 </style>
