@@ -22,17 +22,15 @@ export default new Router({
   },
   routes: [
     {
-      path: '/index',
+      path: '/',
       component: Layout,
-      name: '临时',
+      name: '首页',
+      redirect: '/home',
       meta: {
-        title: '主页',
+        title: '首页',
         icon: 'el-icon-menu',
       },
       children: [
-        chartRouter,
-        formRouter,
-        tableRouter,
         {
           path: '/home',
           name: 'home', // 配套中英文切换
@@ -60,6 +58,9 @@ export default new Router({
             icon: 'el-icon-setting',
           },
         },
+        chartRouter,
+        formRouter,
+        tableRouter,
       ],
     },
     { path: '/login', component: _import('login/index'), hidden: true },
