@@ -18,7 +18,7 @@ export default {
       return this.$route.name
     },
     navList() {
-      let matched = this.$route.matched // 包含当前路由的所有嵌套路径(祖先-->子孙)
+      let { matched } = this.$route // 包含当前路由的所有嵌套路径(祖先-->子孙)
       return matched.map(item => ({
         name: item.name,
         title: item.meta.title,
