@@ -62,9 +62,7 @@ export default {
   },
   created() { },
   mounted() {
-    console.log('所有路由(含嵌套子路由):', this.$router.options.routes)
-    console.log('当前页面的路由(route)信息:', this.$route)
-    console.log('当前页面的name:', this.$route.name)
+    // this.__testRouterAttrs()
   },
   methods: {
     handleOpen(key, keyPath) {
@@ -74,6 +72,12 @@ export default {
     handleClose(key, keyPath) {
       // console.log(key, keyPath)
     },
+    _testRouterAttrs() {
+      console.log('$router:', this.$router)
+      console.log('所有路由(含嵌套子路由):', this.$router.options.routes)
+      console.log('$route:', this.$route)
+      console.log('当前页面的name:', this.$route.name)
+    }
   },
 }
 
