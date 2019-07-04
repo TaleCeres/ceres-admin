@@ -1,8 +1,8 @@
 <template>
   <nav class="nav-path">
-    <a class="item" v-for="(item, index) in navList" :key="index">
-      <span>{{item}}</span>
-    </a>
+    <router-link class="item" v-for="(item) in navList" :key="item.name" :to="item.path">
+      <span>{{item.name}}</span>
+    </router-link>
   </nav>
 </template>
 
@@ -18,9 +18,13 @@ export default {
       return this.$route.name
     },
     navList() {
-      return ['首页', '第二页', this.$route.name]
+      let { matched } = this.$route // 包含当前路由的所有嵌套路径(祖先-->子孙)
+      return matched.map(item => ({
+        name: item.name,
+        title: item.meta.title,
+        path: item.redirect ? item.redirect: item.path
+      }))
     },
-
   },
   created() { },
   mounted() { },
