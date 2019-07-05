@@ -1,7 +1,7 @@
 <template>
   <div style="height:100%;">
     <el-container>
-      <el-aside :width="sidebarWidth" style="border: 1px solid red;">
+      <el-aside :width="sidebarWidth" class="aside">
         <SideBar />
       </el-aside>
       <el-container>
@@ -65,4 +65,8 @@ export default {
   align-items center
   padding 0
   box-shadow 0px 2px 6px 0px rgba(190, 204, 216, 0.4)
+
+.aside
+  border 1px solid red
+  overflow-x hidden
 </style>

@@ -1,4 +1,5 @@
-import Layout from 'comps/layout/blank'
+import Layout from 'comps/layout/default/index'
+
 const _import = file => () => import(/* webpackChunkName: "about" */ `@/views/${file}.vue`)
 
 export default {
