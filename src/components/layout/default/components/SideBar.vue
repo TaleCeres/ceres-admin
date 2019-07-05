@@ -1,11 +1,9 @@
 <template>
   <div class="sidebar">
-    <div v-if="!isCollapse" class="name">
-      <img src="../../../../assets/images/company/name.png" alt="">
-    </div>
-    <div v-else class="logo">
-      <img src="../../../../assets/images/company/logo.png" alt="">
-    </div>
+    <router-link class="logo" to="/">
+      <img v-if="!isCollapse" class="name" src="../../../../assets/images/company/name.png" alt="">
+      <img v-else class="brand" src="../../../../assets/images/company/logo.png" alt="">
+    </router-link>
     <el-menu default-active="2" :collapse="isCollapse" @open="handleOpen" @close="handleClose">
       <template v-for="item in routes">
 
@@ -51,7 +49,7 @@ export default {
     ]),
     routes() {
       let { routes } = this.$router.options
-      let sidebarList = routes.filter(item => item.hidden !== true).map(item => item.children)
+      let sidebarList = routes.filter(item => item.hidden !== true)
       return flatten(sidebarList)
     },
     isCollapse() {
@@ -60,7 +58,7 @@ export default {
   },
   created() { },
   mounted() {
-    // this.__testRouterAttrs()
+    // this._testRouterAttrs()
   },
   methods: {
     handleOpen(key, keyPath) {
@@ -83,23 +81,17 @@ export default {
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .sidebar
-  .name
-    width 100%
+  .logo
     height $header-height
     display flex
     justify-content center
     align-items center
 
-    img
+    .name
       width 148px
       transition height 0, width 0.3s linear // all 0.3s linear
 
-  .logo
-    display flex
-    justify-content center
-    align-items center
-
-    img
+    .brand
       width 40px
       transition height 0, width 0.3s linear
 </style>
