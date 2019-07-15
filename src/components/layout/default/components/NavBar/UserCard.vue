@@ -6,7 +6,7 @@
       </span>
       <el-dropdown-menu slot="dropdown" class="detail">
         <div style="height: 100px; border: 1px solid red"></div>
-        <p>退出登录</p>
+        <p style="cursor: pointer" @click="handleLogout">退出登录</p>
       </el-dropdown-menu>
     </el-dropdown>
   </div>
@@ -26,7 +26,15 @@ export default {
   created() { },
   mounted() {
   },
-  methods: {},
+  methods: {
+    handleLogout() {
+      this.$store.dispatch('FedLogOut').then(() => {
+        this.$router.push( {path: '/login'} )
+      }).catch(() => {
+        console.log('catch')
+      })
+    }
+  },
 }
 </script>
 

@@ -1,4 +1,6 @@
 import {
+  Row,
+  Col,
   Icon,
   Button,
   Container,
@@ -21,6 +23,8 @@ import {
 import { loadPlugins } from '../utils/index'
 
 loadPlugins([
+  Row,
+  Col,
   Icon,
   Button,
   Container,
