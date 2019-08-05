@@ -8,7 +8,7 @@
         <el-header class="header">
           <NavBar />
         </el-header>
-        <el-main>
+        <el-main class="main">
           <AppMain />
         </el-main>
       </el-container>
@@ -18,6 +18,7 @@
 
 <script type="text/ecmascript-6">
 import { mapGetters } from 'vuex'
+import ResizeMixin from './mixin/resize'
 import AppMain from './components/AppMain'
 import SideBar from './components/SideBar'
 import NavBar from './components/NavBar/index'
@@ -29,12 +30,7 @@ export default {
     SideBar,
     NavBar,
   },
-  data() {
-    return {
-      clientWidth: 0, // 页面宽度(body标签)
-      clientHeight: 0, // 页面高度
-    }
-  },
+  mixins: [ResizeMixin],
   computed: {
     ...mapGetters([
       'sidebar',
@@ -49,24 +45,25 @@ export default {
     },
   },
   mounted() { },
-  methods: {
-    // 响应页面的宽度高度变化
-    setResize() {
-      this.clientHeight = document.body.clientHeight
-      this.clientWidth = document.body.clientWidth
-    },
-  },
 }
 
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
-.header
+.aside {
+  border 1px solid red
+  overflow-x hidden
+  &::-webkit-scrollbar {
+    width 0px
+    height 0px
+  }
+}
+.header {
   display flex
   align-items center
   padding 0
   box-shadow 0px 2px 6px 0px rgba(190, 204, 216, 0.4)
-
-.aside
-  border 1px solid red
-  overflow-x hidden
+}
+.main {
+  margin: 2px 0 0 2px // 避免过于紧凑
+}
 </style>

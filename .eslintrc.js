@@ -76,6 +76,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'max-len': ['error', { code: 200 }], // 代码行长度
     'consistent-return': 'off', // 函数需要返回数值
+    'no-trailing-spaces': 'off', // 行末有多余空格
     semi: ['error', 'never'], // 无分号
     indent: ['error', 2, { // 2格缩进
       'SwitchCase': 1, // 针对switch case的缩进（默认：0）

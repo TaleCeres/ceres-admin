@@ -1,8 +1,7 @@
 <template>
   <nav class="nav-path">
-    <router-link v-for="(item) in navList" :key="item.name"
-                 class="item" :to="item.path">
-      <span>{{item.name}}</span>
+    <router-link v-for="(item) in navList" :key="item.name" class="item" :to="item.path">
+      <span>{{item.title}}</span>
     </router-link>
   </nav>
 </template>
@@ -34,18 +33,22 @@ export default {
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-.nav-path
-  .item
-    &:not(:last-child)
-      span
+.nav-path {
+  .item {
+    &:not(:last-child) {
+      span {
         color $light-blue
-
-      &::after
+      }
+      &::after {
         padding 0 8px // 「间隔符」居中
         content '/'
         font-weight bold
         cursor default
-
-    &:last-child
+      }
+    }
+    &:last-child {
       cursor default
+    }
+  }
+}
 </style>
