@@ -1,6 +1,20 @@
 const path = require('path')
+const port = 8080 // dev port
 
 module.exports = {
+  configureWebpack: {
+    devtool: 'source-map', // cheap-module-source-map & source-map
+  },
+  devServer: {
+    port: port,
+    proxy: {
+      // 文档 https://webpack.docschina.org/configuration/dev-server/#devserver-proxy
+      '/mock': {
+        target: `http://localhost:${port}/mock`,
+        // pathRewrite: {'^/api' : ''}, // 如果接口本身没有/api, 需要通过pathRewrite来重写了地址
+      },
+    },
+  },
   chainWebpack: (config) => {
     // 设置alias(文件路径的别名)
     config.resolve.alias

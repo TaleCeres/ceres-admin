@@ -1,14 +1,14 @@
 <template>
   <div style="height:100%;">
     <el-container>
-      <el-aside :width="sidebarWidth" style="border: 1px solid red;">
+      <el-aside :width="sidebarWidth" class="aside">
         <SideBar />
       </el-aside>
       <el-container>
         <el-header class="header">
           <NavBar />
         </el-header>
-        <el-main>
+        <el-main class="main">
           <AppMain />
         </el-main>
       </el-container>
@@ -17,6 +17,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { mapGetters } from 'vuex'
+import ResizeMixin from './mixin/resize'
 import AppMain from './components/AppMain'
 import SideBar from './components/SideBar'
 import NavBar from './components/NavBar/index'
@@ -28,37 +30,40 @@ export default {
     SideBar,
     NavBar,
   },
-  data() {
-    return {
-      isCollapse: false, // 左侧菜单栏是否折叠
-      sidebarWidth: '170px', // 左侧菜单栏展开的宽度
-      clientWidth: 0, // 页面宽度(body标签)
-      clientHeight: 0, // 页面高度
-    }
-  },
-  computed: {},
-  watch: {
+  mixins: [ResizeMixin],
+  computed: {
+    ...mapGetters([
+      'sidebar',
+    ]),
+    // 左侧菜单栏是否折叠
     isCollapse() {
-      this.sideBarWidth = this.isCollapse === false ? '170px' : '64px'
+      return this.sidebar.closed
+    },
+    // 左侧菜单栏展开的宽度
+    sidebarWidth() {
+      return this.isCollapse === false ? '170px' : '64px'
     },
   },
-  mounted() {
-
-  },
-  methods: {
-    // 响应页面的宽度高度变化
-    setResize() {
-      this.clientHeight = document.body.clientHeight
-      this.clientWidth = document.body.clientWidth
-    },
-  },
+  mounted() { },
 }
 
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
-.header
+.aside {
+  border 1px solid red
+  overflow-x hidden
+  &::-webkit-scrollbar {
+    width 0px
+    height 0px
+  }
+}
+.header {
   display flex
   align-items center
   padding 0
   box-shadow 0px 2px 6px 0px rgba(190, 204, 216, 0.4)
+}
+.main {
+  margin: 2px 0 0 2px // 避免过于紧凑
+}
 </style>

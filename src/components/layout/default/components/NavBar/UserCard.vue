@@ -1,12 +1,22 @@
 <template>
   <div class="user-card">
     <el-dropdown>
-      <span class="el-dropdown-link">
+      <div class="el-dropdown-link">
         <img class="avatar" :src="defaultAvatar" alt="头像">
-      </span>
-      <el-dropdown-menu class="detail" slot="dropdown">
-        <div style="height: 100px; border: 1px solid red"></div>
-        <p>退出登录</p>
+      </div>
+      <el-dropdown-menu slot="dropdown" class="detail">
+        <el-dropdown-item>
+          <router-link to="/home">用户信息</router-link>
+        </el-dropdown-item>
+        <el-dropdown-item>
+          <router-link to="/setting">页面配置</router-link>
+        </el-dropdown-item>
+        <el-dropdown-item>
+          <a target="_blank" href="https://github.com/TaleCeres/ceres-admin">Github地址</a>
+        </el-dropdown-item>
+        <el-dropdown-item divided icon="el-icon-switch-button">
+          注销
+        </el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
   </div>

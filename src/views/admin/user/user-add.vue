@@ -1,17 +1,17 @@
 <template>
-  <div class="container">
-    <h2>规范指南</h2>
-  </div>
+  <div>用户管理</div>
 </template>
 
 <script type="text/ecmascript-6">
 export default {
-  name: 'GuideIndex',
+  name: 'UserAdd',
   components: {},
   data() {
     return {}
   },
   computed: {},
+  created() {},
+  mounted() {},
   methods: {},
 }
 </script>

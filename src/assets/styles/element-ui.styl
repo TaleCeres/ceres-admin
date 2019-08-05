@@ -1,32 +1,92 @@
 /* layout */
-.el-container
+.el-container {
   height 100%
-
-.el-main
+}
+.el-main {
   padding 0
-
-.el-aside
+}
+.el-aside {
   transition all 0.3s linear
-
-/* el-button */
+}
 /* el-menu */
-.el-menu
-  // 二级菜单的默认icon
-  .icon-menu
+.el-menu {
+  border 0 // 消除自带的border
+  text-align left
+  .icon-menu {
     .el-menu-item,
-    .el-menu-item.is-active
-      position relative
+    .el-menu-item.is-active {
+      span {
+        position relative
+        // 设置「二级菜单」的默认icon
+        &:before {
+          position absolute
+          left -14px
+          top 7px
+          width 5px
+          height 5px
+          content ''
+          border 1px solid $submenu-title-default-color
+          border-radius 50%
+        }
+      }
+      // 点击后的样式
+      &.is-active {
+        span {
+          &:before {
+            border 1px solid #409EFF
+          }
+        }
+      }
+    }
+  }
+}
+// sidebar展开时，无 icon的 menu-item的样式
+.el-menu > .el-submenu >.el-menu {
+  // 二级 menu-item
+  & > .icon-menu > .el-menu-item {
+    padding-left 60px !important
+  }
+  // 三级 menu-item
+  & > .el-submenu > .el-menu {
+      & > .icon-menu > .el-menu-item {
+        padding-left 80px !important
+    }
+  }
+}
+// sidebar收缩时，无 icon的 menu-item(覆盖二级&三级)的样式
+.el-menu--vertical {
+  // 
+  .icon-menu > .el-menu-item {
+    padding-left 40px !important
+  }
+}
 
-      &:before
-        position absolute
-        left 60px
-        top 23px
-        width 4px
-        height 4px
-        content ''
-        border 1px solid grey
-        border-radius 50%
-
-      &.is-active
-        &:before
-          border 1px solid #409EFF
+.el-submenu__title {
+  color $submenu-title-default-color
+  i {
+    color $submenu-title-default-color
+  }
+}
+// 目录title恢复原色(目录激活&展开)
+.el-submenu.is-active.is-opened > .el-submenu__title {
+  color $submenu-title-default-color
+  i {
+    color $submenu-title-default-color
+  }
+}
+// 目录title激活色(目录激活&闭合)
+.el-submenu.is-active > .el-submenu__title {
+  color $submenu-title-active-color
+  i {
+    color $submenu-title-active-color
+  }
+}
+/* 覆盖侧边栏中 front awesome 字体图标的属性 */
+.el-submenu [class^=fa] {
+  vertical-align middle
+  margin-right 5px
+  width 24px
+  text-align center
+  font-size 18px
+}
+/* el-button */

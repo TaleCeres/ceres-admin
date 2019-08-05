@@ -1,19 +1,19 @@
-import Layout from 'comps/layout/blank'
-const _import = file => () => import(/* webpackChunkName: "about" */ `@/views/${file}.vue`)
+import Layout from 'comps/layout/default'
+const _import = file => () => import(`@/views/${file}.vue`)
 
 export default {
   path: '/form',
   name: 'Form',
   component: Layout,
   meta: {
-    title: 'Form',
-    icon: 'el-icon-s-data',
+    title: '表单',
+    icon: 'el-icon-tickets',
   },
   children: [
     {
       path: '/form/index',
       component: _import('form/index'),
-      name: 'IndexForm',
+      name: '表单首页',
       meta: { title: 'Index Form', icon: 'el-icon-house' },
     },
   ],

@@ -1,37 +1,49 @@
 <template>
   <div class="sidebar">
-    <div class="name" v-if="!isCollapse">
-      <img src="../../../../assets/images/company/name.png" alt="">
-    </div>
-    <div class="logo" v-else>
-      <img src="../../../../assets/images/company/logo.png" alt="">
-    </div>
-    <el-menu default-active="2" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+    <router-link class="logo" to="/">
+      <img v-if="!isCollapse" class="name" src="../../../../assets/images/company/name.png" alt="">
+      <img v-else class="brand" src="../../../../assets/images/company/logo.png" alt="">
+    </router-link>
+    <el-menu style="margin-bottom:50px" :default-active="defaultActive" :collapse="isCollapse" @open="handleOpen" @close="handleClose">
       <template v-for="item in routes">
-
         <!-- 一级菜单(含二级菜单) -->
-        <el-submenu v-if="item.children" :index="item.name" :key="item.name">
+        <el-submenu v-if="item.children" :key="item.name" :index="item.name">
           <template slot="title">
             <i :class="item.meta.icon"></i>
-            <span>{{ item.name }}</span>
+            <span>{{ item.meta.title }}</span>
           </template>
-          <router-link class="icon-menu" v-for="(subItem) in item.children" :to="subItem.path" :key="subItem.name">
-            <el-menu-item :index="subItem.name" style="padding-left: 60px;">
-              {{ subItem.name }}
-            </el-menu-item>
-          </router-link>
           <!-- 二级菜单 -->
+          <template v-for="(subItem) in item.children">
+            <el-submenu v-if="subItem.children" :key="subItem.name" :index="subItem.name">
+              <template slot="title">
+                <i :class="subItem.meta.icon"></i>
+                <span>{{ subItem.meta.title }}</span>
+              </template>
+              <!-- 三级菜单 -->
+              <router-link v-for="(grandchildItem) in subItem.children" :key="grandchildItem.name" class="icon-menu" :to="grandchildItem.path">
+                <el-menu-item :index="grandchildItem.name">
+                  <span>{{ grandchildItem.meta.title }}</span>
+                </el-menu-item>
+              </router-link>
+            </el-submenu>
+
+            <!-- 二级菜单else -->
+            <router-link v-else :key="subItem.name" class="icon-menu" :to="subItem.path">
+              <el-menu-item :index="subItem.name">
+                <span>{{ subItem.meta.title }}</span>
+              </el-menu-item>
+            </router-link>
+          </template>
         </el-submenu>
+        <!-- 一级菜单(不含二级菜单) -->
+        <router-link v-else :key="item.name" :to="item.path">
+          <el-menu-item :index="item.name">
+            <i :class="item.meta.icon"></i>
+            <span slot="title">{{ item.meta.title }}</span>
+          </el-menu-item>
+        </router-link>
 
-          <!-- 一级菜单(不含二级菜单) -->
-          <router-link v-else :to="item.path" :key="item.name">
-            <el-menu-item :index="item.name">
-              <i :class="item.meta.icon"></i>
-              <span slot="title">{{item.name}}</span>
-            </el-menu-item>
-          </router-link>
-
-        </template>
+      </template>
     </el-menu>
   </div>
 </template>
@@ -51,19 +63,19 @@ export default {
     ]),
     routes() {
       let { routes } = this.$router.options
-      let sidebarList = routes.filter(item => item.hidden !== true).map(item => item.children)
-      console.log('sidebarList', sidebarList)
+      let sidebarList = routes.filter(item => item.hidden !== true)
       return flatten(sidebarList)
     },
     isCollapse() {
       return this.sidebar.closed
     },
+    defaultActive() {
+      return this.$route.name
+    },
   },
   created() { },
   mounted() {
-    console.log('所有路由(含嵌套子路由):', this.$router.options.routes)
-    console.log('当前页面的路由(route)信息:', this.$route)
-    console.log('当前页面的name:', this.$route.name)
+    // this._testRouterAttrs()
   },
   methods: {
     handleOpen(key, keyPath) {
@@ -73,30 +85,37 @@ export default {
     handleClose(key, keyPath) {
       // console.log(key, keyPath)
     },
+    _testRouterAttrs() {
+      console.log('$router:', this.$router)
+      console.log('所有路由(含嵌套子路由):', this.$router.options.routes)
+      console.log('$route:', this.$route)
+      console.log('当前页面的name:', this.$route.name)
+    },
   },
 }
 
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-.sidebar
-  .name
-    width $sidebar-width
+.sidebar {
+  .logo {
+    position sticky
+    top 0
+    left 0
+    z-index 99
     height $header-height
     display flex
     justify-content center
     align-items center
-
-    img
-      width 90%
-      transition all 0.3s linear
-
-  .logo
-    display flex
-    justify-content center
-    align-items center
-
-    img
-      width 50%
-      transition all 0.3s linear
+    background-color #fff
+    .name {
+      width 148px
+      transition height 0, width 0.3s linear // all 0.3s linear
+    }
+    .brand {
+      width 40px
+      transition height 0, width 0.3s linear
+    }
+  }
+}
 </style>
