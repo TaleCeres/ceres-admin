@@ -2,11 +2,12 @@
   <nav class="nav-bar">
     <div class="left-menu">
       <i v-show="true" class="icon-font el-icon-s-fold" :class="{rotate: foldState}"
-         @click="toggleSlidebarState" />
+      @click="toggleSlidebarState" />
       <Breadcrumb />
     </div>
     <div class="right-menu">
-      <Screenfull style="margin-right: 10px;"/>
+      <Screenfull style="margin-right: 15px;"/>
+      <LangSelect style="margin-right: 15px;"/>
       <UserCard style="margin-right: 10px;"/>
     </div>
   </nav>
@@ -16,13 +17,16 @@
 import { mapGetters } from 'vuex'
 import UserCard from './UserCard'
 import Breadcrumb from './Breadcrumb'
+import LangSelect from './LangSelect'
 import Screenfull from './Screenfull'
 export default {
   name: 'NavBar',
   components: {
     UserCard,
     Breadcrumb,
+    LangSelect,
     Screenfull,
+
   },
   data() {
     return {}
@@ -41,7 +45,7 @@ export default {
   methods: {
     // 控制菜单折叠
     toggleSlidebarState() {
-      this.$store.commit('TOGGLE_SIDEBAR')
+      this.$store.commit('app/TOGGLE_SIDEBAR')
     },
   },
 }
