@@ -1,11 +1,9 @@
-import Layout from 'comps/layout/default'
-import Midlayer from 'comps/layout/midlayer'
 const _import = file => () => import(`@/views/${file}.vue`)
 
 export default {
   path: '/admin',
   name: 'Admin',
-  component: Layout,
+  component: undefined,
   meta: {
     title: '权限管理',
     icon: 'el-icon-user',
@@ -14,7 +12,7 @@ export default {
   children: [
     {
       path: '/admin/user',
-      component: Midlayer,
+      component: undefined,
       name: 'AdminUser',
       meta: {
         title: '用户管理',
@@ -36,7 +34,7 @@ export default {
     },
     {
       path: '/admin/group',
-      component: Midlayer,
+      component: undefined,
       name: 'AdminGroup',
       meta: {
         title: '分组管理',
@@ -46,7 +44,7 @@ export default {
       children: [
         {
           path: '/admin/group/list',
-          component: _import('admin/user/group-list'),
+          component: _import('admin/group/group-list'),
           name: 'GroupList',
           meta: {
             title: '分组列表',

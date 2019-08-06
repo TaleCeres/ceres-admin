@@ -1,10 +1,9 @@
-import Layout from 'comps/layout/default'
 const _import = file => () => import(`@/views/${file}.vue`)
 
 export default {
   path: '/form',
   name: 'Form',
-  component: Layout,
+  component: undefined,
   meta: {
     title: '表单',
     icon: 'el-icon-tickets',

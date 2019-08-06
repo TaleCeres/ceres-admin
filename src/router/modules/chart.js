@@ -1,10 +1,9 @@
-import Layout from 'comps/layout/default'
 const _import = file => () => import(`@/views/${file}.vue`)
 
 export default {
   path: '/chart',
   name: 'Chart',
-  component: Layout,
+  component: undefined,
   meta: {
     title: '图表',
     icon: 'el-icon-pie-chart',

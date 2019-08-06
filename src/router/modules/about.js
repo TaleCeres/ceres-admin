@@ -1,10 +1,9 @@
-import Layout from 'comps/layout/default'
 const _import = file => () => import(`@/views/${file}.vue`)
 
 export default {
   path: '/about',
   name: 'About',
-  component: Layout,
+  component: undefined,
   meta: {
     title: '关于',
     icon: 'fa fa-info-circle',

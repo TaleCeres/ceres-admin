@@ -1,10 +1,9 @@
-import Layout from 'comps/layout/default'
 const _import = file => () => import(`@/views/${file}.vue`)
 
 export default {
   path: '/table',
   name: 'Table',
-  component: Layout,
+  component: undefined,
   meta: {
     title: '表格',
     icon: 'el-icon-s-grid',

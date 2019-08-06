@@ -1,10 +1,9 @@
 /* Layout */
-import Layout from 'comps/layout/default'
 const _import = file => () => import(`@/views/${file}.vue`)
 
 export default {
   path: '/',
-  component: Layout,
+  component: undefined,
   name: '首页',
   redirect: '/home',
   meta: {
