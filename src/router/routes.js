@@ -1,4 +1,8 @@
-import Layout from 'comps/layout/default'
+/* template at different level 
+* Layout有三种选择 default、t-type
+*/
+// import Layout from 'comps/layout/default'
+import Layout from 'comps/layout/t-type'
 import Midlayer from 'comps/layout/midlayer'
 /* Router Modules */
 import homeRouter from './modules/home'
@@ -12,15 +16,26 @@ import tableRouter from './modules/table'
 const _import = file => () => import(`@/views/${file}.vue`)
 
 /* eslint-disable */
-/* 处理router的函数 */
-function processRouterWithTemplate(router) {
+/**
+ * 处理router对应的组件(component)，包含三个级别的路由
+ * 一级路由的模版目前有三种: 
+ *  1. 左右布局(Layout), 默认
+ *  2. T型布局
+ *  3. 上下布局
+ * 如果三级路由存在，则其父级(二级)路由为 Midlayer；否则为具体的页面组件
+ *
+ * @param {object} rawRouter
+ * @returns
+ */
+function processRouterWithTemplate(rawRouter) {
+  let { ...router } = rawRouter
   router.component = Layout // 一级路由的模版为 Layout
   if (router.hasOwnProperty('children')) {
     let { children: childrenRouter } = router
     childrenRouter.forEach(item => {
       // 判断是否有三级路由
-      if (!item.hasOwnProperty('children')) return 
-      item.component = Midlayer // 如果有三级路由，则二级路由的模版设为 Midlayer
+      if (!item.hasOwnProperty('children')) return
+      item.component = Midlayer
     })
   }
   return router

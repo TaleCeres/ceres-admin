@@ -9,7 +9,7 @@
           <router-link to="/home">用户信息</router-link>
         </el-dropdown-item>
         <el-dropdown-item>
-          <router-link to="/setting">页面配置</router-link>
+          <router-link to="/admin/config">页面配置</router-link>
         </el-dropdown-item>
         <el-dropdown-item>
           <a target="_blank" href="https://github.com/TaleCeres/ceres-admin">Github地址</a>

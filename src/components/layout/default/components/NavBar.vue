@@ -15,10 +15,10 @@
 
 <script type="text/ecmascript-6">
 import { mapGetters } from 'vuex'
-import UserCard from './UserCard'
-import Breadcrumb from './Breadcrumb'
-import LangSelect from './LangSelect'
-import Screenfull from './Screenfull'
+import UserCard from 'comps/base/UserCard'
+import Breadcrumb from 'comps/base/Breadcrumb'
+import LangSelect from 'comps/base/LangSelect'
+import Screenfull from 'comps/base/Screenfull'
 export default {
   name: 'NavBar',
   components: {
