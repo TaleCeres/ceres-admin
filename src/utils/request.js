@@ -11,14 +11,13 @@ let interceptorList = [
 
 // 创建请求实例
 const _axios = axios.create({
-  baseURL: 'https://server.mini-shop.ivinetrue.com/v1',
+  baseURL: 'https://api.izjgk.com/v1',
   timeout: 5000 // request timeout
 })
 
 // request 拦截
 _axios.interceptors.request.use(
   config => {
-    console.log('config', config)
     config.headers['Authorization'] = getToken()
     return config
   },

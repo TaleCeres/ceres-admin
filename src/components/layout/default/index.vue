@@ -18,7 +18,7 @@
 
 <script type="text/ecmascript-6">
 import { mapGetters } from 'vuex'
-import ResizeMixin from '../mixin/resize'
+import ResizeMixin from '../mixin/resize'   
 import AppMain from './components/AppMain'
 import SideBar from './components/SideBar'
 import NavBar from './components/NavBar'

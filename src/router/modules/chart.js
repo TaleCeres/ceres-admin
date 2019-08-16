@@ -27,5 +27,11 @@ export default {
       name: 'MapChart',
       meta: { title: '地图', icon: 'el-icon-position' },
     },
+    {
+      path: '/chart/mind-map',
+      component: _import('chart/mind-map'),
+      name: 'MindMap',
+      meta: { title: '思维导图', icon: ' fa fa-text-width' },
+    },
   ],
 }

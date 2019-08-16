@@ -16,7 +16,7 @@ export default {
   created() {
     this.getTime()
   },
-  mounted() { 
+  mounted() {
     this.setIntervalID = setInterval(() => {
       this.getTime()
     }, 1000)

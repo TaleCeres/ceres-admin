@@ -1,8 +1,8 @@
 /* template at different level 
 * Layout有三种选择 default、t-type
 */
-// import Layout from 'comps/layout/default'
-import Layout from 'comps/layout/t-type'
+import Layout from 'comps/layout/default'
+// import Layout from 'comps/layout/t-type'
 import Midlayer from 'comps/layout/midlayer'
 /* Router Modules */
 import homeRouter from './modules/home'

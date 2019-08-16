@@ -3,19 +3,26 @@ import {
   get,
   put,
 } from '@/utils/request'
+import { saveToken } from '../utils/cookie'
 
 export default class User {
-  static async getToken() {
+  /**
+   * @static
+   * @param {*} account 用户账号
+   * @param {*} secret 密码
+   * @memberof User
+   */
+  static async getToken(account, secret) {
     const data = await post('token/user', {
-      account: '999@qq.com',
-      secret: '123456',
+      account,
+      secret,
       type: 100,
     })
-    console.log('data', data)
+    saveToken(data.token)
   }
 
   static async getInfo() {
-    const user = await get('api/get_user_info')
-    console.log('user', user)
+    const user = await get('user')
+    return user
   }
 }

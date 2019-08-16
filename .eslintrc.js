@@ -69,6 +69,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-unused-vars': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-underscore-dangle': 'off',
+    'no-param-reassign': 'off', // 修改函数参数
     'arrow-parens': ['error', 'as-needed'],
     'prefer-const': 'off', // 对于「值不曾被修改」的变量，可以使用 let(非强制一定是 const)
     'import/extensions': 'off', // import不需要写文件扩展名

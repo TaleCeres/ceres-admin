@@ -10,8 +10,8 @@
         <h1 style="font-size: 50px">Hi,</h1>
         <h2 style="margin-top: 20px;">欢迎使用CSS布局系统</h2>
       </div>
-      <form class="login-form">
-        <input v-model="form.nickname" type="text" class="form-item" autocomplete="off" placeholder="请输入用户名">
+      <form class="login-form" @submit.prevent="login">
+        <input v-model="form.username" type="text" class="form-item" autocomplete="off" placeholder="请输入用户名">
         <input v-model="form.password" type="password" class="form-item" autocomplete="off" placeholder="请输入密码">
         <button type="submit" class="form-item submit-btn">立即登录</button>
       </form>
@@ -20,19 +20,47 @@
 </template>
 
 <script type="text/ecmascript-6">
+import User from '@/models/user'
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'LoginIndex',
   components: {},
   data() {
     return {
+      loading: false, // 加载动画
       form: {
-        nickname: '',
-        password: '',
+        username: '999@qq.com',
+        password: '123456',
       },
     }
   },
-  computed: {},
-  methods: {},
+  computed: {
+    ...mapState({
+      logined: state => state.user.logined,
+    }),
+  },
+  methods: {
+    ...mapActions({
+      setUser: 'user/setUser',
+    }),
+    async login() {
+      const { username: account, password: secret } = this.form
+      this.loading = true
+      try {
+        await User.getToken(account, secret)
+        await this.assignUserInfo()
+        this.loading = false
+        this.$router.push('/admin')
+        // this.$message.success('登录成功')
+      } catch (e) {
+        this.loading = false
+      }
+    },
+    async assignUserInfo() {
+      const user = await User.getInfo()
+      this.setUser(user)
+    },
+  },
 }
 </script>
 
@@ -90,8 +118,8 @@ export default {
         }
         &:-webkit-autofill {
           // 通过延长增加自动填充背景色的方式, 是用户感受不到样式的变化
-          -webkit-transition-delay: 99999s;
-          -webkit-transition: color 99999s ease-out, background-color 99999s ease-out;
+          -webkit-transition-delay 99999s
+          -webkit-transition color 99999s ease-out, background-color 99999s ease-out
         }
       }
       .submit-btn {

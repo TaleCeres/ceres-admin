@@ -14,7 +14,7 @@
         <el-dropdown-item>
           <a target="_blank" href="https://github.com/TaleCeres/ceres-admin">Github地址</a>
         </el-dropdown-item>
-        <el-dropdown-item divided icon="el-icon-switch-button">
+        <el-dropdown-item divided icon="el-icon-switch-button" @click.native="handleLogout">
           注销
         </el-dropdown-item>
       </el-dropdown-menu>
@@ -23,6 +23,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { mapActions } from 'vuex'
 import defaultAvatar from 'assets/images/company/logo.png'
 export default {
   name: 'UserCard',
@@ -36,7 +37,16 @@ export default {
   created() { },
   mounted() {
   },
-  methods: {},
+  methods: {
+    ...mapActions({
+      logout: 'user/logout'
+    }),
+    handleLogout() {
+      console.log('logout')
+      this.logout()
+      window.location.reload(true)
+    },
+  },
 }
 </script>
 
