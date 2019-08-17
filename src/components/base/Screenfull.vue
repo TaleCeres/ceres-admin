@@ -35,9 +35,9 @@ export default {
     width 22px
     height 22px
     cursor pointer
-    fill $grey
+    fill $color-grey
     &:hover {
-      fill $black
+      fill $color-black
     }
   }
 }

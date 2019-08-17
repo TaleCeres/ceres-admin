@@ -30,7 +30,7 @@ const actions = {
     commit('SET_USER', { nick_name, wx_nick, email, modify_limit, auth })
     // commit('SET_USER_AUTH', user.auth)
   },
-  logout({commit}) {
+  logout({ commit }) {
     removeToken()
     commit('SET_LOGINED', false)
   }

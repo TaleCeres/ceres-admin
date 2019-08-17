@@ -1,8 +1,8 @@
 <template>
   <nav class="nav-path">
-    <router-link v-for="(item) in navList" :key="item.name" class="item" :to="item.path">
+    <span v-for="(item) in navList" :key="item.name" class="item" :to="item.path">
       <span>{{item.title}}</span>
-    </router-link>
+    </span>
   </nav>
 </template>
 
@@ -26,9 +26,6 @@ export default {
       }))
     },
   },
-  created() { },
-  mounted() { },
-  methods: {},
 }
 </script>
 

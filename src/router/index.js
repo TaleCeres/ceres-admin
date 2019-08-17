@@ -17,10 +17,10 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   // 登录验证
-  if (to.path !== '/login' && !store.state.user.logined) {
-    next({ path: '/login' })
-    return
-  }
+  // if (to.path !== '/login' && !store.state.user.logined) {
+  //   next({ path: '/login' })
+  //   return
+  // }
   // 权限验证
 
   // 路由发生变化时，修改页面title

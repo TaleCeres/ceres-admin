@@ -17,6 +17,9 @@ import {
   Link,
   Input,
   Select,
+  Tooltip,
+  Row,
+  Col,
 } from 'element-ui'
 import { loadPlugins } from '../utils/index'
 
@@ -39,4 +42,7 @@ loadPlugins([
   Link,
   Input,
   Select,
+  Tooltip,
+  Row,
+  Col,
 ])

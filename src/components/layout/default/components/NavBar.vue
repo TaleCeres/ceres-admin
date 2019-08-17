@@ -1,14 +1,20 @@
 <template>
   <nav class="nav-bar">
     <div class="left-menu">
-      <i v-show="true" class="icon-font el-icon-s-fold" :class="{rotate: foldState}"
-      @click="toggleSlidebarState" />
+      <i v-show="true" class="icon-font el-icon-s-fold" :class="{rotate: foldState}" @click="toggleSlidebarState" />
       <Breadcrumb />
     </div>
     <div class="right-menu">
-      <Screenfull style="margin-right: 15px;"/>
-      <LangSelect style="margin-right: 15px;"/>
-      <UserCard style="margin-right: 10px;"/>
+      <el-tooltip effect="dark" content="数据大屏" placement="bottom">
+        <router-link to="/data-graph/overview">
+          <fa-icon icon-name="area-chart" style="margin-right: 15px;" />
+        </router-link>
+      </el-tooltip>
+      <el-tooltip effect="dark" content="全屏显示" placement="bottom">
+        <Screenfull style="margin-right: 15px;" />
+      </el-tooltip>
+      <LangSelect style="margin-right: 15px;" />
+      <UserCard style="margin-right: 10px;" />
     </div>
   </nav>
 </template>
@@ -52,29 +58,31 @@ export default {
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-.nav-bar
+.nav-bar {
   width 100%
   display flex
   justify-content space-between
   align-items center
-
   .left-menu,
-  .right-menu
+  .right-menu {
     display flex
     align-items center
-
-  .left-menu
-    .icon-font
+  }
+  .left-menu {
+    .icon-font {
       margin 0 10px
       font-size 22px
       font-weight 500
       transform rotate(0deg)
       transition all 0.3s linear
-
-      &:hover
+      &:hover {
         color #3963bc
-
-    .rotate
+      }
+    }
+    .rotate {
       transform rotate(180deg)
       transition all 0.3s linear
+    }
+  }
+}
 </style>

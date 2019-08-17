@@ -25,8 +25,9 @@ export default {
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .icon {
   font-size 22px
+  color $color-grey
   &:hover {
-    color $black
+    color $color-black
   }
 }
 </style>

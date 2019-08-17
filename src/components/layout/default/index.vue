@@ -18,7 +18,8 @@
 
 <script type="text/ecmascript-6">
 import { mapGetters } from 'vuex'
-import ResizeMixin from '../mixin/resize'   
+import HistoryTag from 'comps/base/HistoryTag'
+import ResizeMixin from '../mixin/resize'
 import AppMain from './components/AppMain'
 import SideBar from './components/SideBar'
 import NavBar from './components/NavBar'
@@ -29,6 +30,7 @@ export default {
     AppMain,
     SideBar,
     NavBar,
+    // HistoryTag,
   },
   mixins: [ResizeMixin],
   computed: {
@@ -64,6 +66,6 @@ export default {
   box-shadow 0px 2px 6px 0px rgba(190, 204, 216, 0.4)
 }
 .main {
-  margin: 2px 0 0 2px // 避免过于紧凑
+  margin 2px 0 0 2px // 避免过于紧凑
 }
 </style>

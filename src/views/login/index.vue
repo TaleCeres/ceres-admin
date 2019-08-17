@@ -10,7 +10,7 @@
         <h1 style="font-size: 50px">Hi,</h1>
         <h2 style="margin-top: 20px;">欢迎使用CSS布局系统</h2>
       </div>
-      <form class="login-form" @submit.prevent="login">
+      <form class="login-form" @submit.prevent="handleLogin">
         <input v-model="form.username" type="text" class="form-item" autocomplete="off" placeholder="请输入用户名">
         <input v-model="form.password" type="password" class="form-item" autocomplete="off" placeholder="请输入密码">
         <button type="submit" class="form-item submit-btn">立即登录</button>
@@ -43,7 +43,7 @@ export default {
     ...mapActions({
       setUser: 'user/setUser',
     }),
-    async login() {
+    async handleLogin() {
       const { username: account, password: secret } = this.form
       this.loading = true
       try {
@@ -107,11 +107,10 @@ export default {
       input {
         width 285px
         padding 0 0 5px 5px
-        border-bottom 1px solid rgba(255, 255, 255, 1)
+        border-bottom 1px solid $color-white
         font-size 16px
         box-sizing border-box
-        font-family MicrosoftYaHeiUI
-        color rgba(255, 255, 255, 1)
+        color $color-white
         background-color transparent
         &::-webkit-input-placeholder {
           color rgba(192, 216, 255, 1)
@@ -127,9 +126,9 @@ export default {
         height 30px
         line-height 30px
         text-align center
-        border 1px solid rgba(255, 255, 255, 1)
+        border 1px solid $color-white
         border-radius 2px
-        color rgba(255, 255, 255, 1)
+        color $color-white
         background-color transparent
         cursor pointer
       }

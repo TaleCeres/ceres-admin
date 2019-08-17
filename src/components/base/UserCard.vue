@@ -39,10 +39,9 @@ export default {
   },
   methods: {
     ...mapActions({
-      logout: 'user/logout'
+      logout: 'user/logout',
     }),
     handleLogout() {
-      console.log('logout')
       this.logout()
       window.location.reload(true)
     },
@@ -51,16 +50,19 @@ export default {
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-.user-card
-  .el-dropdown-link
-    .avatar
+.user-card {
+  .el-dropdown-link {
+    .avatar {
       width 37px
       height 37px
       border-radius 50%
-
-  .detail
+    }
+  }
+  .detail {
     width 326px
     margin-bottom 0
     padding-bottom 0
     border 1px solid blue
+  }
+}
 </style>
