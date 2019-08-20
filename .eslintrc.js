@@ -61,7 +61,7 @@ module.exports = {
     }],
     'vue/prop-name-casing': ['error', 'camelCase'], // prop name 使用小驼峰命名法
     'vue/attribute-hyphenation': ['error', 'always'], // 特性name 使用连字符: <MyComponent my-prop="prop" />
-
+    'vue/no-unused-components': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     /* js 规范 
     
     */ 
@@ -70,6 +70,7 @@ module.exports = {
     'no-unused-vars': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-underscore-dangle': 'off',
     'no-param-reassign': 'off', // 修改函数参数
+    'quote-props': 'off', 
     'comma-dangle': 'off', // 逗号
     'arrow-parens': ['error', 'as-needed'],
     'prefer-const': 'off', // 对于「值不曾被修改」的变量，可以使用 let(非强制一定是 const)

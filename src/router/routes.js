@@ -53,7 +53,7 @@ const viewRouters = [
 const routes = [
   ...viewRouters,
   // 数据大屏页面
-  { path: '/data-graph/overview', component: _import('data-graph/overview'), hidden: true },
+  { path: '/data-graph/overview', component: _import('data-graph/overview/index'), meta: { title: '全国高等院校分布' }, hidden: true },
   // 以下非「业务页面」
   { path: '/login', component: _import('login/index'), hidden: true },
   { path: '/404', component: _import('error-page/404'), hidden: true },

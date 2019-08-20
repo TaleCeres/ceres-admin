@@ -1,20 +1,32 @@
+// Echart 详细参数信息： https://www.jianshu.com/p/3cf80b96a65d
+import echarts from 'echarts'
+
 export default {
-  data() {
-    return {
-      browserWidth: 1900,
-      browserHeight: 900
-    }
+  mounted() {
+    this.drawChart()
+    // 监听窗口的变化
+    window.addEventListener('resize', this.__resizeHanlder)
   },
-  created() {
-    this.resizeCharts()
+  beforeDestroy() {
+    this.destroyChart()
   },
   methods: {
-    resizeCharts() {
-      this.browserWidth = document.documentElement.clientWidth
-      this.browserHeight = document.documentElement.clientHeight
-      if (this.browserHeight <= 650) {
-        this.browserHeight = 650
+    __resizeHanlder() {
+      if (this.chart) {
+        this.chart.resize()
       }
+    },
+    drawChart() {
+      this.chart = echarts.init(document.getElementById(this.id))
+      this.chart.setOption(this.option)
+    },
+    destroyChart() {
+      if (!this.chart) {
+        return
+      }
+      window.removeEventListener('resize', this.__resizeHanlder)
+      this.chart.dispose()
+      this.chart = null
     }
-  }
+  },
 }

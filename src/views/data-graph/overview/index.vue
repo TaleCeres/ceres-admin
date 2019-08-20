@@ -9,31 +9,31 @@
         <el-col :xs="24" :sm="24" :md="6" :lg="6" class="col-item">
 
           <GraphContainer title="各省高校数量热力图" class="graph-item xpanel-wrapper-2">
-            <StackBarChart id="stackBarChart" :chart-height="chartHeight" />
+            <HeatMap id="HeatMap" />
           </GraphContainer>
 
           <GraphContainer title="" class="graph-item xpanel-wrapper-2">
-            <StackBarChart id="stackBarChart" :chart-height="chartHeight" />
+            <DonutForCooperateType id="donutForCooperateType" />
           </GraphContainer>
 
         </el-col>
         <el-col :xs="24" :sm="24" :md="12" :lg="12" class="col-item">
           <GraphContainer title="全国高等院校城市分布" class="graph-item xpanel-wrapper-1">
-            <StackBarChart id="stackBarChart" :chart-height="chartHeight" />
+            <ChinaMap id="chinaMap" />
           </GraphContainer>
         </el-col>
         <el-col :xs="24" :sm="24" :md="6" :lg="6" class="col-item">
 
           <GraphContainer title="全国院校本/专科比例" class="graph-item xpanel-wrapper-3">
-            <StackBarChart id="stackBarChart1" :chart-height="chartHeight" />
+            <DonutForSchoolLevel id="donutForSchoolLevel" />
           </GraphContainer>
 
           <GraphContainer title="本科院校TOP12的省份" class="graph-item xpanel-wrapper-3">
-            <StackBarChart id="stackBarChart" :chart-height="chartHeight" />
+            <TopProvince id="topProvince" />
           </GraphContainer>
 
           <GraphContainer title="院校总数TOP10的城市" class="graph-item xpanel-wrapper-3">
-            <StackBarChart id="stackBarChart" :chart-height="chartHeight" />
+            <TopCity id="topCity" />
           </GraphContainer>
         </el-col>
       </el-row>
@@ -45,13 +45,23 @@
 import Screenfull from 'comps/base/Screenfull'
 import GraphContainer from 'comps/base/GraphContainer'
 // 业务组件
-import StackBarChart from './components/StackBarChart'
+import TopProvince from './components/TopProvince'
+import ChinaMap from './components/ChinaMap'
+import HeatMap from './components/HeatMap'
+import DonutForSchoolLevel from './components/DonutForSchoolLevel'
+import DonutForCooperateType from './components/DonutForCooperateType'
+import TopCity from './components/TopCity'
 export default {
   name: 'overview',
   components: {
     Screenfull,
     GraphContainer,
-    StackBarChart,
+    TopProvince,
+    ChinaMap,
+    HeatMap,
+    DonutForSchoolLevel,
+    DonutForCooperateType,
+    TopCity,
   },
   data() {
     return {

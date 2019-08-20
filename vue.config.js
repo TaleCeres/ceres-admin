@@ -21,6 +21,7 @@ module.exports = {
       .set('@', resolve('src'))
       .set('assets', resolve('src/assets'))
       .set('comps', resolve('src/components'))
+      .set('node_modules', resolve('node_modules'))
     /*
     自动化导入 Stylus
     链接: https://cli.vuejs.org/zh/guide/css.html#自动化导入
