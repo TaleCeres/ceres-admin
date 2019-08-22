@@ -20,6 +20,9 @@ export default {
       this.chart = echarts.init(document.getElementById(this.id))
       this.chart.setOption(this.option)
     },
+    updateChart() {
+      this.chart.setOption(this.option)
+    },
     destroyChart() {
       if (!this.chart) {
         return

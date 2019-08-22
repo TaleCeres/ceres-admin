@@ -50,9 +50,10 @@ import ChinaMap from './components/ChinaMap'
 import HeatMap from './components/HeatMap'
 import DonutForSchoolLevel from './components/DonutForSchoolLevel'
 import DonutForCooperateType from './components/DonutForCooperateType'
-import TopCity from './components/TopCity'
+import TopCity from './components/TopCity'// 省份级组件
+
 export default {
-  name: 'overview',
+  name: 'Overview',
   components: {
     Screenfull,
     GraphContainer,

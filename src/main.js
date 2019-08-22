@@ -1,11 +1,11 @@
 import Vue from 'vue'
-import FaIcon from 'comps/base/FaIcon'
 import App from './App.vue'
 import router from './router/index'
 import store from './store/index'
-import customConfig from '@/config/index'
-import './plugins/element.js'
-
+// 组件库
+import './plugins/element'
+import './plugins/custom'
+// CSS样式
 import 'font-awesome/css/font-awesome.css'
 import 'assets/styles/index.styl'
 
@@ -15,9 +15,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 Vue.config.productionTip = false
-Vue.prototype.customConfig = customConfig // 自定义的配置参数
-
-Vue.component('fa-icon', FaIcon)
 
 new Vue({
   router,

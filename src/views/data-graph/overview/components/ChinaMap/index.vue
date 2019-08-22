@@ -1,21 +1,5 @@
 <template>
-  <div class="map">
-    <div :id="id" style="height: 95%"></div>
-    <div class="detail-wrapper">
-      <table border="1" :data="schoolList">
-        <tr>
-          <th>序号</th>
-          <th>院校名称</th>
-        </tr>
-        <tr v-for="(item, index) in schoolList" :key="index">
-          <template v-if="index < 10">
-            <td>{{index + 1}}</td>
-            <td>{{item.name}}</td>
-          </template>
-        </tr>
-      </table>
-    </div>
-  </div>
+  <div :id="id" style="height: 95%"></div>
 </template>
 
 <script type="text/ecmascript-6">
@@ -40,22 +24,21 @@ export default {
       schoolList: [],
     }
   },
+  mounted() {
+    this.chart.on('click', 'series', data => {
+      let { seriesIndex: geoLevel, name: province, dataIndex } = data
+      if (geoLevel === 0) {
+        this.$store.commit('visual/SET_PROVINCE', province)
+        this.$router.push({
+          path: '/data-graph/college-list',
+          query: {
+            province
+          }
+        })
+      }
+    })
+  }
 }
 </script>
 
-<style lang="stylus" scoped>
-.map {
-  position relative
-  height 100%
-  .detail-wrapper {
-    position absolute
-    top 10px
-    right 0
-    width 180px
-    table {
-      box-sizing border-box
-      width 100%
-    }
-  }
-}
-</style>
+<style scoped lang="stylus" rel="stylesheet/stylus"></style>

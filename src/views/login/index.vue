@@ -20,7 +20,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import User from '@/models/user'
+import UserModel from '@/models/user'
 import { mapState, mapActions } from 'vuex'
 export default {
   name: 'LoginIndex',
@@ -47,7 +47,7 @@ export default {
       const { username: account, password: secret } = this.form
       this.loading = true
       try {
-        await User.getToken(account, secret)
+        await UserModel.getToken(account, secret)
         await this.assignUserInfo()
         this.loading = false
         this.$router.push('/admin')
@@ -57,7 +57,7 @@ export default {
       }
     },
     async assignUserInfo() {
-      const user = await User.getInfo()
+      const user = await UserModel.getInfo()
       this.setUser(user)
     },
   },

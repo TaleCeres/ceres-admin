@@ -48,8 +48,8 @@
   }
   // 三级 menu-item
   & > .el-submenu > .el-menu {
-      & > .icon-menu > .el-menu-item {
-        padding-left 80px !important
+    & > .icon-menu > .el-menu-item {
+      padding-left 80px !important
     }
   }
 }
@@ -60,7 +60,6 @@
     padding-left 40px !important
   }
 }
-
 .el-submenu__title {
   color $submenu-title-default-color
   i {
@@ -88,5 +87,58 @@
   width 24px
   text-align center
   font-size 18px
+}
+/* el-table */
+.visual {
+  .el-table {
+    /* 表格字体颜色 */
+    color white
+    /* 表格边框颜色 */
+    /* border: 0.5px solid #758a99; */
+    background-color transparent
+  }
+  /* 表格内背景颜色 */
+  .el-table th,
+  .el-table tr,
+  .el-table td {
+    border 0
+    // background-color: transparent;
+  }
+  /* 使表格背景透明 */
+  .el-table th,
+  .el-table tr {
+    background-color transparent
+  }
+  /* 表格表头字体颜色 */
+  .el-table thead {
+    color white
+    background-color transparent
+  }
+  // 鼠标 hover
+  .el-table tbody tr:hover>td {
+    background-color rgba(255, 255, 255, 0.2) // 灰色透明
+  }
+  // 滚动条的样式
+  *::-webkit-scrollbar { /* 定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸 */
+    width 7px
+    height 10px
+    background-color transparent
+  }
+  /* 定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸 */
+  *::-webkit-scrollbar-track { /* 定义滚动条轨道 内阴影+圆角 */
+    background-color #f0f6ff
+  }
+  /* 定义滚动条轨道 内阴影+圆角 */
+  *::-webkit-scrollbar-thumb { /* 定义滑块 内阴影+圆角 */
+    background-color #2B91B6
+    border-radius 6px
+  }
+  /* 定义滑块 内阴影+圆角 */
+  .scrollbarHide::-webkit-scrollbar {
+    display none
+  }
+  .scrollbarShow::-webkit-scrollbar {
+    display block
+  }
 }
 /* el-button */

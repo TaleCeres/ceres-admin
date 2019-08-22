@@ -24,11 +24,7 @@ export default {
       option,
     }
   },
-  mounted() {
-    this.chart.on('click', 'series', data => {
-      console.log('data', data)
-    })
-  }
+  mounted() {}
 }
 </script>
 

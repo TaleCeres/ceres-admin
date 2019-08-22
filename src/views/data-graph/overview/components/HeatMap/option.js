@@ -9,10 +9,9 @@ export default {
     trigger: 'item',
     formatter: params => {
       if (params.value.length === 3) {
-        return '<p>' + params.name + '</p><p>' + params.seriesName + ':' + params.value[2] + '</p>'
-      } else {
-        return '<p>' + params.name + '</p><p>' + params.seriesName + ':' + params.value + '</p>'
-      }
+        return `<p>${params.name}</p><p>${params.seriesName}:${params.value[2]}</p>`
+      } 
+      return `<p>${params.name}</p><p>${params.seriesName}:${params.value}</p>`
     }
   },
   geo: {
@@ -32,7 +31,7 @@ export default {
         },
       }
     },
-    zoom: 1.2, 
+    zoom: 1.2,
     roam: false, // 缩放
     itemStyle: { // 地图元素块的样式
       normal: { // 普通情况下

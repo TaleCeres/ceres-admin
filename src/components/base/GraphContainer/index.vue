@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container">
-      <div class="title">{{title}}</div>
+      <div v-if="title" class="title">{{title}}</div>
       <slot />
     </div>
   </div>
@@ -14,7 +14,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: '未名',
+      default: '',
     },
   },
   data() {

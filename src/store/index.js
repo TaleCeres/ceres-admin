@@ -8,6 +8,7 @@ import actions from './actions'
 import app from './modules/app'
 import user from './modules/user'
 import router from './modules/router'
+import visual from './modules/visual'
 
 Vue.use(Vuex)
 
@@ -20,5 +21,6 @@ export default new Vuex.Store({
     app,
     user,
     router,
+    visual,
   },
 })
