@@ -24,18 +24,18 @@ export default {
     z: 10
   },
   yAxis: {
-    data: ['北京市', '武汉市', '广州市', '重庆市', '上海市', '西安市', '郑州市', '天津市', '长沙市', '成都市'],
+    type: 'category',
+    data: ['成都市', '长沙市', '天津市', '郑州市', '西安市', '上海市', '重庆市', '广州市', '武汉市', '北京市'],
     axisLine: {
       show: false
     },
     axisTick: {
-      show: false
+      show: false,
     },
     axisLabel: {
-      textStyle: {
-        color: '#fff',
-        fontSize: 16
-      }
+      interval: 0,
+      color: '#fff',
+      fontSize: 14
     }
   },
   dataZoom: [
@@ -76,7 +76,7 @@ export default {
           )
         }
       },
-      data: [92, 84, 83, 65, 64, 63, 58, 58, 57, 56]
+      data: [56, 57, 58, 58, 63, 64, 65, 83, 84, 92]
     }
   ]
 }
