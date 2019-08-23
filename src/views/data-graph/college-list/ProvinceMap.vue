@@ -9,12 +9,14 @@
 
 <script type="text/ecmascript-6">
 import resize from '@/mixins/resize'
-import { provinces } from 'assets/data/index'
-const provincesInCN = Object.entries(provinces).map(item => ({ value: item[1], label: item[1] }))
+import { provincesInCN } from 'assets/data/index'
 
-Object.keys(provinces).forEach(item => {
-  // eslint-disable-next-line
-  require(`node_modules/echarts/map/js/province/${item}.js`)
+// 导入地图信息
+// echarts会自动用 echarts.registerMap('china', GeoJson} 载入地图信息
+// require.context参考 https://juejin.im/post/5ab8bcdb6fb9a028b77acdbd
+const files = require.context('node_modules/echarts/map/js/province', false, /\.js$/)
+files.keys().forEach(key => {
+  files(key)
 })
 
 export default {
@@ -138,7 +140,7 @@ export default {
       this.$store.commit('visual/SET_PROVINCE', this.province)
       // 刷新 map
       this.updateChart()
-      // 刷新 路由路径
+      // 替换「路由路径」，不刷新
       this.$router.replace({
         // path: '/data-graph/college-list',
         query: {

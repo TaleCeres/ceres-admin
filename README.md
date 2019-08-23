@@ -37,6 +37,9 @@ npm run commit # 提交至「本地仓库」，结合 npm scripts自动运行 co
 
 页面组件可能包含多个业务组件，业务组件包含多个基础组件
 
+## 可视化
+参考[个人作品:GraphVis](http://www.graphvis.cn/graphvis/university/index.html)
+
 ## Vue模版格式
 ```vue
 <template>

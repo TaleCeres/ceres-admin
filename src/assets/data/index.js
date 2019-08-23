@@ -34,3 +34,5 @@ export const provinces = {
   yunnan: '云南',
   zhejiang: '浙江',
 }
+
+export const provincesInCN = Object.entries(provinces).map(item => ({ value: item[1], label: item[1] }))

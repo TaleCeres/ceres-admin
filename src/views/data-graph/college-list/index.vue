@@ -26,7 +26,7 @@
           </GraphContainer>
 
           <GraphContainer title="" class="graph-item xpanel-wrapper-3">
-            
+
           </GraphContainer>
 
           <GraphContainer title="" class="graph-item xpanel-wrapper-3">
