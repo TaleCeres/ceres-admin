@@ -34,10 +34,8 @@ export default {
     },
     axisLabel: {
       interval: 0,
-      textStyle: {
-        color: '#fff',
-        // fontSize: 16
-      }
+      color: '#fff',
+      fontSize: 14
     }
   },
   dataZoom: [
