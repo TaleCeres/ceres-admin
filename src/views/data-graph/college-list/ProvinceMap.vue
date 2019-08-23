@@ -1,6 +1,6 @@
 <template>
-  <div style="height: 100%">
-    <el-select v-model="value" placeholder="请选择" size="mini" filterable @change="handelUpdateMap">
+  <div style="height: 100%" class="visual">
+    <el-select v-model="value" placeholder="请选择" size="mini" filterable popper-class="select-option" @change="handelUpdateMap">
       <el-option v-for="item in provincesInCN" :key="item.value" :label="item.label" :value="item.value" />
     </el-select>
     <div :id="id" style="height: 95%"></div>
