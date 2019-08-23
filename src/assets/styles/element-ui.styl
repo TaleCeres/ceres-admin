@@ -55,7 +55,7 @@
 }
 // sidebar收缩时，无 icon的 menu-item(覆盖二级&三级)的样式
 .el-menu--vertical {
-  // 
+  //
   .icon-menu > .el-menu-item {
     padding-left 40px !important
   }
@@ -139,6 +139,41 @@
   }
   .scrollbarShow::-webkit-scrollbar {
     display block
+  }
+}
+/* el-select */
+.visual {
+  padding 10px
+  .el-select {
+    .el-input__inner { /* 定义输入框样式 */
+      border #fff 1px solid
+      background-color transparent
+      color #fff
+    }
+  }
+}
+.select-option { /* popper-class覆盖下拉框样式 */
+  /* 下拉框整体背景色 */
+  background-color transparent
+  .el-scrollbar {
+    .el-scrollbar__wrap {
+      .el-select-dropdown__list {
+        .el-select-dropdown__item {
+          /* 下拉列表中各元素样式 */
+          background-color transparent
+          color silver
+          border-bottom 1px solid silver
+          /* hover高亮 */
+          &:hover {
+            color #409EFF
+          }
+        }
+        /* 选中元素高亮 */
+        .el-select-dropdown__item.selected {
+          color #409EFF
+        }
+      }
+    }
   }
 }
 /* el-button */
