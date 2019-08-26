@@ -8,9 +8,16 @@
       <SideBar></SideBar>
     </div>
     <div class="right-menu">
-    <DigitalClock style="margin-right: 15px;"/>
-    <Screenfull style="margin-right: 15px;"/>
-    <UserCard style="margin-right: 10px;"/>
+      <el-tooltip effect="dark" content="数据大屏" placement="bottom">
+        <router-link to="/data-graph/overview">
+          <fa-icon icon-name="area-chart" style="margin-right: 15px;" />
+        </router-link>
+      </el-tooltip>
+      <el-tooltip effect="dark" content="全屏显示" placement="bottom">
+        <Screenfull style="margin-right: 15px;" />
+      </el-tooltip>
+      <LangSelect style="margin-right: 15px;" />
+      <UserCard style="margin-right: 10px;" />
     </div>
   </nav>
 </template>
@@ -20,6 +27,7 @@ import { mapGetters } from 'vuex'
 import DigitalClock from 'comps/base/DigitalClock'
 import Screenfull from 'comps/base/Screenfull'
 import UserCard from 'comps/base/UserCard'
+import LangSelect from 'comps/base/LangSelect'
 import SideBar from './SideBar'
 export default {
   name: 'NavBar',
@@ -27,7 +35,8 @@ export default {
     DigitalClock,
     Screenfull,
     UserCard,
-    SideBar
+    SideBar,
+    LangSelect
   },
   data() {
     return {}

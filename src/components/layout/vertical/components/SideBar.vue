@@ -16,7 +16,7 @@
                 <span>{{ subItem.meta.title }}</span>
               </template>
               <!-- 三级菜单 -->
-              <router-link v-for="(grandchildItem) in subItem.children" :key="grandchildItem.name" class="icon-menu" :to="grandchildItem.path">
+              <router-link v-for="(grandchildItem) in subItem.children" :key="grandchildItem.name" class="icon-menu-horizontal" :to="grandchildItem.path">
                 <el-menu-item :index="grandchildItem.name">
                   <span>{{ grandchildItem.meta.title }}</span>
                 </el-menu-item>
@@ -24,7 +24,7 @@
             </el-submenu>
 
             <!-- 二级菜单else -->
-            <router-link v-else :key="subItem.name" class="icon-menu" :to="subItem.path">
+            <router-link v-else :key="subItem.name" class="icon-menu-horizontal" :to="subItem.path">
               <el-menu-item :index="subItem.name">
                 <span>{{ subItem.meta.title }}</span>
               </el-menu-item>
