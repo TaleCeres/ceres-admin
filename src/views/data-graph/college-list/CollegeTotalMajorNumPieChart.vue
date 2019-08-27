@@ -70,10 +70,6 @@ export default {
       this.updateChart()
     }
   },
-  async created() {
-    let { province } = this.$route.query
-    this.provinceStat = totalMajorNum[province]
-  },
 }
 </script>
 
