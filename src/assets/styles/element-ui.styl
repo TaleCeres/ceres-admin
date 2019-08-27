@@ -39,6 +39,34 @@
       }
     }
   }
+  .icon-menu-horizontal {
+    .el-menu-item,
+    .el-menu-item.is-active {
+      span {
+        padding-left 30px
+        position relative
+        // 设置「二级菜单」的默认icon
+        &:before {
+          position absolute
+          left 10px
+          top 5px
+          width 5px
+          height 5px
+          content ''
+          border 1px solid $submenu-title-default-color
+          border-radius 50%
+        }
+      }
+      // 点击后的样式
+      &.is-active {
+        span {
+          &:before {
+            border 1px solid #409EFF
+          }
+        }
+      }
+    }
+  }
 }
 // sidebar展开时，无 icon的 menu-item的样式
 .el-menu > .el-submenu >.el-menu {
