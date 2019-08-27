@@ -63,17 +63,11 @@ export default {
   },
   watch: {
     province(val) {
-      console.log('变化了')
       let province = val
       this.provinceStat = totalEnrollNum[province]
       // 刷新 map
       this.updateChart()
     }
-  },
-  async activated() {
-
-    // let { province } = this.$route.query
-    // this.provinceStat = totalEnrollNum[province]
   },
 }
 </script>

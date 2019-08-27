@@ -72,11 +72,7 @@ export default {
       // 刷新 map
       this.updateChart()
     }
-  },
-  async created() {
-    // let { province } = this.$route.query
-    // this.provinceStat = keyMajorStatNum[province]
-  },
+  }
 }
 </script>
 

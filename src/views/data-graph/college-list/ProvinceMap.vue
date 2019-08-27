@@ -123,15 +123,16 @@ export default {
     let { province } = this.$route.query
     this.province = province
     this.value = province
-    setTimeout(() => {
-      this.$store.commit('visual/SET_PROVINCE', this.province)
-    }, 200)
+    // setTimeout(() => {
+    //   this.$store.commit('visual/SET_PROVINCE', this.province)
+    // }, 200)
   },
   mounted() {
     this.chart.on('click', 'series', data => {
       let { name: city } = data
       this.$store.commit('visual/SET_CITY', city)
     })
+    this.$store.commit('visual/SET_PROVINCE', this.province)
   },
   methods: {
     handelUpdateMap() {
