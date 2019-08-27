@@ -10,6 +10,7 @@
 <script type="text/ecmascript-6">
 import resize from '@/mixins/resize'
 import { provincesInCN } from 'assets/data/index'
+import { collegeDistributionByProvince } from 'assets/data/stat'
 
 // 导入地图信息
 // echarts会自动用 echarts.registerMap('china', GeoJson} 载入地图信息
@@ -37,6 +38,13 @@ export default {
     }
   },
   computed: {
+    collegeDistribution() {
+      return collegeDistributionByProvince[this.province]
+    },
+    maxValue() {
+      let valueArr = this.collegeDistribution.map(item => item.value)
+      return Math.max(...valueArr)
+    },
     option() {
       return {
         tooltip: {
@@ -78,7 +86,7 @@ export default {
           type: 'continuous',
           show: true,
           min: 0,
-          max: 46,
+          max: this.maxValue,
           left: 5,
           text: ['多', '少'],
           realtime: false,
@@ -105,19 +113,7 @@ export default {
             },
             roam: true,
             animation: false,
-            data: [
-              { name: '杭州市', value: 46 },
-              { name: '宁波市', value: 14 },
-              { name: '温州市', value: 11 },
-              { name: '丽水市', value: 2 },
-              { name: '舟山市', value: 4 },
-              { name: '台州市', value: 4 },
-              { name: '金华市', value: 7 },
-              { name: '衢州市', value: 2 },
-              { name: '绍兴市', value: 8 },
-              { name: '嘉兴市', value: 6 },
-              { name: '湖州市', value: 3 },
-            ]
+            data: this.collegeDistribution
           }
         ]
       }

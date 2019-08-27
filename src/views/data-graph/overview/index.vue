@@ -45,12 +45,12 @@
 import Screenfull from 'comps/base/Screenfull'
 import GraphContainer from 'comps/base/GraphContainer'
 // 业务组件
-import TopProvince from './components/TopProvince'
-import ChinaMap from './components/ChinaMap'
-import HeatMap from './components/HeatMap'
-import DonutForSchoolLevel from './components/DonutForSchoolLevel'
-import DonutForCooperateType from './components/DonutForCooperateType'
-import TopCity from './components/TopCity'// 省份级组件
+import TopProvince from './TopProvince'
+import ChinaMap from './ChinaMap'
+import HeatMap from './HeatMap'
+import DonutForSchoolLevel from './DonutForSchoolLevel'
+import DonutForCooperateType from './DonutForCooperateType'
+import TopCity from './TopCity' // 省份级组件
 
 export default {
   name: 'Overview',
@@ -79,11 +79,11 @@ export default {
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .overview {
   height 100%
-  background url('./bg.png') center no-repeat
+  background url('../_common/bg.png') center no-repeat
   background-size 100% 100%
   .header {
     margin-bottom 10px
-    background url('./header.png') center no-repeat
+    background url('../_common/header.png') center no-repeat
     line-height 65px
     text-align center
     color #5dc2fe

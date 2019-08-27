@@ -1,26 +1,29 @@
 <template>
   <div class="college-table visual">
     <el-table :data="collegeList" class="table" style="widht: 100%" height="100%">
-      <el-table-column type="index" label="序号" width="50" align="center" />
+      <el-table-column type="index" label="序号" width="55" align="center" />
       <el-table-column prop="name" label="学校" />
-      <el-table-column prop="is_985" label="985" width="50" align="center">
+      <el-table-column prop="is_985" label="985" width="80" align="center" sortable>
         <template slot-scope="scope">
-          {{ chooseBooleanSymbol(scope.row.is_985) }}
+          {{ convertBoolean2Symbol(scope.row.is_985) }}
         </template>
       </el-table-column>
-      <el-table-column prop="is_211" label="211" width="50" align="center">
+      <el-table-column prop="is_211" label="211" width="80" align="center" sortable>
         <template slot-scope="scope">
-          {{ chooseBooleanSymbol(scope.row.is_211) }}
+          {{ convertBoolean2Symbol(scope.row.is_211) }}
         </template>
       </el-table-column>
-      <el-table-column prop="is_double_1st" label="双一流" width="70" align="center">
+      <el-table-column prop="is_double_1st" label="双一流" width="90" align="center" sortable>
         <template slot-scope="scope">
-          {{ chooseBooleanSymbol(scope.row.is_double_1st) }}
+          {{ convertBoolean2Symbol(scope.row.is_double_1st) }}
         </template>
       </el-table-column>
-      <el-table-column prop="is_public" label="类型" width="50">
+      <el-table-column prop="is_public" label="类型" width="80" 
+        :filters="[{ text: '公办', value: 1 }, { text: '民办', value: 2 }, { text: '独立', value: 3 }]" 
+        :filter-method="filterIsPublic" 
+        filter-placement="bottom-end">
         <template slot-scope="scope">
-          {{ scope.row.is_public? '公办': '私立'  }}
+          {{ convertNum2CollegeType(scope.row.is_public) }}
         </template>
       </el-table-column>
     </el-table>
@@ -53,17 +56,28 @@ export default {
     let { province } = this.$route.query
     this.updateTable(province)
   },
-  mounted() {
-  },
+  mounted() { },
   methods: {
-    chooseBooleanSymbol(bool) {
+    async updateTable(province) {
+      const data = await CollegeModel.getList(province, 1, 200)
+      this.collegeList = data.colleges
+    },
+    convertBoolean2Symbol(bool) {
       if (bool) return '✔'
       return '✘'
     },
-    async updateTable(province) {
-      const data = await CollegeModel.getList(province, 1, 30)
-      this.collegeList = data.colleges
-    }
+    convertNum2CollegeType(num) {
+      const CollegeTypeObj = {
+        1: '公办',
+        2: '民办',
+        3: '独立'
+      }
+      let { [num]: collegeType = '其他' } = CollegeTypeObj // 对象结构&默认值
+      return collegeType
+    },
+    filterIsPublic(value, row) {
+      return row.is_public === value
+    },
   },
 }
 </script>

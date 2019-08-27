@@ -16,22 +16,23 @@
         </el-col>
         <el-col :xs="24" :sm="24" :md="12" :lg="12" class="col-item">
           <GraphContainer title="" class="graph-item xpanel-wrapper-1">
-            <ProvinceMap id="provinceMap"/>
+            <ProvinceMap id="provinceMap" />
           </GraphContainer>
         </el-col>
         <el-col :xs="24" :sm="24" :md="6" :lg="6" class="col-item">
 
-          <GraphContainer title="" class="graph-item xpanel-wrapper-3">
-
+          <GraphContainer title="重点学科" class="graph-item xpanel-wrapper-3">
+            <CollegeKeyMajorNumPieChart id="collegeKeyMajorNumPieChart" />
           </GraphContainer>
 
-          <GraphContainer title="" class="graph-item xpanel-wrapper-3">
-
+          <GraphContainer title="专业总数(本/专)" class="graph-item xpanel-wrapper-3">
+            <CollegeTotalMajorNumPieChart id="collegeTotalMajorNumPieChart" />
           </GraphContainer>
 
-          <GraphContainer title="" class="graph-item xpanel-wrapper-3">
-
+          <GraphContainer title="招生人数(本/专)" class="graph-item xpanel-wrapper-3">
+            <CollegeEnrollNumPieChart id="collegeEnrollNumPieChart" />
           </GraphContainer>
+
         </el-col>
       </el-row>
     </el-main>
@@ -44,6 +45,10 @@ import GraphContainer from 'comps/base/GraphContainer'
 // 省份级组件
 import CollegeTable from '../_common/CollegeTable'
 import ProvinceMap from './ProvinceMap'
+import CollegeKeyMajorNumPieChart from './CollegeKeyMajorNumPieChart'
+import CollegeTotalMajorNumPieChart from './CollegeTotalMajorNumPieChart'
+import CollegeEnrollNumPieChart from './CollegeEnrollNumPieChart'
+
 
 export default {
   name: 'CollegeListView',
@@ -52,6 +57,9 @@ export default {
     GraphContainer,
     CollegeTable,
     ProvinceMap,
+    CollegeKeyMajorNumPieChart,
+    CollegeTotalMajorNumPieChart,
+    CollegeEnrollNumPieChart,
   },
   data() {
     return {}

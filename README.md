@@ -40,7 +40,99 @@ npm run commit # 提交至「本地仓库」，结合 npm scripts自动运行 co
 ## 可视化
 参考[个人作品:GraphVis](http://www.graphvis.cn/graphvis/university/index.html)
 
-## Vue模版格式
+## 项目目录结构
+```
+.
+├── README.md
+├── babel.config.js
+├── mock
+│   ├── index.js
+│   └── modules
+├── node_modules
+├── public
+│   ├── favicon.ico
+│   └── index.html
+├── src
+│   ├── App.vue
+│   ├── assets
+│   │   ├── data
+│   │   ├── icons
+│   │   ├── images
+│   │   └── styles
+│   ├── components
+│   │   ├── base
+│   │   └── layout
+│   ├── config
+│   │   └── index.js
+│   ├── main.js
+│   ├── mixins
+│   │   └── resize.js
+│   ├── models
+│   │   ├── college.js
+│   │   └── user.js
+│   ├── plugins
+│   │   ├── custom.js
+│   │   └── element.js
+│   ├── router
+│   │   ├── index.js
+│   │   ├── modules
+│   │   └── routes.js
+│   ├── store
+│   │   ├── actions.js
+│   │   ├── getters.js
+│   │   ├── index.js
+│   │   ├── modules
+│   │   ├── mutations.js
+│   │   └── state.js
+│   ├── utils
+│   │   ├── cookie.js
+│   │   ├── index.js
+│   │   └── request.js
+│   └── views
+│       ├── about
+│       ├── admin
+│       ├── chart
+│       ├── dashboard
+│       ├── data-graph
+│       ├── _common
+│       │   ├── CollegeTable.vue
+│       │   ├── bg.png
+│       │   └── header.png
+│       ├── college-detail
+│       │   └── index.vue
+│       ├── college-list
+│       │   ├── CollegeEnrollNumPieChart.vue
+│       │   ├── CollegeKeyMajorNumPieChart.vue
+│       │   ├── CollegeTotalMajorNumPieChart.vue
+│       │   ├── ProvinceMap.vue
+│       │   └── index.vue
+│       ├─── overview
+│       │   ├── ChinaMap
+│       │   ├── DonutForCooperateType.vue
+│       │   ├── DonutForSchoolLevel.vue
+│       │   ├── HeatMap
+│       │   ├── TopCity
+│       │   ├── TopProvince.vue
+│       │   └── index.vue
+│       ├── error-page
+│       ├── form
+│       ├── guide
+│       ├── home
+│       ├── login
+│       └── table
+└── vue.config.js
+```
+
+目录 **`src/views/data-graph`** 的结构包含4个子目录，其中 `overview、college-list、college-detail` 是路由 **`/data-graph`** 所有子级路由的页面组件，`_common` 是路由 **`/data-graph`** 所有子级页面组件的共用资源的目录。
+
+
+`overview` 目录中，小写开头的 **`.vue`** 文件为页面组件(有且只有一个)，所有大写开头的 **`.vue`** 文件都是业务组件。
+
+`_common` 中包含共用图片和组件，尽量减少嵌套关系。
+
+## Vue
+
+### .vue模版格式
 ```vue
 <template>
   <div></div>
@@ -63,6 +155,7 @@ export default {
 <style scoped lang="stylus" rel="stylesheet/stylus">
 </style>
 ```
+
 
 ## 后续计划
 基于 TypeScript重构 ceres-admin项目，参考[TypeScript + 大型项目实战](https://juejin.im/post/5b54886ce51d45198f5c75d7#heading-3)
