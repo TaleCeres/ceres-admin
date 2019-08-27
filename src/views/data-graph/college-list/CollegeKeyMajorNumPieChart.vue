@@ -66,7 +66,7 @@ export default {
   watch: {
     // 监听省份变化(失败)
     province(val) {
-      console.log('val', val)
+      // console.log('val', val)
       let province = val
       this.provinceStat = keyMajorStatNum[province]
       // 刷新 map
@@ -74,8 +74,8 @@ export default {
     }
   },
   async created() {
-    let { province } = this.$route.query
-    this.provinceStat = keyMajorStatNum[province]
+    // let { province } = this.$route.query
+    // this.provinceStat = keyMajorStatNum[province]
   },
 }
 </script>

@@ -21,7 +21,7 @@ module.exports = {
     /* vue 规范
     Vue风格指南: https://cn.vuejs.org/v2/style-guide/index.html
     Vue规范文档: https://eslint.vuejs.org/rules
-    */ 
+    */
     'vue/order-in-components': ['warn', {
       'order': [ // 组件&实例的选项的顺序(参考: https://cn.vuejs.org/v2/style-guide/index.html#组件-实例的选项的顺序-推荐)
         'el',
@@ -62,17 +62,18 @@ module.exports = {
     'vue/prop-name-casing': ['error', 'camelCase'], // prop name 使用小驼峰命名法
     'vue/attribute-hyphenation': ['error', 'always'], // 特性name 使用连字符: <MyComponent my-prop="prop" />
     'vue/no-unused-components': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    /* js 规范 
-    
-    */ 
+    /* js 规范
+
+    */
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off', // 使用控制台
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-unused-vars': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-underscore-dangle': 'off',
     'no-param-reassign': 'off', // 修改函数参数
-    'quote-props': 'off', 
+    'quote-props': 'off',
     'comma-dangle': 'off', // 逗号
     'arrow-parens': ['error', 'as-needed'],
+    'linebreak-style': 'off',
     'prefer-const': 'off', // 对于「值不曾被修改」的变量，可以使用 let(非强制一定是 const)
     'import/extensions': 'off', // import不需要写文件扩展名
     'import/newline-after-import': 'off',

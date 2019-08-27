@@ -62,17 +62,18 @@ export default {
     }
   },
   watch: {
-    // 监听省份变化(失败)
     province(val) {
+      console.log('变化了')
       let province = val
       this.provinceStat = totalEnrollNum[province]
       // 刷新 map
       this.updateChart()
     }
   },
-  async created() {
-    let { province } = this.$route.query
-    this.provinceStat = totalEnrollNum[province]
+  async activated() {
+
+    // let { province } = this.$route.query
+    // this.provinceStat = totalEnrollNum[province]
   },
 }
 </script>

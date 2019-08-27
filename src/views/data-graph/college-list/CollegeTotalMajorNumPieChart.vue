@@ -71,8 +71,8 @@ export default {
     }
   },
   async created() {
-    let { province } = this.$route.query
-    this.provinceStat = totalMajorNum[province]
+    // let { province } = this.$route.query
+    // this.provinceStat = totalMajorNum[province]
   },
 }
 </script>
