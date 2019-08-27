@@ -65,7 +65,7 @@ export default {
     province(val) {
       let province = val
       this.provinceStat = totalEnrollNum[province]
-      // 刷新 map
+      // 刷新map
       this.updateChart()
     }
   },
