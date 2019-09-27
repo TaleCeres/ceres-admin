@@ -5,6 +5,10 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "start": "pm2 start app.js --name='ceres-admin'",
+    "stop": "pm2 delete ceres-admin",
+    "restart": "npm run stop && npm run start",
+    "buildart": "npm run build && npm run restart",
     "lint": "vue-cli-service lint",
     "commit": "git-cz"
   },

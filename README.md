@@ -16,6 +16,12 @@ npm run build # 编译 & 优化(生成模式)
 npm run test # 运行测试
 npm run lint # 格式化 & 修复
 npm run commit # 自动化 git commit
+
+# pm2 相关
+npm run start # pm2 启动已指定的项目(即 pm2 start app.js --name='ceres-admin') 
+npm run stop # pm2 关闭已指定的项目(即 pm2 delete ceres-admin) 
+npm run restart # pm2 重启已指定的项目
+npm run buildart # 重新编译，并使用pm2 重启已指定的项目
 ```
 
 ## git commmit 规范
