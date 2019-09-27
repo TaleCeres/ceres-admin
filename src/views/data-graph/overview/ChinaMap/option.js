@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { cityGeo } from 'assets/data/index'
 let max = 480
 let min = 9
 let maxSize4Pin = 100
@@ -10,10 +11,11 @@ export default {
     trigger: 'item',
     formatter: params => {
       if (params.value.length === 3) {
-        return '<p>' + params.name + '</p><p>' + params.seriesName + ':' + params.value[2] + '</p>'
-      } else {
-        return '<p>' + params.name + '</p><p>' + params.seriesName + ':' + params.value + '</p>'
-      }
+        return '<p>' + params.name + '</p><p>' + '院校数量:' + params.value[2] + '</p>'
+      } 
+      // else {
+      //   return '<p>' + params.name + '</p><p>' + params.seriesName + ':' + params.value + '</p>'
+      // }
     }
   },
   geo: {
@@ -31,7 +33,7 @@ export default {
         show: true,
         textStyle: {
           color: '#fff',
-          fontSize: 28,
+          fontSize: 12,
         },
       }
     },
@@ -53,7 +55,7 @@ export default {
   visualMap: {
     show: true,
     min: 0,
-    max: 200,
+    max: 65,
     left: 5,
     text: ['多', '少'],
     calculable: true,
@@ -137,11 +139,14 @@ export default {
       label: {
         normal: {
           show: true,
+          formatter: param => {
+            return param.value[2]
+          },
           textStyle: {
             color: '#fff',
             fontSize: 10
           }
-        }
+        },
       },
       itemStyle: {
         normal: {
@@ -149,36 +154,7 @@ export default {
         }
       },
       zlevel: 6,
-      data: [
-        { name: '北京', value: [116.46, 39.92, 92] },
-        { name: '武汉', value: [114.31, 30.52, 84] },
-        { name: '广州', value: [113.23, 23.16, 83] },
-        { name: '重庆', value: [106.54, 29.59, 65] },
-        { name: '上海', value: [121.48, 31.22, 64] },
-        { name: '新疆', value: [87.68, 43.77, 27] },
-        { name: '青海', value: [101.74, 36.56, 10] },
-        { name: '拉萨', value: [91.11, 29.97, 7] },
-        { name: '西安', value: [108.95, 34.27, 63] },
-        { name: '郑州', value: [113.65, 34.76, 58] },
-        { name: '天津', value: [117.2, 39.13, 58] },
-        { name: '长沙', value: [113, 28.21, 57] },
-        { name: '成都', value: [104.06, 30.67, 56] },
-        { name: '合肥', value: [117.27, 31.86, 54] },
-        { name: '南昌', value: [115.89, 28.68, 53] },
-        { name: '南京', value: [118.78, 32.04, 53] },
-        { name: '哈尔滨', value: [126.63, 45.75, 51] },
-        { name: '昆明', value: [102.73, 25.04, 49] },
-        { name: '沈阳', value: [123.38, 41.8, 48] },
-        { name: '杭州', value: [120.19, 30.26, 46] },
-        { name: '石家庄', value: [114.48, 38.03, 44] },
-        { name: '济南', value: [117, 36.65, 43] },
-        { name: '太原', value: [112.53, 37.87, 43] },
-        { name: '莱芜', value: [117.67, 36.19, 1] },
-        { name: '梅州', value: [116.1, 24.55, 1] },
-        { name: '河源', value: [114.68, 23.73, 1] },
-        { name: '甘肃', value: [98.289152, 39.77313, 1] },
-        { name: '潮州', value: [116.63, 23.68, 1] }
-      ]
+      data: cityGeo
     }
   ]
 }

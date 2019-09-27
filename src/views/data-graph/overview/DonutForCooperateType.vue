@@ -16,7 +16,7 @@ const option = {
       name: '院校类型',
       type: 'pie',
       center: ['50%', '55%'],
-      radius: ['40%', '70%'],
+      radius: ['40%', '65%'],
       avoidLabelOverlap: true, // avoidLabelOverlap:是否启用防止标签重叠策略，默认开启
       label: {
         fontSize: 16,

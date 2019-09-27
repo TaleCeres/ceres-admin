@@ -63,8 +63,7 @@ export default {
   },
   watch: {
     province(val) {
-      let province = val
-      this.provinceStat = totalEnrollNum[province]
+      this.provinceStat = totalEnrollNum[val]
       // 刷新map
       this.updateChart()
     }

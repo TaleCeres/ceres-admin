@@ -21,17 +21,17 @@
         </el-col>
         <el-col :xs="24" :sm="24" :md="6" :lg="6" class="col-item">
 
-          <GraphContainer title="重点学科" class="graph-item xpanel-wrapper-3">
+          <GraphContainer title="重点学科" class="graph-item xpanel-wrapper-2">
             <CollegeKeyMajorNumPieChart id="collegeKeyMajorNumPieChart" />
           </GraphContainer>
 
-          <GraphContainer title="专业总数(本/专)" class="graph-item xpanel-wrapper-3">
+          <GraphContainer title="专业总数(本/专)" class="graph-item xpanel-wrapper-2">
             <CollegeTotalMajorNumPieChart id="collegeTotalMajorNumPieChart" />
           </GraphContainer>
-
+<!-- 
           <GraphContainer title="招生人数(本/专)" class="graph-item xpanel-wrapper-3">
             <CollegeEnrollNumPieChart id="collegeEnrollNumPieChart" />
-          </GraphContainer>
+          </GraphContainer> -->
 
         </el-col>
       </el-row>
@@ -40,10 +40,11 @@
 </template>
 
 <script type="text/ecmascript-6">
+// 基础组件
 import Screenfull from 'comps/base/Screenfull'
 import GraphContainer from 'comps/base/GraphContainer'
-// 省份级组件
-import CollegeTable from '../_common/CollegeTable'
+// 业务组件
+import CollegeTable from './CollegeTable'
 import ProvinceMap from './ProvinceMap'
 import CollegeKeyMajorNumPieChart from './CollegeKeyMajorNumPieChart'
 import CollegeTotalMajorNumPieChart from './CollegeTotalMajorNumPieChart'
@@ -62,11 +63,18 @@ export default {
     CollegeEnrollNumPieChart,
   },
   data() {
-    return {}
+    return {
+      province: ''
+    }
   },
   computed: {},
-  created() { },
-  mounted() { },
+  created() {
+    let { province } = this.$route.query
+    this.province = province
+  },
+  mounted() {
+    this.$store.commit('visual/SET_PROVINCE', this.province)
+  },
   methods: {},
 }
 </script>

@@ -28,13 +28,13 @@ export default {
     this.chart.on('click', 'series', data => {
       let { seriesIndex: geoLevel, name: province, dataIndex } = data
       if (geoLevel === 0) {
-        this.$store.commit('visual/SET_PROVINCE', province)
-        this.$router.push({
+        let newRouter = this.$router.resolve({
           path: '/data-graph/college-list',
           query: {
             province
           }
         })
+        window.open(newRouter.href, '_blank')
       }
     })
   }

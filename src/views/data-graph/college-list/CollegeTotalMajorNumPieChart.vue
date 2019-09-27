@@ -62,10 +62,9 @@ export default {
     }
   },
   watch: {
-    // 监听省份变化(失败)
+    // 监听省份变化
     province(val) {
-      let province = val
-      this.provinceStat = totalMajorNum[province]
+      this.provinceStat = totalMajorNum[val]
       // 刷新 map
       this.updateChart()
     }

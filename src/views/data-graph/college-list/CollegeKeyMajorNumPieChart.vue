@@ -7,6 +7,7 @@
 import resize from '@/mixins/resize'
 import { mapState } from 'vuex'
 import { keyMajorStatNum } from 'assets/data/stat'
+import color from 'assets/data/color'
 export default {
   name: 'CollegeKeyMajorNumPieChart',
   components: {},
@@ -33,7 +34,15 @@ export default {
           trigger: 'item',
           formatter: '{a} <br/>{b}: {c}个 ({d}%)'
         },
-        color: ['#60acfc', '#32d3eb', '#5bc49f', '#feb64d', '#ff7c7c', '#9287e7'],
+        legend: {
+          orient: 'vertical',
+          x: 'left',
+          textStyle: {
+            color: '#fff'
+          },
+          data: ['A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', '普通']
+        },
+        color: color.category12,
         series: [
           {
             name: '学科类型',
@@ -64,11 +73,9 @@ export default {
     }
   },
   watch: {
-    // 监听省份变化(失败)
+    // 监听省份变化
     province(val) {
-      // console.log('val', val)
-      let province = val
-      this.provinceStat = keyMajorStatNum[province]
+      this.provinceStat = keyMajorStatNum[val]
       // 刷新 map
       this.updateChart()
     }

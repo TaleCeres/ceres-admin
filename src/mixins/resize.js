@@ -2,6 +2,15 @@
 import echarts from 'echarts'
 
 export default {
+  data() {
+    return echarts
+  },
+  watch: {
+    option() {
+      // option变化，立马渲染
+      this.updateChart()
+    }
+  },
   mounted() {
     this.drawChart()
     // 监听窗口的变化

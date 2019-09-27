@@ -8,12 +8,14 @@
       <el-row class="main" style="height: 100%">
         <el-col :xs="24" :sm="24" :md="6" :lg="6" class="col-item">
 
-          <GraphContainer title="各省高校数量热力图" class="graph-item xpanel-wrapper-2">
+          <GraphContainer title="高校数量热力图" class="graph-item xpanel-wrapper-2">
             <HeatMap id="HeatMap" />
           </GraphContainer>
 
-          <GraphContainer title="" class="graph-item xpanel-wrapper-2">
-            <DonutForCooperateType id="donutForCooperateType" />
+          <GraphContainer title="全国重点学科分布" class="graph-item xpanel-wrapper-2">
+            <!-- 本科院校TOP12的省份 -->
+            <!-- <TopProvince id="topProvince" /> -->
+            <KeyMajorPieChart id="KeyMajorPieChart" />
           </GraphContainer>
 
         </el-col>
@@ -24,12 +26,12 @@
         </el-col>
         <el-col :xs="24" :sm="24" :md="6" :lg="6" class="col-item">
 
-          <GraphContainer title="全国院校本/专科比例" class="graph-item xpanel-wrapper-3">
-            <DonutForSchoolLevel id="donutForSchoolLevel" />
+          <GraphContainer title="" class="graph-item xpanel-wrapper-3">
+            <DonutForCooperateType id="donutForCooperateType" />
           </GraphContainer>
 
-          <GraphContainer title="本科院校TOP12的省份" class="graph-item xpanel-wrapper-3">
-            <TopProvince id="topProvince" />
+          <GraphContainer title="本、专科(专业数/人数)" class="graph-item xpanel-wrapper-3">
+            <DonutForSchoolLevel id="donutForSchoolLevel" />
           </GraphContainer>
 
           <GraphContainer title="院校总数TOP10的城市" class="graph-item xpanel-wrapper-3">
@@ -51,6 +53,7 @@ import HeatMap from './HeatMap'
 import DonutForSchoolLevel from './DonutForSchoolLevel'
 import DonutForCooperateType from './DonutForCooperateType'
 import TopCity from './TopCity' // 省份级组件
+import KeyMajorPieChart from './KeyMajorPieChart'
 
 export default {
   name: 'Overview',
@@ -63,6 +66,7 @@ export default {
     DonutForSchoolLevel,
     DonutForCooperateType,
     TopCity,
+    KeyMajorPieChart,
   },
   data() {
     return {
