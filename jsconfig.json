@@ -1,0 +1,20 @@
+/**
+[不再手写import-VSCode自动引入Vue组件和JS模块](https://segmentfault.com/a/1190000015690038)
+[前端常用开发工具的路径解析配置](https://zhuanlan.zhihu.com/p/37691779)
+*/
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "allowSyntheticDefaultImports": false,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "assets/*": ["src/assets/*"],
+      "comps/*": ["src/components/*"]
+    }
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": ["node_modules", "dist"]
+}

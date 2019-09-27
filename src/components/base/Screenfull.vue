@@ -13,13 +13,6 @@
 import screenfull from 'screenfull'
 export default {
   name: 'Screenfull',
-  components: {},
-  data() {
-    return {}
-  },
-  computed: {},
-  created() { },
-  mounted() { },
   methods: {
     toggleZoom() {
       if (!screenfull.enabled) return

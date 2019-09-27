@@ -13,4 +13,12 @@ export default class College {
     })
     return data
   }
+
+  // 高校近几年的趋势分析
+  static async getMajorListOfTrendAnalyse(id) {
+    const data = await get(`college/${id}/trend_analyse`)
+    return data
+  }
+
+  // 高校的重点学科
 }

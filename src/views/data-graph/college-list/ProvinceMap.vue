@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100%" class="visual">
-    <el-select v-model="value" placeholder="请选择" size="mini" filterable popper-class="select-option" @change="handelUpdateMap">
+    <el-select v-model="province" placeholder="请选择" size="mini" filterable popper-class="select-option" @change="handelUpdateMap">
       <el-option v-for="item in provincesInCN" :key="item.value" :label="item.label" :value="item.value" />
     </el-select>
     <div :id="id" style="height: 95%"></div>
@@ -32,12 +32,18 @@ export default {
   data() {
     return {
       chart: null,
-      province: '',
       provincesInCN,
-      value: ''
     }
   },
   computed: {
+    province: {
+      get() {
+        return this.$store.state.visual.geo.province
+      },
+      set(val) {
+        this.$store.commit('visual/SET_PROVINCE', val)
+      }
+    },
     collegeDistribution() {
       return collegeDistributionByProvince[this.province]
     },
@@ -46,6 +52,7 @@ export default {
       return Math.max(...valueArr)
     },
     option() {
+      let { province, maxValue, collegeDistribution } = this
       return {
         tooltip: {
           trigger: 'item',
@@ -58,7 +65,7 @@ export default {
         },
         geo: {
           show: true,
-          map: this.province,
+          map: province,
           label: {
             normal: {
               show: true,
@@ -86,7 +93,7 @@ export default {
           type: 'continuous',
           show: true,
           min: 0,
-          max: this.maxValue,
+          max: maxValue,
           left: 5,
           text: ['多', '少'],
           realtime: false,
@@ -113,30 +120,26 @@ export default {
             },
             roam: true,
             animation: false,
-            data: this.collegeDistribution
+            data: collegeDistribution
           }
         ]
       }
     }
   },
-  created() {
-    let { province } = this.$route.query
-    this.province = province
-    this.value = province
-    // setTimeout(() => {
-    //   this.$store.commit('visual/SET_PROVINCE', this.province)
-    // }, 200)
+
+  watch: {
+    province(val) {
+      this.updateChart()
+    }
   },
   mounted() {
     this.chart.on('click', 'series', data => {
       let { name: city } = data
       this.$store.commit('visual/SET_CITY', city)
     })
-    this.$store.commit('visual/SET_PROVINCE', this.province)
   },
   methods: {
     handelUpdateMap() {
-      this.province = this.value
       this.$store.commit('visual/SET_PROVINCE', this.province)
       // 刷新 map
       this.updateChart()

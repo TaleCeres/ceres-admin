@@ -1,4 +1,10 @@
-// 各省的高校的重点&普通专业数量
+/**
+ * keyMajorStatNum： 各省所有高校的重点&普通专业数量
+ * totalMajorNum： 各省所有高校的的本/专科专业数量
+ * totalEnrollNum： 各省所有高校的本/专科招收人数
+ * collegeDistributionByProvince: 各省下各市的
+ */
+
 export const keyMajorStatNum = {
   '浙江': [
     {

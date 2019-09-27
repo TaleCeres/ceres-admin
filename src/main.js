@@ -6,7 +6,7 @@ import store from './store/index'
 import './plugins/element'
 import './plugins/custom'
 // CSS样式
-import 'font-awesome/css/font-awesome.css'
+import 'node_modules/font-awesome/css/font-awesome.css'
 import 'assets/styles/index.styl'
 
 if (process.env.NODE_ENV !== 'production') {
