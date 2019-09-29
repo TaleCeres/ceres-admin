@@ -43,8 +43,32 @@ npm run commit # 提交至「本地仓库」，结合 npm scripts自动运行 co
 
 页面组件可能包含多个业务组件，业务组件包含多个基础组件
 
+### 规范
+页面组件和业务件在html代码为 **`大驼峰命名`**，便于区分html标签和第三方组件。<br>
+无slot(插槽)的组件和html标签使用 **标签闭合**，便于减少代码量。
+
+```html
+<div style="height:100%;">
+  <el-container>
+    <el-aside :width="sidebarWidth" class="aside">
+      <SideBar />
+    </el-aside>
+    <el-container>
+      <el-header class="header">
+        <NavBar />
+      </el-header>
+      <el-main class="main">
+        <AppMain />
+      </el-main>
+    </el-container>
+  </el-container>
+</div>
+```
+
 ## 可视化
 参考[个人作品:GraphVis](http://www.graphvis.cn/graphvis/university/index.html)
+
+Echarts参考[术语速查手册](https://www.echartsjs.com/zh/cheat-sheet.html)，包括：常用组件说明、文档速查
 
 ## 项目目录结构
 ```
