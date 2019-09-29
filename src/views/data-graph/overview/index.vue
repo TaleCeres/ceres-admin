@@ -3,6 +3,7 @@
     <Screenfull style="position: fixed; top: 10px; right: 10px;" />
     <el-header class="header" height="72px">
       <p>全国高等院校分布</p>
+      <DigitalClock/>
     </el-header>
     <el-main>
       <el-row class="main" style="height: 100%">
@@ -44,7 +45,9 @@
 </template>
 
 <script type="text/ecmascript-6">
+// 基础组件
 import Screenfull from 'comps/base/Screenfull'
+import DigitalClock from 'comps/base/DigitalClock'
 import GraphContainer from 'comps/base/GraphContainer'
 // 业务组件
 import TopProvince from './TopProvince'
@@ -60,6 +63,7 @@ export default {
   components: {
     Screenfull,
     GraphContainer,
+    DigitalClock,
     TopProvince,
     ChinaMap,
     HeatMap,
