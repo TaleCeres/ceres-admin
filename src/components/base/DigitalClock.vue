@@ -1,5 +1,7 @@
 <template>
-  <div>{{ time }}</div>
+  <div class="clock">
+    <div class="time">{{ time }}</div>
+  </div>
 </template>
 
 <script type="text/ecmascript-6">
@@ -9,7 +11,7 @@ export default {
   data() {
     return {
       time: '',
-      intervalID: undefined,
+      intervalId: undefined,
     }
   },
   computed: {},
@@ -17,16 +19,16 @@ export default {
     this.getTime()
   },
   mounted() {
-    this.setIntervalID = setInterval(() => {
+    this.intervalId = setInterval(() => {
       this.getTime()
     }, 1000)
   },
   beforeDestroy() {
-    clearInterval(this.intervalID)
+    clearInterval(this.intervalId)
   },
   methods: {
     getTime() {
-      let date = new Date()// 时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      let date = new Date()// 时间戳为10位需*1000
       let Y = `${date.getFullYear()}`
       let M = `${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}`
       let D = `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`
@@ -39,4 +41,28 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus" rel="stylesheet/stylus"></style>
+<style scoped lang="stylus" rel="stylesheet/stylus">
+@font-face {
+  font-family LcdD
+  font-style normal
+  src url('../../assets/fonts/LcdD.ttf')
+}
+.clock {
+  position absolute
+  margin-top -3px
+  right 20px
+  top 25px
+  .time {
+    font-family LcdD
+    color #52a3e5
+    letter-spacing 2px
+    font-size 28px
+  }
+}
+/* 移动端 clock */
+@media only screen and (max-width: 992px) {
+  .clock {
+    display none
+  }
+}
+</style>

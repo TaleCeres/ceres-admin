@@ -7,7 +7,6 @@
       </router-link>
     </div>
     <div class="right-menu">
-    <DigitalClock style="margin-right: 15px;"/>
     <Screenfull style="margin-right: 15px;"/>
     <UserCard style="margin-right: 10px;"/>
     </div>
@@ -16,13 +15,11 @@
 
 <script type="text/ecmascript-6">
 import { mapGetters } from 'vuex'
-import DigitalClock from 'comps/base/DigitalClock'
 import Screenfull from 'comps/base/Screenfull'
 import UserCard from 'comps/base/UserCard'
 export default {
   name: 'NavBar',
   components: {
-    DigitalClock,
     Screenfull,
     UserCard,
   },
