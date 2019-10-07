@@ -32,7 +32,6 @@ export default {
     Breadcrumb,
     LangSelect,
     Screenfull,
-
   },
   data() {
     return {}
@@ -60,6 +59,7 @@ export default {
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .nav-bar {
   width 100%
+  height 50px
   display flex
   justify-content space-between
   align-items center
