@@ -65,7 +65,12 @@ npm run commit # 提交至「本地仓库」，结合 npm scripts自动运行 co
 </div>
 ```
 
-## 可视化
+## 参考
+### 后台管理模块
+[lin-cms-vue](https://github.com/TaleLin/lin-cms-vue) -- [线上项目](http://face.cms.7yue.pro/#/about)
+[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin) -- [线上项目](https://panjiachen.github.io/vue-element-admin/#/dashboard)
+
+### 可视化
 参考[个人作品:GraphVis](http://www.graphvis.cn/graphvis/university/index.html)
 
 Echarts参考[术语速查手册](https://www.echartsjs.com/zh/cheat-sheet.html)，包括：常用组件说明、文档速查
