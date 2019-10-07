@@ -36,6 +36,7 @@ function processRouterWithTemplate(rawRouter) {
     childrenRouter.forEach(item => {
       // 判断是否有三级路由
       if (!item.hasOwnProperty('children')) return
+      // if (item.children.length === 1) return 
       item.component = Midlayer
     })
   }
@@ -51,7 +52,44 @@ const viewRouters = [
   tableRouter,
 ].map(item => processRouterWithTemplate(item))
 
+
+/**
+ * 
+ * 
+ * hidden: true                   if set true, item will not show in the sidebar(default is false)
+ *
+ * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
+ * path: 'route'                 
+ * name:'route-name'             the name is used by <keep-alive> (must set)
+ * meta : {
+    title: 'title'               the name show in sidebar and breadcrumb (recommend set; in Chinese)
+    icon: 'svg-name'             the icon show in the sidebar and history-tags
+    affix: true                  if set true, the tag will affix in the history-tags alway
+  }
+  *
+  * route是一条路由配置, routes是一堆路由配置，router是路由功能集合
+ */
+
 const routes = [
+  {
+    path: '/',
+    name: 'Dashboard',
+    redirect: '/dashboard/index',
+    component: Layout,
+    meta: {
+      title: '纵览',
+      icon: 'el-icon-s-grid',
+      hidden: true
+    },
+    children: [
+      {
+        path: '/dashboard/index',
+        component: _import('dashboard/index'),
+        name: 'DashboardIndex',
+        meta: { title: '一览', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
   ...viewRouters,
   // 数据大屏页面
   { path: '/data-graph/overview', component: _import('data-graph/overview/index'), meta: { title: '全国高等院校分布' }, hidden: true },

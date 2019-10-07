@@ -3,6 +3,7 @@ const _import = file => () => import(`@/views/${file}.vue`)
 export default {
   path: '/about',
   name: 'About',
+  redirect: '/about/index',
   component: undefined,
   meta: {
     title: '关于',
@@ -10,9 +11,9 @@ export default {
   },
   children: [
     {
-      path: '/about/line',
+      path: '/about/index',
       component: _import('about/index'),
-      name: 'AboutIndex',
+      name: '关于',
       meta: { title: '团队信息', icon: 'el-icon-house' },
     },
   ],

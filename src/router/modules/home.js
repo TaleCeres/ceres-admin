@@ -3,9 +3,9 @@ const _import = file => () => import(`@/views/${file}.vue`)
 
 export default {
   path: '/',
-  component: undefined,
-  name: '首页',
   redirect: '/home',
+  name: '首页',
+  component: undefined,
   meta: {
     title: '首页',
     icon: 'el-icon-menu',

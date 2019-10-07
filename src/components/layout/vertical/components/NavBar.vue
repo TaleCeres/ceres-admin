@@ -5,7 +5,7 @@
         <img class="icon" src="@/assets/images/company/logo.png" alt="">
         <img class="name" src="@/assets/images/company/name.png" alt="">
       </router-link>
-      <SideBar></SideBar>
+      <SideBar />
     </div>
     <div class="right-menu">
       <el-tooltip effect="dark" content="数据大屏" placement="bottom">
@@ -24,7 +24,6 @@
 
 <script type="text/ecmascript-6">
 import { mapGetters } from 'vuex'
-import DigitalClock from 'comps/base/DigitalClock'
 import Screenfull from 'comps/base/Screenfull'
 import UserCard from 'comps/base/UserCard'
 import LangSelect from 'comps/base/LangSelect'
@@ -32,7 +31,6 @@ import SideBar from './SideBar'
 export default {
   name: 'NavBar',
   components: {
-    DigitalClock,
     Screenfull,
     UserCard,
     SideBar,

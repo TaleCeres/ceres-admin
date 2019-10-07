@@ -5,8 +5,9 @@
         <SideBar />
       </el-aside>
       <el-container>
-        <el-header class="header">
+        <el-header class="header" height="84px">
           <NavBar />
+          <HistoryTag />
         </el-header>
         <el-main class="main">
           <AppMain />
@@ -19,10 +20,8 @@
 <script type="text/ecmascript-6">
 import { mapGetters } from 'vuex'
 import HistoryTag from 'comps/base/HistoryTag'
+import { AppMain, SideBar, NavBar } from './components'
 import ResizeMixin from '../mixin/resize'
-import AppMain from './components/AppMain'
-import SideBar from './components/SideBar'
-import NavBar from './components/NavBar'
 
 export default {
   name: 'DefalutLayout',
@@ -30,7 +29,7 @@ export default {
     AppMain,
     SideBar,
     NavBar,
-    // HistoryTag,
+    HistoryTag,
   },
   mixins: [ResizeMixin],
   computed: {
@@ -60,8 +59,7 @@ export default {
   }
 }
 .header {
-  display flex
-  align-items center
+  width 100%
   padding 0
   box-shadow 0px 2px 6px 0px rgba(190, 204, 216, 0.4)
 }
