@@ -79,8 +79,8 @@ const routes = [
     meta: {
       title: '纵览',
       icon: 'el-icon-s-grid',
-      hidden: true
     },
+    hidden: true,
     children: [
       {
         path: '/dashboard/index',
