@@ -63,7 +63,7 @@ export default {
       let { tags } = this
       let tagIndex = tags.findIndex(tag => tag.path === curTag.path)
       tags.splice(tagIndex, 1)
-      if (tagIndex === tags.length) {
+      if (tagIndex === tags.length && this.isActive(curTag)) {
         let routerPath = this.tags[tagIndex - 1].path
         this.$router.push(routerPath)
       }
