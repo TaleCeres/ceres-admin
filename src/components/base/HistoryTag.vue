@@ -31,7 +31,6 @@ export default {
   },
   computed: {
     scrollWrapper() {
-      console.log(this.$refs.scrollContainer)
       return this.$refs.scrollContainer
     }
   },
@@ -79,7 +78,6 @@ export default {
       }
     },
     checkoutTag() {
-      console.log('click')
     }
   },
 }
