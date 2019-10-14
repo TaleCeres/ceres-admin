@@ -65,29 +65,6 @@ npm run commit # 提交至「本地仓库」，结合 npm scripts自动运行 co
 </div>
 ```
 
-#### vue文件格式
-```html
-<template>
-  <div></div>
-</template>
-
-<script type="text/ecmascript-6">
-export default {
-  name: 'DefaultTemplate',
-  data() {
-    return {}
-  },
-  computed: {},
-  created() { },
-  mounted() { },
-  methods: {},
-}
-</script>
-
-<style scoped lang="stylus" rel="stylesheet/stylus">
-</style>
-```
-
 ## 参考
 ### 后台管理模块
 - [lin-cms-vue](https://github.com/TaleLin/lin-cms-vue) -- [线上项目](http://face.cms.7yue.pro/#/about) -- [文档](http://doc.cms.7yue.pro/)
@@ -198,7 +175,7 @@ Echarts参考[术语速查手册](https://www.echartsjs.com/zh/cheat-sheet.html)
 
 <script type="text/ecmascript-6">
 export default {
-  name: 'App',
+  name: 'ComponentName',
   components: {},
   data() {
     return {}
@@ -213,6 +190,11 @@ export default {
 <style scoped lang="stylus" rel="stylesheet/stylus">
 </style>
 ```
+
+## Element-UI
+### 组件的使用规范
+- Notification(通知)显示后端的异常信息
+- Message(消息提示)显示前端的异常信息
 
 
 ## 后续计划

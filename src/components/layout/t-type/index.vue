@@ -8,7 +8,7 @@
         <el-aside :width="sidebarWidth" class="aside">
           <SideBar />
         </el-aside>
-        <div class="icon-font side-btn" :style="{left: toggleBtnMargin}" @click="toggleSlidebarState">
+        <div class="icon-font side-btn" :style="{left: sidebarWidth}" @click="toggleSlidebarState">
           <i class="el-icon-caret-left" :class="{rotate: foldState}"></i>
         </div>
         <el-main class="main">
@@ -46,9 +46,6 @@ export default {
     sidebarWidth() {
       return this.isCollapse === false ? '170px' : '64px'
     },
-    toggleBtnMargin() {
-      return this.isCollapse === false ? '160px' : '54px'
-    }
   },
   mounted() {
   },
@@ -87,8 +84,7 @@ export default {
   z-index 100
 }
 .icon-font {
-  margin 0 10px
-  font-size 22px
+  font-size 15px
   font-weight 500
   transform rotate(0deg)
   transition all 0.3s linear
