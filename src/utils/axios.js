@@ -1,3 +1,7 @@
+/**
+ * [axios 文档](http://www.axios-js.com/docs/)
+ * [axios怎么获取到error中的状态值&具体信息](https://blog.csdn.net/weixin_41838204/article/details/82107567)
+ */
 /* eslint-disable */
 import axios from 'axios'
 import store from '@/store'

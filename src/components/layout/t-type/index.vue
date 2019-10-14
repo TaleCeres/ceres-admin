@@ -6,9 +6,11 @@
       </el-header>
       <el-container>
         <el-aside :width="sidebarWidth" class="aside">
-          <i v-show="true" class="icon-font el-icon-s-fold do-slide" :class="{rotate: foldState}" @click="toggleSlidebarState" />
           <SideBar />
         </el-aside>
+        <div class="icon-font side-btn" :style="{left: toggleBtnMargin}" @click="toggleSlidebarState">
+          <i class="el-icon-caret-left" :class="{rotate: foldState}"></i>
+        </div>
         <el-main class="main">
           <AppMain />
         </el-main>
@@ -20,9 +22,7 @@
 <script type="text/ecmascript-6">
 import { mapGetters } from 'vuex'
 import ResizeMixin from '../mixin/resize'
-import AppMain from './components/AppMain'
-import SideBar from './components/SideBar'
-import NavBar from './components/NavBar'
+import { AppMain, SideBar, NavBar } from './components'
 export default {
   name: 'TTypeLayout',
   components: {
@@ -46,6 +46,9 @@ export default {
     sidebarWidth() {
       return this.isCollapse === false ? '170px' : '64px'
     },
+    toggleBtnMargin() {
+      return this.isCollapse === false ? '160px' : '54px'
+    }
   },
   mounted() {
   },
@@ -73,10 +76,15 @@ export default {
   padding 0
   box-shadow 0px 2px 6px 0px rgba(190, 204, 216, 0.4)
 }
-.do-slide {
+.side-btn {
   position absolute
-  bottom 100px
-  right 20px
+  top 150px
+  background-color #eaeaea
+  padding 12px 0
+  border-top-right-radius 7px
+  border-bottom-right-radius 7px
+  cursor pointer
+  z-index 100
 }
 .icon-font {
   margin 0 10px
