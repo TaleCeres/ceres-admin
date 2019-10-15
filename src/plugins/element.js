@@ -21,7 +21,9 @@ import {
   Tooltip,
   Row,
   Col,
-  Scrollbar
+  Scrollbar,
+  Form,
+  FormItem
 } from 'element-ui'
 import { loadPlugins } from '../utils/index'
 
@@ -48,5 +50,7 @@ loadPlugins([
   Tooltip,
   Row,
   Col,
-  Scrollbar
+  Scrollbar,
+  Form,
+  FormItem
 ])

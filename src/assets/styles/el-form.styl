@@ -1,0 +1,52 @@
+// 表单样式
+.form {
+
+  // 表单每行样式
+  .el-form-item {
+    // 两行间距
+    margin-bottom: 5px;
+
+    // 表单名称标签样式
+    .el-form-item__label {
+      width: 180px;
+      height: 42px;
+      // 文字对齐
+      text-align: center;
+      // 圆角
+      border-radius: 4px;
+      background-color: #FBFBFB;
+      border: 1px solid #DCDFE6;
+      font-size: 14px;
+      color: #606266;
+      // 行高
+      line-height: 40px;
+      padding: 0 12px 0 0;
+      // 盒模型标准:content-box(标准盒子模型) border-box(IE盒子模型)
+      box-sizing: border-box;
+    }
+
+    // 表单输入框样式
+    .el-form-item__content {
+      .el-input {
+        margin-left: 10px;
+        font-size: 14px;
+
+        .el-input__inner {
+          border-radius: 4px;
+          border: 1px solid #DCDFE6;
+          box-sizing: border-box;
+          color: #606266;
+          display: inline-block;
+          font-size: inherit;
+          height: 40px;
+          line-height: 40px;
+          outline: 0;
+          // 内边距
+          padding: 0 15px;
+          width: 100%;
+          height: 40px;
+        }
+      }
+    }
+  }
+}

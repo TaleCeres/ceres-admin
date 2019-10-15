@@ -10,6 +10,7 @@
     "restart": "npm run stop && npm run start",
     "buildart": "npm run build && npm run restart",
     "lint": "vue-cli-service lint",
+    "fix": "eslint --fix --ext .js,.vue src",
     "commit": "git-cz"
   },
   "config": {
