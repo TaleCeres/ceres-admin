@@ -22,6 +22,12 @@ export default {
       meta: { title: '饼状图', icon: 'el-icon-collection-tag' },
     },
     {
+      path: '/chart/flying',
+      component: _import('chart/flying-line-chart/index'),
+      name: 'FlyingLine',
+      meta: { title: '飞线图', icon: 'el-icon-position' },
+    },
+    {
       path: '/chart/map',
       component: _import('chart/map'),
       name: 'MapChart',

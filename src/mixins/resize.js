@@ -1,9 +1,12 @@
 // Echart 详细参数信息： https://www.jianshu.com/p/3cf80b96a65d
 import echarts from 'echarts'
-
+import { Loading } from 'element-ui'
 export default {
   data() {
-    return echarts
+    return {
+      loadingInstance: '',
+      loadingOptions: {},
+    }
   },
   watch: {
     option() {
@@ -12,7 +15,7 @@ export default {
     }
   },
   mounted() {
-    this.drawChart()
+    // this.drawChart()
     // 监听窗口的变化
     window.addEventListener('resize', this.__resizeHanlder)
   },
@@ -39,6 +42,14 @@ export default {
       window.removeEventListener('resize', this.__resizeHanlder)
       this.chart.dispose()
       this.chart = null
+    },
+    startLoading() {
+      this.loadingOptions.target = document.getElementById(this.id).parentNode
+      this.loadingOptions.fullscreen = true
+      this.loadingInstance = Loading.service(this.loadingOptions)
+    },
+    endLoading() {
+      this.loadingInstance.close()
     }
   },
 }
