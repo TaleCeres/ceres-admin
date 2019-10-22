@@ -5,6 +5,10 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "start": "pm2 start app.js --name='ceres-admin'",
+    "stop": "pm2 delete ceres-admin",
+    "restart": "npm run stop && npm run start",
+    "buildart": "npm run build && npm run restart",
     "lint": "vue-cli-service lint",
     "commit": "git-cz"
   },
@@ -16,6 +20,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "core-js": "^2.6.5",
+    "d3": "^5.9.7",
     "echarts": "^4.2.1",
     "element-ui": "^2.11.1",
     "font-awesome": "^4.7.0",
@@ -37,7 +42,6 @@
     "babel-plugin-component": "^1.1.1",
     "commitizen": "^3.0.0",
     "cz-conventional-changelog": "^2.1.0",
-    "d3": "^5.9.7",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "mockjs": "^1.0.1-beta3",

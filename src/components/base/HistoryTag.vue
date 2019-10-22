@@ -24,6 +24,7 @@ export default {
         {
           name: '主页面',
           path: '/home',
+
           affix: true
         },
       ],
@@ -31,7 +32,6 @@ export default {
   },
   computed: {
     scrollWrapper() {
-      console.log(this.$refs.scrollContainer)
       return this.$refs.scrollContainer
     }
   },
@@ -104,10 +104,8 @@ export default {
         &:first-child {
           margin-left 10px
         }
-
         .name {
         }
-
         .icon {
           margin-left 8px
           width 16px
@@ -116,13 +114,11 @@ export default {
           text-align center
           border-radius 50%
           font-size 10px
-
           &:hover {
             background grey
             color white
           }
         }
-
         &.active {
           background-color #42b983
           color #fff

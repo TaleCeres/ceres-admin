@@ -1,8 +1,8 @@
 /**
- ESLint 规则中文: https://cloud.tencent.com/developer/chapter/12618
- 'off' 或 0 - 关闭规则
- 'warn' 或 1 - 将规则视为一个警告
- 'error' 或 2 - 将规则视为一个错误
+ * ESLint 规则中文: https://cloud.tencent.com/developer/chapter/12618
+ * 'off' 或 0 - 关闭规则
+ * 'warn' 或 1 - 将规则视为一个警告
+ * 'error' 或 2 - 将规则视为一个错误
  */
 module.exports = {
   root: true,
@@ -73,6 +73,7 @@ module.exports = {
     'quote-props': 'off',
     'comma-dangle': 'off', // 逗号
     'arrow-parens': ['error', 'as-needed'],
+    'linebreak-style': 'off',
     'prefer-const': 'off', // 对于「值不曾被修改」的变量，可以使用 let(非强制一定是 const)
     'import/extensions': 'off', // import不需要写文件扩展名
     'import/newline-after-import': 'off',

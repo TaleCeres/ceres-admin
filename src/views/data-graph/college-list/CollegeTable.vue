@@ -1,6 +1,7 @@
 <template>
   <div class="college-table visual">
-    <el-table :data="collegeList" class="table" style="widht: 100%" height="100%">
+    <el-table :data="collegeList" class="table" style="widht: 100%" height="100%"
+      @row-click="handleRowClick">
       <el-table-column type="index" label="序号" width="55" align="center" />
       <el-table-column prop="name" label="学校" />
       <el-table-column prop="is_985" label="985" width="80" align="center" sortable>
@@ -47,24 +48,28 @@ export default {
     })
   },
   watch: {
-    // 监听省份变化(失败)
+    // 监听省份变化
     province(val) {
       this.updateTable(val)
     }
   },
-  async created() {
-    let { province } = this.$route.query
-    this.updateTable(province)
-  },
-  mounted() { },
   methods: {
     async updateTable(province) {
       const data = await CollegeModel.getList(province, 1, 200)
       this.collegeList = data.colleges
     },
+    handleRowClick(row) {
+      let { id: collegeID } = row
+      let newRouter = this.$router.resolve({
+        path: '/data-graph/college-detail',
+        query: {
+          collegeID
+        }
+      })
+      window.open(newRouter.href, '_blank')
+    },
     convertBoolean2Symbol(bool) {
-      if (bool) return '✔'
-      return '✘'
+      return bool ? '✔' : '✘'
     },
     convertNum2CollegeType(num) {
       const CollegeTypeObj = {

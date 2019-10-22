@@ -10,17 +10,25 @@ const option = {
     trigger: 'item',
     formatter: '{a} <br/>{b}: {c}所 ({d}%)'
   },
-  color: ['#60acfc', '#32d3eb', '#5bc49f', '#feb64d', '#ff7c7c', '#9287e7'],
+  legend: {
+    orient: 'vertical',
+    x: 'left',
+    textStyle: {
+      color: '#fff'
+    },
+    data: ['本科人数', '专科人数', '本科专业', '专科专业']
+  },
+  color: ['#5bc49f', '#feb64d', '#ff7c7c', '#9287e7', '#60acfc', '#32d3eb'],
   series: [
     {
-      name: '院校类型',
+      name: '招生人数',
       type: 'pie',
       center: ['50%', '45%'],
-      radius: ['40%', '70%'],
+      radius: ['50%', '75%'],
       avoidLabelOverlap: false,
       label: {
         fontSize: 16,
-        formatter: '{b}院校 \n {c} 所',
+        formatter: '{b} \n {c} 位',
         emphasis: {
           show: true,
           textStyle: {
@@ -35,11 +43,39 @@ const option = {
         }
       },
       data: [
-        { value: 1243, name: '本科' },
-        { value: 1388, name: '专科' },
-        { value: 988, name: '混合' },
+        { name: '本科人数', value: 116337 },
+        { name: '专科人数', value: 77491 },
       ]
-    }
+    },
+    {
+      name: '专业数量',
+      type: 'pie',
+      center: ['50%', '45%'],
+      radius: ['0%', '40%'],
+      avoidLabelOverlap: false,
+      label: {
+        normal: {
+          position: 'inner',
+          textStyle: {
+            fontSize: 14,
+            fontWeight: 'bold'
+          }
+        }
+      },
+      labelLine: {
+        normal: {
+          show: false
+        }
+      },
+      tooltip: {
+        trigger: 'item',
+        formatter: '{a} <br/>{b}: {c}个 ({d}%)'
+      },
+      data: [
+        { name: '本科专业', value: 13614 },
+        { name: '专科专业', value: 4360 },
+      ]
+    },
   ]
 }
 export default {

@@ -10,25 +10,28 @@
         <el-col :xs="24" :sm="24" :md="6" :lg="6" class="col-item">
 
           <GraphContainer title="" class="graph-item xpanel-wrapper-1">
-            <CollegeTable id="collegeTable" />
+            <CollegeMajorTable id="CollegeMajorTable" />
           </GraphContainer>
 
         </el-col>
-        <el-col :xs="24" :sm="24" :md="12" :lg="12" class="col-item">
+        <el-col :xs="24" :sm="24" :md="6" :lg="6" class="col-item">
+          <GraphContainer title="" class="graph-item xpanel-wrapper-2">
+          </GraphContainer>
+
+          <GraphContainer title="" class="graph-item xpanel-wrapper-2">
+          </GraphContainer>
+        </el-col>
+        <el-col :xs="24" :sm="24" :md="6" :lg="6" class="col-item">
           <GraphContainer title="" class="graph-item xpanel-wrapper-1">
           </GraphContainer>
         </el-col>
         <el-col :xs="24" :sm="24" :md="6" :lg="6" class="col-item">
 
-          <GraphContainer title="" class="graph-item xpanel-wrapper-3">
+          <GraphContainer title="" class="graph-item xpanel-wrapper-2">
 
           </GraphContainer>
 
-          <GraphContainer title="" class="graph-item xpanel-wrapper-3">
-
-          </GraphContainer>
-
-          <GraphContainer title="" class="graph-item xpanel-wrapper-3">
+          <GraphContainer title="" class="graph-item xpanel-wrapper-2">
 
           </GraphContainer>
         </el-col>
@@ -38,23 +41,30 @@
 </template>
 
 <script type="text/ecmascript-6">
+// 基础组件
 import Screenfull from 'comps/base/Screenfull'
 import GraphContainer from 'comps/base/GraphContainer'
-// 省份级组件
-import CollegeTable from '../_common/CollegeTable'
+
+// 业务组件
+import CollegeMajorTable from './CollegeMajorTable'
 
 export default {
   name: 'CollegeDetailView',
   components: {
     Screenfull,
     GraphContainer,
-    CollegeTable,
+    CollegeMajorTable,
   },
   data() {
-    return {}
+    return {
+      collegeID: ''
+    }
   },
   computed: {},
-  created() { },
+  created() {
+    let { collegeID } = this.$route.query
+    this.collegeID = collegeID
+  },
   mounted() { },
   methods: {},
 }

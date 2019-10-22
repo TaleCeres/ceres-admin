@@ -6,9 +6,11 @@
       </el-header>
       <el-container>
         <el-aside :width="sidebarWidth" class="aside">
-          <i v-show="true" class="icon-font el-icon-s-fold do-slide" :class="{rotate: foldState}" @click="toggleSlidebarState" />
           <SideBar />
         </el-aside>
+        <div class="icon-font side-btn" :style="{left: sidebarWidth}" @click="toggleSlidebarState">
+          <i class="el-icon-caret-left" :class="{rotate: foldState}"></i>
+        </div>
         <el-main class="main">
           <AppMain />
           <HistoryTag/>
@@ -22,9 +24,7 @@
 import { mapGetters } from 'vuex'
 import HistoryTag from 'comps/base/HistoryTag'
 import ResizeMixin from '../mixin/resize'
-import AppMain from './components/AppMain'
-import SideBar from './components/SideBar'
-import NavBar from './components/NavBar'
+import { AppMain, SideBar, NavBar } from './components'
 export default {
   name: 'TTypeLayout',
   components: {
@@ -76,14 +76,18 @@ export default {
   padding 0
   box-shadow 0px 2px 6px 0px rgba(190, 204, 216, 0.4)
 }
-.do-slide {
+.side-btn {
   position absolute
-  bottom 100px
-  right 20px
+  top 150px
+  background-color #eaeaea
+  padding 12px 0
+  border-top-right-radius 7px
+  border-bottom-right-radius 7px
+  cursor pointer
+  z-index 100
 }
 .icon-font {
-  margin 0 10px
-  font-size 22px
+  font-size 15px
   font-weight 500
   transform rotate(0deg)
   transition all 0.3s linear
