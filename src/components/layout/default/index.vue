@@ -9,6 +9,7 @@
           <NavBar />
         </el-header>
         <el-main class="main">
+          <HistoryTag></HistoryTag>
           <AppMain />
         </el-main>
       </el-container>
@@ -30,7 +31,7 @@ export default {
     AppMain,
     SideBar,
     NavBar,
-    // HistoryTag,
+    HistoryTag,
   },
   mixins: [ResizeMixin],
   computed: {

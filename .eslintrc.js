@@ -21,7 +21,7 @@ module.exports = {
     /* vue 规范
     Vue风格指南: https://cn.vuejs.org/v2/style-guide/index.html
     Vue规范文档: https://eslint.vuejs.org/rules
-    */ 
+    */
     'vue/order-in-components': ['warn', {
       'order': [ // 组件&实例的选项的顺序(参考: https://cn.vuejs.org/v2/style-guide/index.html#组件-实例的选项的顺序-推荐)
         'el',
@@ -62,15 +62,15 @@ module.exports = {
     'vue/prop-name-casing': ['error', 'camelCase'], // prop name 使用小驼峰命名法
     'vue/attribute-hyphenation': ['error', 'always'], // 特性name 使用连字符: <MyComponent my-prop="prop" />
     'vue/no-unused-components': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    /* js 规范 
-    
-    */ 
+    /* js 规范
+
+    */
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off', // 使用控制台
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-unused-vars': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-underscore-dangle': 'off',
     'no-param-reassign': 'off', // 修改函数参数
-    'quote-props': 'off', 
+    'quote-props': 'off',
     'comma-dangle': 'off', // 逗号
     'arrow-parens': ['error', 'as-needed'],
     'prefer-const': 'off', // 对于「值不曾被修改」的变量，可以使用 let(非强制一定是 const)
@@ -80,6 +80,7 @@ module.exports = {
     'max-len': ['error', { code: 200 }], // 代码行长度
     'consistent-return': 'off', // 函数需要返回数值
     'no-trailing-spaces': 'off', // 行末有多余空格
+    'linebreak-style': 'off',
     semi: ['error', 'never'], // 无分号
     indent: ['error', 2, { // 2格缩进
       'SwitchCase': 1, // 针对switch case的缩进（默认：0）
