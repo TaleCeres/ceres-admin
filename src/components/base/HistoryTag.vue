@@ -1,6 +1,6 @@
 <template>
   <div ref="scrollContainer" class="history-tag" @wheel.prevent="handleScroll">
-    <div  class="router-box" :style="{width:(tags.length*120+'px')}"  >
+    <div  class="router-box" :style="{width:(tags.length*130+'px')}"  >
       <router-link v-for="(item) in tags" :key="item.path" :to="item.path"
                    :class="isActive(item)?'active':''" class="tag-item"
                    @click.native="checkoutTag"
@@ -22,8 +22,9 @@ export default {
     return {
       tags: [
         {
-          name: '一览',
-          path: '/dashboard/index',
+          name: '主页面',
+          path: '/home',
+
           affix: true
         },
       ],
@@ -41,7 +42,7 @@ export default {
     },
   },
   created() {},
-  mounted() {},
+  mounted() { this.addTag() },
   methods: {
     handleScroll(e) {
       const eventDelta = e.wheelDelta || -e.deltaY * 40
@@ -85,10 +86,12 @@ export default {
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
   .history-tag {
+    margin-top 10px
     width 100%
     height 32px
     line-height 28px
     overflow hidden
+    box-shadow 0px 5px 5px -5px #eee
     .router-box {
       width auto
       .tag-item {
@@ -101,10 +104,8 @@ export default {
         &:first-child {
           margin-left 10px
         }
-
         .name {
         }
-
         .icon {
           margin-left 8px
           width 16px
@@ -113,13 +114,11 @@ export default {
           text-align center
           border-radius 50%
           font-size 10px
-
           &:hover {
             background grey
             color white
           }
         }
-
         &.active {
           background-color #42b983
           color #fff

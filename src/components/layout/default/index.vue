@@ -10,6 +10,7 @@
           <HistoryTag />
         </el-header>
         <el-main class="main">
+          <HistoryTag></HistoryTag>
           <AppMain />
         </el-main>
       </el-container>

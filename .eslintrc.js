@@ -18,10 +18,10 @@ module.exports = {
     '@vue/airbnb',
   ],
   rules: {
-    /* Vue 规范
-     * Vue风格指南: https://cn.vuejs.org/v2/style-guide/index.html
-     * Vue规范文档: https://eslint.vuejs.org/rules
-     */
+    /* vue 规范
+    Vue风格指南: https://cn.vuejs.org/v2/style-guide/index.html
+    Vue规范文档: https://eslint.vuejs.org/rules
+    */
     'vue/order-in-components': ['warn', {
       'order': [ // 组件&实例的选项的顺序(参考: https://cn.vuejs.org/v2/style-guide/index.html#组件-实例的选项的顺序-推荐)
         'el',
@@ -81,6 +81,7 @@ module.exports = {
     'max-len': ['error', { code: 200 }], // 代码行长度
     'consistent-return': 'off', // 函数需要返回数值
     'no-trailing-spaces': 'off', // 行末有多余空格
+    'linebreak-style': 'off',
     semi: ['error', 'never'], // 无分号
     indent: ['error', 2, { // 2格缩进
       'SwitchCase': 1, // 针对switch case的缩进（默认：0）

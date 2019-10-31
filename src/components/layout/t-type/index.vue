@@ -13,6 +13,7 @@
         </div>
         <el-main class="main">
           <AppMain />
+          <HistoryTag/>
         </el-main>
       </el-container>
     </el-container>
@@ -21,6 +22,7 @@
 
 <script type="text/ecmascript-6">
 import { mapGetters } from 'vuex'
+import HistoryTag from 'comps/base/HistoryTag'
 import ResizeMixin from '../mixin/resize'
 import { AppMain, SideBar, NavBar } from './components'
 export default {
@@ -29,6 +31,7 @@ export default {
     AppMain,
     SideBar,
     NavBar,
+    HistoryTag
   },
   mixins: [ResizeMixin],
   computed: {
