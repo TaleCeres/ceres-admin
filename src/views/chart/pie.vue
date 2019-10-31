@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" style="height: 95%"></div>
+  <div :id="id" style="height: 500px"></div>
 </template>
 
 <script type="text/ecmascript-6">
