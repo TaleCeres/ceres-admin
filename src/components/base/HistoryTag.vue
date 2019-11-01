@@ -86,7 +86,6 @@ export default {
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
   .history-tag {
-    margin-top 10px
     width 100%
     height 32px
     line-height 28px

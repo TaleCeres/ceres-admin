@@ -7,10 +7,9 @@
       <el-container>
         <el-header class="header" height="84px">
           <NavBar />
-          <HistoryTag />
+          <HistoryTag/>
         </el-header>
         <el-main class="main">
-          <HistoryTag></HistoryTag>
           <AppMain />
         </el-main>
       </el-container>
