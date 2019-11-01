@@ -7,6 +7,7 @@ import axios from 'axios'
 import store from '@/store'
 import { Notification } from 'element-ui'
 import { getToken } from './cookie'
+import { baseURL } from '../config'
 
 // 拦截器，使用mock数据代替
 let interceptorList = [
@@ -15,7 +16,7 @@ let interceptorList = [
 
 // 创建请求实例
 const _axios = axios.create({
-  baseURL: 'https://api.izjgk.com/v1',
+  baseURL,
   timeout: 5 * 1000 // 请求超时时间设置
 })
 
