@@ -51,7 +51,7 @@ export default {
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
   .aside {
-    border 1px solid red
+    border-right 1px solid black
     overflow-x hidden
     position relative
     &::-webkit-scrollbar {

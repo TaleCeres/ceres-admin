@@ -2,10 +2,12 @@
 .vscode
 node_modules
 /dist
+/guide
 
 # local env files
 .env.local
 .env.*.local
+.env.alpha
 
 # Log files
 npm-debug.log*

@@ -12,8 +12,8 @@
           <i class="el-icon-caret-left" :class="{rotate: foldState}"></i>
         </div>
         <el-main class="main">
+          <HistoryTag v-if="isVisible" />
           <AppMain />
-          <HistoryTag/>
         </el-main>
       </el-container>
     </el-container>
@@ -25,6 +25,8 @@ import { mapGetters } from 'vuex'
 import HistoryTag from 'comps/base/HistoryTag'
 import ResizeMixin from '../mixin/resize'
 import { AppMain, SideBar, NavBar } from './components'
+import config from '@/config'
+
 export default {
   name: 'TTypeLayout',
   components: {
@@ -38,6 +40,9 @@ export default {
     ...mapGetters([
       'sidebar',
     ]),
+    ...mapGetters({
+      isVisible: 'app/historyTagState'
+    }),
     foldState() {
       return this.sidebar.closed
     },
@@ -45,9 +50,10 @@ export default {
     isCollapse() {
       return this.sidebar.closed
     },
-    // 左侧菜单栏展开的宽度
+    // 左侧菜单栏展开的宽度(改为全局config配置)
     sidebarWidth() {
-      return this.isCollapse === false ? '170px' : '64px'
+      const { layout: { sidebar: { minWidth, maxWidth } } } = config
+      return this.isCollapse === false ? maxWidth : minWidth
     },
   },
   mounted() {
@@ -62,7 +68,7 @@ export default {
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .aside {
-  border 1px solid red
+  border-right 1px solid black
   overflow-x hidden
   position relative
   &::-webkit-scrollbar {

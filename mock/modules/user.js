@@ -1,6 +1,5 @@
 /* eslint-disable */
-import Mock from 'mockjs'
-const { Random } = Mock
+import { Random } from 'mockjs'
 
 export const getUserInfo = options => {
   // options为前端的 request信息
@@ -11,7 +10,7 @@ export const getUserInfo = options => {
   }
   return {
     data,
-    error_code: 200,
+    error_code: 0,
     msg: '',
   }
 }

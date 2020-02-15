@@ -7,7 +7,7 @@ import axios from 'axios'
 import store from '@/store'
 import { Notification } from 'element-ui'
 import { getToken } from './cookie'
-import { baseURL } from '../config'
+import config from '../config'
 
 // 拦截器，使用mock数据代替
 let interceptorList = [
@@ -16,11 +16,11 @@ let interceptorList = [
 
 // 创建请求实例
 const _axios = axios.create({
-  baseURL,
+  baseURL: config.baseURL,
   timeout: 5 * 1000 // 请求超时时间设置
 })
 
-// request 拦截
+// request 拦截器设置
 _axios.interceptors.request.use(
   config => {
     config.headers['Authorization'] = getToken()
@@ -31,20 +31,22 @@ _axios.interceptors.request.use(
   },
 )
 
-// request 拦截
-_axios.interceptors.response.use(response => {
-  const { error_code: errorCode, msg, data } = response.data
-  // 成功的errorCode为0，其他都是
-  if (errorCode >= 100) {
-    Notification({
-      message: msg || '服务端异常',
-      type: 'warning',
-      duration: 5 * 1000
-    })
-    return Promise.reject(msg || '服务端异常')
-  }
-  return data
-  }, error => {
+// response 拦截器设置
+_axios.interceptors.response.use(
+  response => {
+    const { error_code: errorCode, msg, data } = response.data
+    // 成功的errorCode为0
+    if (errorCode >= 100) {
+      Notification({
+        message: msg || '服务端异常',
+        type: 'warning',
+        duration: 5 * 1000
+      })
+      return Promise.reject(msg || '服务端异常')
+    }
+    return data
+  },
+  error => {
     return Promise.reject(error)
   },
 )

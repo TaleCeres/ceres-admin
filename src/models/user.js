@@ -10,10 +10,9 @@ export default class User {
    * @static
    * @param {*} account 用户账号
    * @param {*} secret 密码
-   * @memberof User
    */
   static async getToken(account, secret) {
-    const data = await post('token/user', {
+    const data = await post('token', {
       account,
       secret,
       type: 100,

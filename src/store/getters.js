@@ -8,5 +8,6 @@
 const getters = {
   sidebar: state => state.app.sidebar,
   sidebarList: state => { },
+  drawer: state => state.app.drawer,
 }
 export default getters

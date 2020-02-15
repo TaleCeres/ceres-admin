@@ -37,7 +37,7 @@ export default {
       path: '/chart/mind-map',
       component: _import('chart/mind-map'),
       name: 'MindMap',
-      meta: { title: '思维导图', icon: ' fa fa-text-width' },
+      meta: { title: '思维导图', icon: 'fa fa-text-width' },
     },
   ],
 }

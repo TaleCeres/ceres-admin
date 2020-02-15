@@ -109,11 +109,11 @@ Echarts参考[术语速查手册](https://www.echartsjs.com/zh/cheat-sheet.html)
 │   ├── plugins
 │   │   ├── custom.js
 │   │   └── element.js
-│   ├── router
-│   │   ├── index.js
-│   │   ├── modules
-│   │   └── routes.js
-│   ├── store
+│   ├── router  // 前端路由
+│   │   ├── modules // 每个业务模型的路由树
+│   │   ├── index.js //  vue-router 入口文件
+│   │   └── routes.js // vue-router 路由配置
+│   ├── store // vuex状态管理文件
 │   │   ├── actions.js
 │   │   ├── getters.js
 │   │   ├── index.js

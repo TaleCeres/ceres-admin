@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar">
-    <router-link class="logo" to="/">
+    <router-link v-if="logoVisible" class="logo" to="/">
       <img v-if="!isCollapse" class="name" src="../../../../assets/images/company/name.png" alt="">
       <img v-else class="brand" src="../../../../assets/images/company/logo.png" alt="">
     </router-link>
@@ -61,6 +61,9 @@ export default {
     ...mapGetters([
       'sidebar',
     ]),
+    ...mapGetters({
+      logoVisible: 'app/logoState'
+    }),
     routes() {
       let { routes } = this.$router.options
       let sidebarList = routes.filter(item => item.hidden !== true)

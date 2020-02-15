@@ -2,8 +2,8 @@
   <div ref="scrollContainer" class="history-tag" @wheel.prevent="handleScroll">
     <div  class="router-box" :style="{width:(tags.length*130+'px')}"  >
       <router-link v-for="(item) in tags" :key="item.path" :to="item.path"
-                   :class="isActive(item)?'active':''" class="tag-item"
-                   @click.native="checkoutTag"
+      :class="isActive(item)?'active':''" class="tag-item"
+      @click.native="checkoutTag"
       >
         <span class="name">{{item.name}}</span>
         <span v-if="!item.affix" class="el-icon-close icon"
@@ -20,13 +20,9 @@ export default {
   components: {},
   data() {
     return {
-      tags: [
-        {
-          name: '主页面',
-          path: '/home',
-
-          affix: true
-        },
+      tags: [ 
+        // 初始化为{ affix: true }的路由
+        // { name: '一览', path: '/dashboard/index', affix: true },
       ],
     }
   },
@@ -42,7 +38,9 @@ export default {
     },
   },
   created() {},
-  mounted() { this.addTag() },
+  mounted() { 
+    this.addTag()
+  },
   methods: {
     handleScroll(e) {
       const eventDelta = e.wheelDelta || -e.deltaY * 40

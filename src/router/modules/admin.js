@@ -7,7 +7,6 @@ export default {
   meta: {
     title: '权限管理',
     icon: 'el-icon-user',
-    type: 'folder',
   },
   children: [
     {
@@ -17,7 +16,6 @@ export default {
       meta: {
         title: '用户管理',
         icon: 'el-icon-house',
-        type: 'folder',
       },
       children: [
         {
@@ -27,7 +25,6 @@ export default {
           meta: {
             title: '用户列表',
             icon: 'el-icon-collection-tag',
-            type: 'view',
           },
         },
       ],
@@ -39,7 +36,6 @@ export default {
       meta: {
         title: '分组管理',
         icon: 'fa fa-group',
-        type: 'folder',
       },
       children: [
         {
@@ -49,7 +45,6 @@ export default {
           meta: {
             title: '分组列表',
             icon: 'el-icon-collection-tag',
-            type: 'view',
           },
         },
       ],

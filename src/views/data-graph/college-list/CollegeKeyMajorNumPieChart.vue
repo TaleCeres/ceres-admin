@@ -1,4 +1,3 @@
-
 <template>
   <div :id="id" style="height: 95%"></div>
 </template>
@@ -7,7 +6,6 @@
 import resize from '@/mixins/resize'
 import { mapState } from 'vuex'
 import { keyMajorStatNum } from 'assets/data/stat'
-import color from 'assets/data/color'
 export default {
   name: 'CollegeKeyMajorNumPieChart',
   components: {},
@@ -42,7 +40,7 @@ export default {
           },
           data: ['A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', '普通']
         },
-        color: color.category12,
+        color: this.$color.category12,
         series: [
           {
             name: '学科类型',

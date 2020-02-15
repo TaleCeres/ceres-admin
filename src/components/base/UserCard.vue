@@ -9,7 +9,7 @@
           <router-link to="/home">用户信息</router-link>
         </el-dropdown-item>
         <el-dropdown-item>
-          <router-link to="/admin/config">页面配置</router-link>
+          <div @click="openDrawer">布局配置</div>
         </el-dropdown-item>
         <el-dropdown-item>
           <a target="_blank" href="https://github.com/TaleCeres/ceres-admin">Github地址</a>
@@ -23,7 +23,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { mapActions } from 'vuex'
+import { mapMutations, mapActions } from 'vuex'
 import defaultAvatar from 'assets/images/company/logo.png'
 export default {
   name: 'UserCard',
@@ -40,6 +40,9 @@ export default {
   methods: {
     ...mapActions({
       logout: 'user/logout',
+    }),
+    ...mapMutations({
+      openDrawer: 'app/OPEN_DRAWER'
     }),
     handleLogout() {
       this.logout()

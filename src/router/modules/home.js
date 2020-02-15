@@ -2,8 +2,7 @@
 const _import = file => () => import(`@/views/${file}.vue`)
 
 export default {
-  path: '/',
-  redirect: '/home',
+  path: '/main',
   name: '首页',
   component: undefined,
   meta: {
@@ -13,11 +12,12 @@ export default {
   children: [
     {
       path: '/home',
-      name: 'Home', // 配套中英文切换
+      name: 'Home',
       component: _import('home/index'),
       meta: {
         title: '主页面',
         icon: 'el-icon-menu',
+        affix: true,
       },
     },
     {

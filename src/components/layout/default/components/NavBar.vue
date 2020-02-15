@@ -1,7 +1,7 @@
 <template>
   <nav class="nav-bar">
     <div class="left-menu">
-      <i v-show="true" class="icon-font el-icon-s-fold" :class="{rotate: foldState}" @click="toggleSlidebarState" />
+      <i v-show="true" class="icon-font el-icon-s-fold" :class="{rotate: foldState}" @click="toggleSidebarState" />
       <Breadcrumb />
     </div>
     <div class="right-menu">
@@ -49,7 +49,7 @@ export default {
   mounted() { },
   methods: {
     // 控制菜单折叠
-    toggleSlidebarState() {
+    toggleSidebarState() {
       this.$store.commit('app/TOGGLE_SIDEBAR')
     },
   },

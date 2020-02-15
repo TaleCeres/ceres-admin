@@ -5,9 +5,9 @@
         <SideBar />
       </el-aside>
       <el-container>
-        <el-header class="header" height="84px">
+        <el-header class="header" :height="navbarHeight">
           <NavBar />
-          <HistoryTag/>
+          <HistoryTag v-if="isVisible" />
         </el-header>
         <el-main class="main">
           <AppMain />
@@ -22,6 +22,7 @@ import { mapGetters } from 'vuex'
 import HistoryTag from 'comps/base/HistoryTag'
 import { AppMain, SideBar, NavBar } from './components'
 import ResizeMixin from '../mixin/resize'
+import config from '@/config'
 
 export default {
   name: 'DefalutLayout',
@@ -36,13 +37,20 @@ export default {
     ...mapGetters([
       'sidebar',
     ]),
+    ...mapGetters({
+      isVisible: 'app/historyTagState'
+    }),
     // 左侧菜单栏是否折叠
     isCollapse() {
       return this.sidebar.closed
     },
+    navbarHeight() {
+      return this.isVisible ? '84px' : '52px'
+    },
     // 左侧菜单栏展开的宽度
     sidebarWidth() {
-      return this.isCollapse === false ? '170px' : '64px'
+      const { layout: { sidebar: { minWidth, maxWidth } } } = config
+      return this.isCollapse === false ? maxWidth : minWidth
     },
   },
   mounted() { },
@@ -51,7 +59,7 @@ export default {
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .aside {
-  border 1px solid red
+  border-right 1px solid black
   overflow-x hidden
   &::-webkit-scrollbar {
     width 0px
