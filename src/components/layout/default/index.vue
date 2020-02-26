@@ -4,6 +4,9 @@
       <el-aside :width="sidebarWidth" class="aside">
         <SideBar />
       </el-aside>
+      <div class="icon-font side-btn" :style="{left: sidebarWidth}" @click="toggleSlidebarState">
+        <i class="el-icon-caret-left" :class="{rotate: foldState}"></i>
+      </div>
       <el-container>
         <el-header class="header" :height="navbarHeight">
           <NavBar />
@@ -40,6 +43,9 @@ export default {
     ...mapGetters({
       isVisible: 'app/historyTagState'
     }),
+    foldState() {
+      return this.sidebar.closed
+    },
     // 左侧菜单栏是否折叠
     isCollapse() {
       return this.sidebar.closed
@@ -54,6 +60,11 @@ export default {
     },
   },
   mounted() { },
+  methods: {
+    toggleSlidebarState() {
+      this.$store.commit('app/TOGGLE_SIDEBAR')
+    },
+  },
 }
 
 </script>
@@ -70,6 +81,25 @@ export default {
   width 100%
   padding 0
   box-shadow 0px 2px 6px 0px rgba(190, 204, 216, 0.4)
+}
+.side-btn {
+  position absolute
+  top 150px
+  background-color #eaeaea
+  padding 12px 0
+  border-top-right-radius 7px
+  border-bottom-right-radius 7px
+  cursor pointer
+  z-index 100
+}
+.icon-font {
+  font-size 15px
+  font-weight 500
+  transform rotate(0deg)
+  transition all 0.3s linear
+  &:hover {
+    color #3963bc
+  }
 }
 .main {
   margin 2px 0 0 2px // 避免过于紧凑
