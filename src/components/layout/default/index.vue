@@ -101,6 +101,10 @@ export default {
     color #3963bc
   }
 }
+.rotate {
+  transform rotate(180deg)
+  transition all 0.3s linear
+}
 .main {
   margin 2px 0 0 2px // 避免过于紧凑
 }
