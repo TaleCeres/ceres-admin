@@ -83,7 +83,7 @@
 }
 // sidebar收缩时，无 icon的 menu-item(覆盖二级&三级)的样式
 .el-menu--vertical {
-  //
+  // 
   .icon-menu > .el-menu-item {
     padding-left 40px !important
   }
@@ -116,7 +116,6 @@
   text-align center
   font-size 18px
 }
-
 .el-menu-item [class^=fa] {
   vertical-align middle
   margin-right 5px
@@ -124,8 +123,12 @@
   text-align center
   font-size 18px
 }
-
 /* el-table */
+.el-table {
+  border-top 1px solid #dee2e6
+  border-left 2px solid #dee2e6
+  border-right 1px solid #dee2e6
+}
 .visual {
   .el-table {
     /* 表格字体颜色 */
@@ -158,8 +161,9 @@
   .el-table tbody tr:hover>td {
     background-color rgba(255, 255, 255, 0.2) // 灰色透明
   }
-  .el-table--border, .el-table--group {
-    border: 0
+  .el-table--border,
+  .el-table--group {
+    border 0
   }
   // 滚动条的样式
   *::-webkit-scrollbar { /* 定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸 */

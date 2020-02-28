@@ -1,11 +1,12 @@
 <template>
-  <section class="container">
-    <transition name="fade" mode="out-in">
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
-    </transition>
-    <LayoutSetting />
+  <section class="wrapper">
+    <div class="container">
+      <transition name="fade" mode="out-in">
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
+      </transition>
+    </div>
   </section>
 </template>
 
@@ -26,12 +27,15 @@ export default {
   },
   methods: {},
 }
-
 </script>
+
 <style scoped lang="stylus" rel="stylesheet/stylus">
-.container {
+.wrapper {
   width 100%
   height 100%
   text-align left
+  .container {
+    padding 0 30px
+  }
 }
 </style>

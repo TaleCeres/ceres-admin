@@ -6,6 +6,7 @@ import Midlayer from 'comps/layout/midlayer'
 import dashboardRouter from './modules/dashboard'
 import homeRouter from './modules/home'
 import adminRouter from './modules/admin'
+import categoryRouter from './modules/category'
 import aboutRouter from './modules/about'
 import chartRouter from './modules/chart'
 import formRouter from './modules/form'
@@ -38,6 +39,7 @@ const normalViewRouters = [
   homeRouter,
   aboutRouter,
   adminRouter,
+  categoryRouter,
   chartRouter,
   formRouter,
   tableRouter,

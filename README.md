@@ -192,11 +192,22 @@ export default {
 </style>
 ```
 
+### 自定义组件
+#### 自定义Table
+```
+lin-table组件: https://github.com/TaleLin/lin-cms-vue/blob/master/src/components/base/table/lin-table.vue#L160
+应用lin-table: https://github.com/TaleLin/lin-cms-vue/blob/master/src/views/book/BookAdd.vue
+
+```
+
 ## Element-UI
 ### 组件的使用规范
 - Notification(通知)显示后端的异常信息
 - Message(消息提示)显示前端的异常信息
 - 所有「新增、修改、删除」的接口调用，都要有弹出框作为提示(是否需要封装？))
+
+
+
 
 
 ## 后续计划

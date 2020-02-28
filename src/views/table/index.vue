@@ -8,7 +8,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import XTable from '@/components/base/Table'
+import XTable from '@/components/base/table'
 export default {
   name: 'TableIndex',
   components: { XTable },
