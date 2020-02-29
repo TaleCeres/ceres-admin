@@ -1,5 +1,3 @@
-const _import = file => () => import(`@/views/${file}.vue`)
-
 export default {
   path: '/about',
   name: 'About',
@@ -12,7 +10,7 @@ export default {
   children: [
     {
       path: '/about/index',
-      component: _import('about/index'),
+      component: 'about/index',
       name: '关于',
       meta: { title: '团队信息', icon: 'el-icon-house' },
     },

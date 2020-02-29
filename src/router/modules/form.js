@@ -1,5 +1,3 @@
-const _import = file => () => import(`@/views/${file}.vue`)
-
 export default {
   path: '/form',
   name: 'Form',
@@ -12,7 +10,7 @@ export default {
   children: [
     {
       path: '/form/index',
-      component: _import('form/index'),
+      component: 'form/index',
       name: 'formIndex',
       meta: { title: '表单', icon: 'el-icon-house' },
     },

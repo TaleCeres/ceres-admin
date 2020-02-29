@@ -1,6 +1,3 @@
-/* Layout */
-const _import = file => () => import(`@/views/${file}.vue`)
-
 export default {
   path: '/main',
   name: '首页',
@@ -13,7 +10,7 @@ export default {
     {
       path: '/home',
       name: 'Home',
-      component: _import('home/index'),
+      component: 'home/index',
       meta: {
         title: '主页面',
         icon: 'el-icon-menu',
@@ -23,7 +20,7 @@ export default {
     {
       path: '/guide',
       name: 'guide',
-      component: _import('guide/index'),
+      component: 'guide/index',
       meta: {
         title: '规范指南',
         icon: 'el-icon-setting',

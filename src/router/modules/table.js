@@ -1,5 +1,3 @@
-const _import = file => () => import(`@/views/${file}.vue`)
-
 export default {
   path: '/table',
   name: 'Table',
@@ -12,7 +10,7 @@ export default {
   children: [
     {
       path: '/table/index',
-      component: _import('table/index'),
+      component: 'table/index',
       name: 'IndexTable',
       meta: { title: '表格', icon: 'el-icon-house' },
     },

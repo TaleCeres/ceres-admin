@@ -1,5 +1,3 @@
-const _import = file => () => import(`@/views/${file}.vue`)
-
 export default {
   path: '/category',
   name: 'Category',
@@ -11,7 +9,7 @@ export default {
   children: [
     {
       path: '/category/list',
-      component: _import('category/list'),
+      component: 'category/list',
       name: 'CategoryList',
       meta: { title: '类别列表', icon: 'el-icon-house' }
     }

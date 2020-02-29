@@ -1,4 +1,3 @@
-const _import = file => () => import(`@/views/${file}.vue`)
 /**
  * 概览页面
  */
@@ -15,7 +14,7 @@ export default {
   children: [
     {
       path: '/dashboard/index',
-      component: _import('dashboard/index'),
+      component: 'dashboard/index',
       name: 'DashboardIndex',
       meta: { title: '一览', icon: 'dashboard', affix: true }
     }

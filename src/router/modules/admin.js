@@ -1,5 +1,3 @@
-const _import = file => () => import(`@/views/${file}.vue`)
-
 export default {
   path: '/admin',
   name: 'Admin',
@@ -20,7 +18,7 @@ export default {
       children: [
         {
           path: '/admin/user/list',
-          component: _import('admin/user/user-list'),
+          component: 'admin/user/list',
           name: 'UserList',
           meta: {
             title: '用户列表',
@@ -40,7 +38,7 @@ export default {
       children: [
         {
           path: '/admin/group/list',
-          component: _import('admin/group/group-list'),
+          component: 'admin/group/list',
           name: 'GroupList',
           meta: {
             title: '分组列表',

@@ -1,6 +1,6 @@
 /* eslint-disable */
 import appStore from '@/store/modules/app'
-
+/* 页面嵌套的Layout中间层模版 */
 import Midlayer from 'comps/layout/midlayer'
 /* Router Modules(业务页面的路由) */
 import dashboardRouter from './modules/dashboard'
@@ -33,7 +33,7 @@ const _import = file => () => import(`@/views/${file}.vue`)
   * route是一条路由配置, routes是一堆路由配置，router是路由功能集合
  */
 
- // 处理「业务页面」的路由
+// 处理「业务页面」的路由
 const normalViewRouters = [
   dashboardRouter,
   homeRouter,
@@ -43,7 +43,7 @@ const normalViewRouters = [
   chartRouter,
   formRouter,
   tableRouter,
-].map(item => initComponent(item))
+].map(item => loadingComponent(item))
 
 /** 
  * 可视化页面
@@ -62,8 +62,6 @@ const defaultViewRouters = [
   { path: '/404', component: _import('error-page/404'), hidden: true },
   { path: '*', redirect: '/404', hidden: true },
 ]
-
-
 
 const routes = [
   ...normalViewRouters,
@@ -84,16 +82,13 @@ export default routes
  * @param {object} rawRouter
  * @returns
  */
-function initComponent(rawRouter) {
+function loadingComponent(rawRouter) {
   let { ...router } = rawRouter
   initLayout(router) // 一级路由的模版为 Layout
+  // 遍历一级路由的子路由
   if (router.hasOwnProperty('children')) {
-    let { children: childrenRouter } = router
-    childrenRouter.forEach(item => {
-      // 判断是否有三级路由
-      if (!item.hasOwnProperty('children')) return
-      // if (item.children.length === 1) return 
-      item.component = Midlayer
+    router.children.forEach(item => {
+      initComponent(item)
     })
   }
   return router
@@ -101,8 +96,7 @@ function initComponent(rawRouter) {
 
 /**
  * Layout有三种选择 default、t-type、vertical
- * @method
- * @return {组件} Layout组件
+ * @param {object} router
  */
 function initLayout(router) {
   const _import_layout = file => () => import(`comps/layout/${file}/index.vue`)
@@ -112,4 +106,26 @@ function initLayout(router) {
     't-type': _import_layout('t-type'),
   }
   router.component = layoutModeObj[appStore.state.layout.mode]
+}
+
+/**
+ * 二级路由开始
+ *  - 1. 如果有子路由，载入「Midlayer」
+ *  - 2. 如果无子路由，载入「router.component同名的组件」
+ * @param {object} router
+ */
+function initComponent(router) {
+  // 1
+  if (router.hasOwnProperty('children')) {
+    router.component = Midlayer
+    let { children: childrenRouter } = router
+    childrenRouter.forEach(item => {
+      initComponent(item)
+    })
+    return
+  }
+  // 2
+  if (typeof (router.component) === 'string') {
+    router.component = _import(router.component)
+  }
 }
