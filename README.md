@@ -77,7 +77,9 @@ npm run commit # 提交至「本地仓库」，结合 npm scripts自动运行 co
 Echarts参考[术语速查手册](https://www.echartsjs.com/zh/cheat-sheet.html)，包括：常用组件说明、文档速查
 
 ## 项目目录结构
-```
+<details>
+<summary>展开查看</summary>
+<pre><code>
 .
 ├── README.md
 ├── babel.config.js
@@ -157,7 +159,8 @@ Echarts参考[术语速查手册](https://www.echartsjs.com/zh/cheat-sheet.html)
 │       ├── login
 │       └── table
 └── vue.config.js
-```
+</code></pre>
+</details>
 
 目录 **`src/views/data-graph`** 的结构包含4个子目录，其中 `overview、college-list、college-detail` 是路由 **`/data-graph`** 所有子级路由的页面组件，`_common` 是路由 **`/data-graph`** 所有子级页面组件的共用资源的目录。
 
@@ -165,6 +168,48 @@ Echarts参考[术语速查手册](https://www.echartsjs.com/zh/cheat-sheet.html)
 `overview` 目录中，小写开头的 **`.vue`** 文件为页面组件(有且只有一个)，所有大写开头的 **`.vue`** 文件都是业务组件。
 
 `_common` 中包含共用图片和组件，尽量减少嵌套关系。
+
+
+目录 **`/router/modules`** 中所有路由的命名、组件的规范如下:
+- 一级路由对应的组件为 **`comps/layout`** 下的布局组件
+- 非一级路由对应的组件
+  - 有子路由，则组件为「Midlayer」
+  - 无自路由，则组件为「component同名的组件」
+- 嵌套最底层的「组件名」与其「路由路径名」尽量同名
+
+```
+export default {
+  path: '/admin',
+  name: 'Admin',
+  component: undefined, // 组件为「布局组件」
+  meta: {
+    title: '权限管理',
+    icon: 'el-icon-user',
+  },
+  children: [
+    {
+      path: '/admin/user',
+      component: undefined, // 组件为「Midlayer」
+      name: 'AdminUser',
+      meta: {
+        title: '用户管理',
+        icon: 'el-icon-house',
+      },
+      children: [
+        {
+          path: '/admin/user/list', // 「路由路径名」
+          component: 'admin/user/list', // 嵌套最底层的「组件名」; 组件为「component同名的组件」
+          name: 'UserList',
+          meta: {
+            title: '用户列表',
+            icon: 'el-icon-collection-tag',
+          },
+        },
+      ],
+    },
+  ],
+}
+```
 
 ## Vue
 
@@ -205,9 +250,6 @@ lin-table组件: https://github.com/TaleLin/lin-cms-vue/blob/master/src/componen
 - Notification(通知)显示后端的异常信息
 - Message(消息提示)显示前端的异常信息
 - 所有「新增、修改、删除」的接口调用，都要有弹出框作为提示(是否需要封装？))
-
-
-
 
 
 ## 后续计划
