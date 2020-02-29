@@ -162,12 +162,15 @@ Echarts参考[术语速查手册](https://www.echartsjs.com/zh/cheat-sheet.html)
 </code></pre>
 </details>
 
-目录 **`src/views/data-graph`** 的结构包含4个子目录，其中 `overview、college-list、college-detail` 是路由 **`/data-graph`** 所有子级路由的页面组件，`_common` 是路由 **`/data-graph`** 所有子级页面组件的共用资源的目录。
+目录 **`src/views/data-graph`** 的结构包含4个子目录，其中
+- `overview、college-list、college-detail` 是路由 **`/data-graph`** 所有子级路由的「页面组件」
+- `_common` 是路由 **`/data-graph`** 所有子级页面组件的「共用资源的目录」
+- `_common` 中包含共用图片和组件，尽量减少嵌套关系。
 
 
-`overview` 目录中，小写开头的 **`.vue`** 文件为页面组件(有且只有一个)，所有大写开头的 **`.vue`** 文件都是业务组件。
-
-`_common` 中包含共用图片和组件，尽量减少嵌套关系。
+`overview` 目录中
+- 小写开头的 **`.vue`** 文件为页面组件(有且只有一个)
+- 所有大写开头的 **`.vue`** 文件都是业务组件。
 
 
 目录 **`/router/modules`** 中所有路由的命名、组件的规范如下:
