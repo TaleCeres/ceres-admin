@@ -6,6 +6,7 @@ import { removeToken } from '@/utils/cookie'
 const state = {
   logined: false, // 是否登录
   user: null, // 当前用户
+  auths: [], // 每个用户的所有权限
 }
 
 const getters = {}

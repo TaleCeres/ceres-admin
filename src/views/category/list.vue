@@ -3,11 +3,12 @@
     <div v-show="!showEdit && !showAdd" class="container">
       <div class="header">
         <div class="title">项目列表</div>
-        <el-button style="margin-left: 30px" @click="showAdd=!showAdd">添加项目</el-button>
+        <el-button v-auth style="margin-left: 30px" @click="showAdd=!showAdd">添加项目</el-button>
       </div>
-      <ceres-table 
-        :table-column="tableColumn" 
-        :table-data="tableData" 
+      <ceres-table
+        :pagination="pagination"
+        :table-column="tableColumn"
+        :table-data="tableData"
         :operate="operate"
         @handleEdit="handleEdit"
         @handleDelete="handleDelete"
@@ -44,6 +45,11 @@ export default {
       ],
       showEdit: false,
       showAdd: false,
+      pagination: {
+        pageSize: 5,
+        pageTotal: 0
+      },
+      editID: ''
     }
   },
   computed: {},
@@ -53,6 +59,7 @@ export default {
     this.tableData.forEach(item => {
       item.imageUrl = item.image.url
     })
+    this.pagination.pageTotal = this.tableData.length
   },
   methods: {
     handleEdit(val) {
@@ -71,6 +78,7 @@ export default {
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .container {
+  height: 100%
   .header {
     display flex
     align-items center
