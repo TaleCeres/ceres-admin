@@ -10,7 +10,15 @@
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination />
+    <el-pagination
+      v-if="pagination"
+      class="pagination"
+      background
+      layout="prev, pager, next"
+      :page-size="pagination.pageSize ? pagination.pageSize : 10"
+      :total="pagination.pageTotal ? pagination.pageTotal : null"
+      @current-change="currentChange"
+    />
   </div>
 </template>
 
@@ -34,6 +42,11 @@ export default {
       type: Array,
       default: () => [],
     },
+    pagination: {
+      // 分页
+      type: [Object, Boolean],
+      default: false,
+    },
   },
   data() {
     return {}
@@ -55,8 +68,19 @@ export default {
       // 行内删除，调用父组件执行
       _this.$emit('handleDelete', { index, row })
     },
+    // 切换当前页
+    currentChange(page) {
+      this.$emit('currentChange', page)
+    },
   },
 }
 </script>
 
-<style scoped lang="stylus" rel="stylesheet/stylus"></style>
+<style scoped lang="stylus" rel="stylesheet/stylus">
+  .pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: -10px;
+    margin-top: 15px;
+  }
+</style>

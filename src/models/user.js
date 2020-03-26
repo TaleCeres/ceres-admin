@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {
   post,
   get,
@@ -12,7 +13,7 @@ export default class User {
    * @param {*} secret 密码
    */
   static async getToken(account, secret) {
-    const data = await post('token', {
+    const data = await post('v1/token', {
       account,
       secret,
       type: 100,
@@ -21,7 +22,22 @@ export default class User {
   }
 
   static async getInfo() {
-    const user = await get('user')
+    const user = await get('v1/user')
+    return user
+  }
+
+  static async getUserList(page, size) {
+    const user = await get(`/cms/user/list?page=${page}&size=${size}`)
+    return user
+  }
+
+  static async getOneUser(uid) {
+    const user = await get(`/cms/user/${uid}`)
+    return user
+  }
+
+  static async updateUserGroup(uid, group_id) {
+    const user = await put(`/cms/user/${uid}`, { group_id })
     return user
   }
 }

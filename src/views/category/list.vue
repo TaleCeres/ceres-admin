@@ -5,9 +5,9 @@
         <div class="title">项目列表</div>
         <el-button style="margin-left: 30px" @click="showAdd=!showAdd">添加项目</el-button>
       </div>
-      <ceres-table 
-        :table-column="tableColumn" 
-        :table-data="tableData" 
+      <ceres-table
+        :table-column="tableColumn"
+        :table-data="tableData"
         :operate="operate"
         @handleEdit="handleEdit"
         @handleDelete="handleDelete"
