@@ -6,7 +6,7 @@
       </div>
       <el-dropdown-menu slot="dropdown" class="detail">
         <el-dropdown-item>
-          <router-link to="/home">用户信息</router-link>
+          <router-link to="/user">用户信息</router-link>
         </el-dropdown-item>
         <el-dropdown-item>
           <div @click="openDrawer">布局配置</div>

@@ -11,18 +11,19 @@ import aboutRouter from './modules/about'
 import chartRouter from './modules/chart'
 import formRouter from './modules/form'
 import tableRouter from './modules/table'
-
+import userRouter from './modules/user'
+import redirectRouter from './modules/redirect'
 // lazy-loaded when the route is visited
 // const _import = file => () => import(/* webpackChunkName: "about" */ `@/views/${file}.vue`)
 const _import = file => () => import(`@/views/${file}.vue`)
 
 /**
- * 
- * 
+ *
+ *
  * hidden: true                   if set true, item will not show in the sidebar(default is false)
  *
  * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
- * path: 'route'                 
+ * path: 'route'
  * name:'route-name'             the name is used by <keep-alive> (must set)
  * meta : {
     title: 'title'               the name show in sidebar and breadcrumb (recommend set; in Chinese)
@@ -35,6 +36,7 @@ const _import = file => () => import(`@/views/${file}.vue`)
 
 // 处理「业务页面」的路由
 const normalViewRouters = [
+  redirectRouter,
   dashboardRouter,
   homeRouter,
   aboutRouter,
@@ -43,9 +45,10 @@ const normalViewRouters = [
   chartRouter,
   formRouter,
   tableRouter,
+  userRouter
 ].map(item => loadingComponent(item))
 
-/** 
+/**
  * 可视化页面
 */
 const visualViewRouters = [
