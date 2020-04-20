@@ -13,21 +13,21 @@
         @handleDelete="handleDelete"
       />
     </div>
-    <group-add v-if="showAdd" @handleHide="handleHide"/>
-    <group-edit v-if="showEdit" :cache-group="cacheGroup" @handleHide="handleHide"/>
+    <GroupApiAdd v-if="showAdd" @handleHide="handleHide"/>
+    <GroupApiEdit v-if="showEdit" :cache-group="cacheGroup" @handleHide="handleHide"/>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import GroupAdd from './GroupAdd'
-import GroupEdit from './GroupEdit'
+import GroupApiAdd from './GroupApiAdd'
+import GroupApiEdit from './GroupApiEdit'
 import Admin from '@/models/admin'
 import User from '@/models/user'
 export default {
-  name: 'GroupList',
+  name: 'GroupApiList',
   components: {
-    GroupAdd,
-    GroupEdit
+    GroupApiAdd,
+    GroupApiEdit
   },
   data() {
     return {

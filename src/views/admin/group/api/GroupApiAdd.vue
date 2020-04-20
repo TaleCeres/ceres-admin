@@ -27,13 +27,12 @@
               <el-input v-model="form.info" size="medium" clearable/>
             </el-form-item>
             <el-form-item>
-              <group-permissions
+              <GroupApiPermissions
                 ref="groupPermissions"
                 title="分配权限"
                 @updatePermissions="updatePermissions"
                 @updateAllPermissions="updateAllPermissions"
-              >
-              </group-permissions>
+              />
             </el-form-item>
             <el-form-item class="submit">
               <el-button type="primary" @click="submitForm('form')">保 存</el-button>
@@ -48,11 +47,11 @@
 
 <script>
 import Admin from '@/models/admin'
-import GroupPermissions from './GroupPermissions'
+import GroupApiPermissions from './GroupApiPermissions'
 
 export default {
   components: {
-    GroupPermissions,
+    GroupApiPermissions,
   },
   data() {
     const checkName = (rule, value, callback) => {

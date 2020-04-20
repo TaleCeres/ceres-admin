@@ -27,14 +27,13 @@
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="配置权限" name="second">
-        <group-permissions
+        <GroupApiPermissions
           :id="id"
           ref="groupPermissions"
           title="分配权限"
           @updatePermissions="updatePermissions"
           @getCacheAuthIds="getCacheAuthIds"
-          @updateAllPermissions="updateAllPermissions">
-        </group-permissions>
+          @updateAllPermissions="updateAllPermissions" />
       </el-tab-pane>
     </el-tabs>
     <div class="submit">
@@ -46,11 +45,11 @@
 
 <script>
 import Admin from '@/models/admin'
-import GroupPermissions from './GroupPermissions'
+import GroupApiPermissions from './GroupApiPermissions'
 
 export default {
   components: {
-    GroupPermissions,
+    GroupApiPermissions,
   },
   props: {
     cacheGroup: {

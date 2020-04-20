@@ -3,7 +3,7 @@ export default {
   name: 'Admin',
   component: undefined,
   meta: {
-    title: '权限管理',
+    title: '系统管理',
     icon: 'el-icon-user',
   },
   children: [
@@ -32,16 +32,25 @@ export default {
       component: undefined,
       name: 'AdminGroup',
       meta: {
-        title: '分组管理',
+        title: '权限组管理',
         icon: 'fa fa-group',
       },
       children: [
         {
-          path: '/admin/group/list',
-          component: 'admin/group/list',
-          name: 'GroupList',
+          path: '/admin/group/api',
+          component: 'admin/group/api/list',
+          name: 'GroupApiList',
           meta: {
-            title: '分组列表',
+            title: '接口权限',
+            icon: 'el-icon-collection-tag',
+          },
+        },
+        {
+          path: '/admin/group/page',
+          component: 'admin/group/page/list',
+          name: 'GroupPageList',
+          meta: {
+            title: '页面权限',
             icon: 'el-icon-collection-tag',
           },
         },
