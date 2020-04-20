@@ -18,7 +18,7 @@
           <ul class="permissions-ul">
             <li v-for="(item, key) in permission" :key="key" class="permissions-li">
               <el-checkbox
-                :label="item.auth"
+                :label="item.name"
                 :value="permission_module_ids.indexOf(item.id) > -1"
                 @change="singleCheck(item.id, permission, moduleName)"/>
             </li>
@@ -33,7 +33,7 @@
 import Admin from '@/models/admin'
 
 export default {
-  props: ['id', 'title'],
+  props: ['id', 'title', 'reset'],
   data() {
     return {
       allPermissions: {}, // 所有分组权限
@@ -46,14 +46,28 @@ export default {
       loading: false,
     }
   },
+  watch: {
+    reset(val) {
+      this.permission_module_ids.length = 0
+      this.halfPermissions.length = 0
+      this.permission_module_name.length = []
+      let modules = Object.keys(this.allPermissions)
+      modules.forEach(item => {
+        if (document.getElementById(item).className === 'el-checkbox module is-checked') {
+          document.getElementById(item).click()
+        }
+      })
+    }
+  },
   async created() {
     try {
       this.loading = true
-      await this.getGroupPermissions()
-      this.loading = false
+      const a = await this.getGroupPermissions()
+      console.log('a', a)
     } catch (e) {
-      this.loading = false
       console.log(e)
+    } finally {
+      this.loading = false
     }
   },
   methods: {
@@ -61,12 +75,13 @@ export default {
     async getGroupPermissions() {
       this.allPermissions = await Admin.getAllPermissions()
       // 通过判断有没有传入id，来判断当前页面是添加分组还是编辑分组
+      // id为group_id
       if (this.id) {
         this.permission_module_ids = []
-        const res = await Admin.getOneGroup(this.id)
+        const group = await Admin.getOneGroup(this.id)
         let temp = []
         const cache = {}
-        res.auth_list.forEach(v => {
+        group.auth_list.forEach(v => {
           this.permission_module_ids.push(v.id)
           temp.push(v.module)
           // 每个module拥有权限个数

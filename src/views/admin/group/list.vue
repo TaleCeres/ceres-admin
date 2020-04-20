@@ -48,7 +48,7 @@ export default {
   computed: {},
   created() { },
   async mounted() {
-    await User.getToken('777@qq.com', '123456')
+    await User.getToken('999@qq.com', '123456')
     await User.getInfo()
     this.getAllGroups()
   },
