@@ -3,6 +3,7 @@
  * [axios怎么获取到error中的状态值&具体信息](https://blog.csdn.net/weixin_41838204/article/details/82107567)
  */
 /* eslint-disable */
+import Vue from 'vue'
 import axios from 'axios'
 import store from '@/store'
 import { Notification } from 'element-ui'
@@ -50,5 +51,28 @@ _axios.interceptors.response.use(
     return Promise.reject(error)
   },
 )
+
+// eslint-disable-next-line
+Plugin.install = function(Vue, options) {
+  // eslint-disable-next-line
+  Vue.axios = _axios
+  window.axios = _axios
+  Object.defineProperties(Vue.prototype, {
+    axios: {
+      get() {
+        return _axios
+      },
+    },
+    $axios: {
+      get() {
+        return _axios
+      },
+    },
+  })
+}
+
+if (!Vue.axios) {
+  Vue.use(Plugin)
+}
 
 export default _axios
