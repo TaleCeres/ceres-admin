@@ -22,7 +22,17 @@
           </template>
           <!-- 二级菜单 -->
           <template v-for="(subItem) in item.children">
-            <el-submenu v-if="subItem.children" :key="subItem.name" :index="subItem.name">
+
+
+            <!-- 二级菜单有且只有一个三级菜单 -->
+            <router-link v-if="!canUnflod(subItem)" :key="subItem.name" class="icon-menu" :to="defaultRoute(subItem).path">
+              <el-menu-item :index="defaultRoute(subItem).name">
+                <span>{{ subItem.meta.title }}</span>
+              </el-menu-item>
+            </router-link>
+
+            <!-- 二级菜单有多个三级菜单 -->
+            <el-submenu v-else-if="subItem.children" :key="subItem.name" :index="subItem.name">
               <template slot="title">
                 <i :class="subItem.meta.icon"></i>
                 <span>{{ subItem.meta.title }}</span>
@@ -35,12 +45,14 @@
               </router-link>
             </el-submenu>
 
-            <!-- 二级菜单else -->
+            <!-- 二级菜单没有三级菜单 -->
             <router-link v-else :key="subItem.name" class="icon-menu" :to="subItem.path">
               <el-menu-item :index="subItem.name">
                 <span>{{ subItem.meta.title }}</span>
               </el-menu-item>
             </router-link>
+
+
           </template>
         </el-submenu>
       </template>
@@ -49,7 +61,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import { flatten } from 'lodash'
 export default {
   name: 'SideBar',
@@ -58,6 +70,9 @@ export default {
     return {}
   },
   computed: {
+    ...mapState({
+      authList: state => state.user.authList,
+    }),
     ...mapGetters([
       'sidebar',
     ]),
@@ -66,6 +81,27 @@ export default {
     }),
     routes() {
       let { routes } = this.$router.options
+      routes.forEach(route => {
+        if (route.permission && route.permission.length > 0) {
+          if (!route.permission.find(auth => this.authList.includes(auth))) {
+            route.hidden = true
+          }
+          if (route.children && route.permission.length > 0) {
+            route.children.forEach(childRoute => {
+              if (childRoute.permission && childRoute.permission.length > 0) {
+                if (!childRoute.permission.find(auth => this.authList.includes(auth))) {
+                  childRoute.hidden = true
+                }
+              }
+            })
+          }
+        }
+      })
+      routes.forEach(route => {
+        if (route.children && route.children.length > 0) {
+          route.children = route.children.filter(item => item.hidden !== true)
+        }
+      })
       let sidebarList = routes.filter(item => item.hidden !== true)
       return flatten(sidebarList)
     },
@@ -107,25 +143,25 @@ export default {
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-.sidebar {
-  .logo {
-    position sticky
-    top 0
-    left 0
-    z-index 99
-    height $header-height
-    display flex
-    justify-content center
-    align-items center
-    background-color #fff
-    .name {
-      width 148px
-      transition height 0, width 0.3s linear // all 0.3s linear
-    }
-    .brand {
-      width 40px
-      transition height 0, width 0.3s linear
+  .sidebar {
+    .logo {
+      position sticky
+      top 0
+      left 0
+      z-index 99
+      height $header-height
+      display flex
+      justify-content center
+      align-items center
+      background-color #fff
+      .name {
+        width 148px
+        transition height 0, width 0.3s linear // all 0.3s linear
+      }
+      .brand {
+        width 40px
+        transition height 0, width 0.3s linear
+      }
     }
   }
-}
 </style>
