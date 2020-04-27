@@ -41,16 +41,16 @@ export default {
           component: 'admin/group/api/list',
           name: 'GroupApiList',
           meta: {
-            title: '接口权限',
+            title: '接口管理',
             icon: 'el-icon-collection-tag',
           },
         },
         {
-          path: '/admin/group/page',
-          component: 'admin/group/page/list',
-          name: 'GroupPageList',
+          path: '/admin/group/menu',
+          component: 'admin/group/menu/list',
+          name: 'GroupMenuList',
           meta: {
-            title: '页面权限',
+            title: '菜单管理',
             icon: 'el-icon-collection-tag',
           },
         },

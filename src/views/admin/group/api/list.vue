@@ -21,7 +21,7 @@
 <script type="text/ecmascript-6">
 import GroupApiAdd from './GroupApiAdd'
 import GroupApiEdit from './GroupApiEdit'
-import Admin from '@/models/admin'
+import AdminModel from '@/models/admin'
 import User from '@/models/user'
 export default {
   name: 'GroupApiList',
@@ -54,14 +54,14 @@ export default {
   },
   methods: {
     async getAllGroups() {
-      this.tableData = await Admin.getAllGroups()
+      this.tableData = await AdminModel.getAllGroups()
     },
     handleEdit(val) {
       this.showEdit = true
       this.cacheGroup = { ...val.row }
     },
     async handleDelete(val) {
-      await Admin.deleteOneGroup(val.row.id)
+      await AdminModel.deleteOneGroup(val.row.id)
       this.$message.success('删除成功')
       this.getAllGroups()
     },

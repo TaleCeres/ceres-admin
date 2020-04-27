@@ -5,9 +5,9 @@ import {
   put, _delete,
 } from '@/utils/request'
 
-export default class admin {
+export default class Admin {
   static getAllPermissions() {
-    return get('cms/admin/auths')
+    return get('cms/auth/all')
   }
   static async getAllGroups() {
     const groups = await get('cms/group/all')
@@ -37,7 +37,7 @@ export default class admin {
   }
 
   static async dispatchPermissions(group_id, auth_ids) {
-    const res = await post('cms/auth/append', {
+    const res = await post('cms/auth', {
       group_id,
       auth_ids,
     })
@@ -45,7 +45,7 @@ export default class admin {
   }
 
   static async removePermissions(group_id, auth_ids) {
-    const res = await post('cms/auth/remove', {
+    const res = await _delete('cms/auth', {
       group_id,
       auth_ids,
     })

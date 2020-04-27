@@ -45,7 +45,7 @@
 
 <script>
 import User from '@/models/user'
-import Admin from '@/models/admin'
+import AdminModel from '@/models/admin'
 export default {
   props: {
     editId: {
@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     async getAllGroups() {
-      this.groups = await Admin.getAllGroups()
+      this.groups = await AdminModel.getAllGroups()
     },
     async getOneUser() {
       const res = await User.getOneUser(this.editId)
@@ -93,7 +93,7 @@ export default {
       //   if (this.cacheGroup.name !== this.form.name || this.cacheGroup.info !== this.form.info) {
       //       // eslint-disable-line
       //     this.loading = true
-      //     const res = await Admin.updateOneGroup(this.form.name, this.form.info, this.id)
+      //     const res = await AdminModel.updateOneGroup(this.form.name, this.form.info, this.id)
       //     this.loading = false
       //     this.$message.success('权限组信息更新成功！')
       //   }
@@ -111,10 +111,10 @@ export default {
       //
       //     this.loading = true
       //     if (addPermissions.length > 0) {
-      //       addRes = await Admin.dispatchPermissions(this.id, addPermissions)
+      //       addRes = await AdminModel.dispatchPermissions(this.id, addPermissions)
       //     }
       //     if (deletePermissions.length > 0) {
-      //       delRes = await Admin.removePermissions(this.id, deletePermissions)
+      //       delRes = await AdminModel.removePermissions(this.id, deletePermissions)
       //     }
       //     this.loading = false
       //     this.$message.success('权限修改成功')

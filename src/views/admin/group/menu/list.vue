@@ -26,7 +26,7 @@
 let id = 1000
 
 export default {
-  name: 'GroupPageList',
+  name: 'GroupMenuList',
   components: {
   },
   data() {

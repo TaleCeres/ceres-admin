@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import Admin from '@/models/admin'
+import AdminModel from '@/models/admin'
 import GroupApiPermissions from './GroupApiPermissions'
 
 export default {
@@ -84,7 +84,7 @@ export default {
   },
   methods: {
     async getOneGroup() {
-      const res = await Admin.getOneGroup(this.id)
+      const res = await AdminModel.getOneGroup(this.id)
       this.form.name = res.name
       this.form.info = res.info
     },
@@ -111,7 +111,7 @@ export default {
         if (this.cacheGroup.name !== this.form.name || this.cacheGroup.info !== this.form.info) {
           // eslint-disable-line
           this.loading = true
-          const res = await Admin.updateOneGroup(this.form.name, this.form.info, this.id)
+          const res = await AdminModel.updateOneGroup(this.form.name, this.form.info, this.id)
           this.loading = false
           this.$message.success('权限组信息更新成功！')
         }
@@ -129,10 +129,10 @@ export default {
 
           this.loading = true
           if (addPermissions.length > 0) {
-            addRes = await Admin.dispatchPermissions(this.id, addPermissions)
+            addRes = await AdminModel.dispatchPermissions(this.id, addPermissions)
           }
           if (deletePermissions.length > 0) {
-            delRes = await Admin.removePermissions(this.id, deletePermissions)
+            delRes = await AdminModel.removePermissions(this.id, deletePermissions)
           }
           this.loading = false
           this.$message.success('权限修改成功')

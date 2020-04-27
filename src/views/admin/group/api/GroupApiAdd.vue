@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import Admin from '@/models/admin'
+import AdminModel from '@/models/admin'
 import GroupApiPermissions from './GroupApiPermissions'
 
 export default {
@@ -93,7 +93,7 @@ export default {
           const finalPermissions = this.permissions.filter(x => Object.keys(this.allPermissions).indexOf(x) < 0)
           try {
             this.loading = true
-            res = await Admin.createOneGroup(this.form.name, this.form.info, finalPermissions, this.id) // eslint-disable-line
+            res = await AdminModel.createOneGroup(this.form.name, this.form.info, finalPermissions, this.id) // eslint-disable-line
           } catch (e) {
             this.loading = false
             console.log(e)

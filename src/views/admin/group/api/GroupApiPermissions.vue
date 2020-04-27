@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import Admin from '@/models/admin'
+import AdminModel from '@/models/admin'
 
 export default {
   props: ['id', 'title', 'reset'],
@@ -63,7 +63,6 @@ export default {
     try {
       this.loading = true
       const a = await this.getGroupPermissions()
-      console.log('a', a)
     } catch (e) {
       console.log(e)
     } finally {
@@ -73,12 +72,12 @@ export default {
   methods: {
     // 获取分组权限
     async getGroupPermissions() {
-      this.allPermissions = await Admin.getAllPermissions()
+      this.allPermissions = await AdminModel.getAllPermissions()
       // 通过判断有没有传入id，来判断当前页面是添加分组还是编辑分组
       // id为group_id
       if (this.id) {
         this.permission_module_ids = []
-        const group = await Admin.getOneGroup(this.id)
+        const group = await AdminModel.getOneGroup(this.id)
         let temp = []
         const cache = {}
         group.auth_list.forEach(v => {
@@ -215,7 +214,7 @@ export default {
         .permissions-ul {
           display: flex;
           flex-wrap: wrap;
-          justify-content: space-between;
+          justify-content: flex-start;
           padding: 20px 20px 0;
           background: #f5f5f6;
           margin-bottom: 20px;
