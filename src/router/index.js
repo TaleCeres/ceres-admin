@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import NProgress from 'nprogress' // progress bar
 import routes from './routes'
 import store from '../store'
-
+import 'nprogress/nprogress.css' // progress bar style
 Vue.use(Router)
 
 const router = new Router({
@@ -16,6 +17,8 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
+  // start progress bar
+  NProgress.start()
   // 登录验证
   // if (to.path !== '/login' && !store.state.user.logined) {
   //   next({ path: '/login' })
@@ -28,6 +31,11 @@ router.beforeEach((to, from, next) => {
     document.title = to.meta.title
   }
   next()
+})
+
+router.afterEach(() => {
+  // finish progress bar
+  NProgress.done()
 })
 
 export default router

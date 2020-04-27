@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view />
+    <router-view :key="key"/>
   </div>
 </template>
 
@@ -11,6 +11,12 @@ export default {
     return {
     }
   },
+  computed: {
+    key() {
+      // 只要保证 key 唯一性就可以了，保证不同页面的 key 不相同
+      return this.$route.fullPath
+    }
+  }
 }
 </script>
 
