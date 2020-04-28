@@ -14,6 +14,8 @@ import tableRouter from './modules/table'
 import userRouter from './modules/user'
 import toolsRouter from './modules/tools'
 import redirectRouter from './modules/redirect'
+import fileRouter from './modules/file'
+import customRouter from './modules/custom'
 // lazy-loaded when the route is visited
 // const _import = file => () => import(/* webpackChunkName: "about" */ `@/views/${file}.vue`)
 const _import = file => () => import(`@/views/${file}.vue`)
@@ -48,6 +50,8 @@ const normalViewRouters = [
   tableRouter,
   toolsRouter,
   userRouter,
+  fileRouter,
+  customRouter
 ].map(item => loadingComponent(item))
 
 /**

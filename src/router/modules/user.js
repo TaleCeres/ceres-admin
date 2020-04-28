@@ -13,7 +13,7 @@ export default {
       component: 'user-info/index',
       name: '用户信息',
       meta: { title: '用户信息', icon: 'el-icon-house' },
-      hidden: true
+      // hidden: true
     },
   ],
 }
