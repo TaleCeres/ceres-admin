@@ -1,12 +1,11 @@
 <template>
-  <div class="lin-container">
-    <div class="lin-title">富文本舞台页面</div>
-    <div class="lin-wrap"><tinymce upload_url="http://dev.lin.colorful3.com/cms/file/" @change="change" /></div>
+  <div class="container">
+    <Tinymce upload_url="http://dev.lin.colorful3.com/cms/file/" @change="change" />
   </div>
 </template>
 
 <script>
-import Tinymce from '@/components/base/tinymce'
+import Tinymce from '@/components/base/Tinymce'
 
 export default {
   components: {
@@ -19,10 +18,12 @@ export default {
   },
   methods: {
     change(val) {
-      console.log(val)
+      // console.log(val)
     },
   },
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="stylus" rel="stylesheet/stylus">
+
+</style>
