@@ -5,7 +5,7 @@
  * dev和prod模式下所调用的API的baseURL
  * 布局方式（layout）
  */
-const isAlphaDevMode = Object.is(process.env.NODE_ENV, 'alpha')
+const isAlphaDevMode = Object.is(process.env.ENV, 'alpha')
 
 export default {
   title: '杭州谷逸网络科技',

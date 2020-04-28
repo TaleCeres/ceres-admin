@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-// eslint-disable-next-line
+/* eslint-disable */
 import tinymce from 'tinymce/tinymce'
 import Editor from '@tinymce/tinymce-vue'
 import 'tinymce/themes/silver'

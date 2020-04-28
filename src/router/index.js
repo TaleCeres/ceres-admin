@@ -18,7 +18,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   // start progress bar
-  NProgress.start()
+  // NProgress.start()
   // 登录验证
   // if (to.path !== '/login' && !store.state.user.logined) {
   //   next({ path: '/login' })
@@ -35,7 +35,7 @@ router.beforeEach((to, from, next) => {
 
 router.afterEach(() => {
   // finish progress bar
-  NProgress.done()
+  // NProgress.done()
 })
 
 export default router

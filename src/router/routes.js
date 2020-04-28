@@ -12,6 +12,7 @@ import chartRouter from './modules/chart'
 import formRouter from './modules/form'
 import tableRouter from './modules/table'
 import userRouter from './modules/user'
+import toolsRouter from './modules/tools'
 import redirectRouter from './modules/redirect'
 import fileRouter from './modules/file'
 import customRouter from './modules/custom'
@@ -47,6 +48,7 @@ const normalViewRouters = [
   chartRouter,
   formRouter,
   tableRouter,
+  toolsRouter,
   userRouter,
   fileRouter,
   customRouter
