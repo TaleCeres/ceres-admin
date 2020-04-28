@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <editor id="tinymceEditor" :key="tinymceFlag" v-model="content" :init="tinymceInit"></editor>
-  </div>
+  <Editor id="tinymceEditor" :key="tinymceFlag" v-model="content" :init="tinymceInit" />
 </template>
 <script>
 /* eslint-disable */
