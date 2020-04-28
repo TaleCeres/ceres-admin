@@ -12,6 +12,7 @@ import chartRouter from './modules/chart'
 import formRouter from './modules/form'
 import tableRouter from './modules/table'
 import userRouter from './modules/user'
+import toolsRouter from './modules/tools'
 import redirectRouter from './modules/redirect'
 // lazy-loaded when the route is visited
 // const _import = file => () => import(/* webpackChunkName: "about" */ `@/views/${file}.vue`)
@@ -45,7 +46,8 @@ const normalViewRouters = [
   chartRouter,
   formRouter,
   tableRouter,
-  userRouter
+  toolsRouter,
+  userRouter,
 ].map(item => loadingComponent(item))
 
 /**

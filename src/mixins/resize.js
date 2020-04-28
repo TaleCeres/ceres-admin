@@ -15,7 +15,7 @@ export default {
     }
   },
   mounted() {
-    // this.drawChart()
+    this.drawChart()
     // 监听窗口的变化
     window.addEventListener('resize', this.__resizeHanlder)
   },
