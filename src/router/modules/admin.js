@@ -28,34 +28,44 @@ export default {
       ],
     },
     {
-      path: '/admin/group',
+      path: '/admin/api',
       component: undefined,
-      name: 'AdminGroup',
+      name: 'AdminApi',
       meta: {
-        title: '权限组管理',
+        title: '接口管理',
         icon: 'fa fa-group',
       },
       children: [
         {
-          path: '/admin/group/api',
-          component: 'admin/group/api/list',
-          name: 'GroupApiList',
+          path: '/admin/api/list',
+          component: 'admin/api/list',
+          name: 'AdminApiList',
           meta: {
-            title: '接口管理',
+            title: '接口列表',
             icon: 'el-icon-collection-tag',
           },
         },
+      ],
+    },
+    {
+      path: '/admin/menu',
+      component: undefined,
+      name: 'AdminMenu',
+      meta: {
+        title: '菜单管理',
+        icon: 'fa fa-group',
+      },
+      children: [
         {
-          path: '/admin/group/menu',
-          component: 'admin/group/menu/list',
-          name: 'GroupMenuList',
+          path: '/admin/menu/list',
+          component: 'admin/menu/list',
+          name: 'AdminMenuList',
           meta: {
-            title: '菜单管理',
+            title: '菜单列表',
             icon: 'el-icon-collection-tag',
           },
         },
       ],
     },
   ],
-  
 }
