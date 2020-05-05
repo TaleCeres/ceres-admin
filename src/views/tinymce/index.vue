@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Tinymce from '@/components/base/Tinymce'
+import Tinymce from 'comps/base/Tinymce'
 
 export default {
   components: {
