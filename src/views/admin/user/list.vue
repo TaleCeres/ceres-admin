@@ -2,8 +2,8 @@
   <div>
   <div v-show="!showEdit && !showAdd" class="container">
     <div class="header">
-      <div class="title">项目列表</div>
-      <el-button style="margin-left: 30px" type="primary" @click="showAdd=!showAdd">添加项目</el-button>
+      <div class="title">用户列表</div>
+      <el-button style="margin-left: 30px" type="primary" @click="showAdd=!showAdd">添加用户</el-button>
     </div>
     <ceres-table
       v-loading="loading"
