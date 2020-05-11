@@ -15,7 +15,7 @@ export default {
       path: '/file/index',
       component: 'file/index',
       name: 'FileIndex',
-      meta: { title: '文件管理', icon: 'dashboard', affix: true }
+      meta: { title: '文件管理', icon: 'dashboard', affix: false }
     }
   ]
 }
