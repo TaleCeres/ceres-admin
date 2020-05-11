@@ -1,17 +1,10 @@
 <template>
-  <div>
-    <x-table :table-data="tableData" :labels="labels">
-      <template v-slot="slotProps" >
-      </template>
-    </x-table>
-  </div>
+  <div class="table"></div>
 </template>
 
 <script type="text/ecmascript-6">
-import XTable from '@/components/base/table'
 export default {
   name: 'TableIndex',
-  components: { XTable },
   data() {
     return {
       tableData: [{

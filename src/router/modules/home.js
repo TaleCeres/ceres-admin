@@ -1,6 +1,6 @@
 export default {
   path: '/main',
-  name: '首页',
+  name: 'Main',
   component: undefined,
   meta: {
     title: '首页',
