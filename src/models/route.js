@@ -29,4 +29,10 @@ export default class College {
     const data = await put('cms/route/tree', tree)
     return data
   }
+
+  // 按ID编辑路由
+  static async editRoute(id, route) {
+    const data = await put(`cms/route/${id}`, route)
+    return data
+  }
 }

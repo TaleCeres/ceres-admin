@@ -6,7 +6,7 @@
           <div slot="header">
             <el-button size="medium" type="primary" @click="updateRouteTree">保存</el-button>
             <el-button size="medium" @click="getRouteTree">刷新</el-button>
-            <el-button size="medium" style="float: right" :disabled="dragFlag" @click="dialogAddVisible = true">新增菜单</el-button>
+            <el-button size="medium" style="float: right" :disabled="dragFlag" @click="dialogVisible = true">新增菜单</el-button>
           </div>
           <div class="block">
             <el-alert
@@ -42,8 +42,8 @@
     </el-row>
 
     <el-dialog
-      title="新建菜单"
-      :visible.sync="dialogAddVisible"
+      :title="form.id? '编辑菜单': '新建菜单'"
+      :visible.sync="dialogVisible"
       width="600px">
       <el-form ref="menuForm" :model="form" label-width="80px">
         <el-form-item label="父级">
@@ -92,14 +92,10 @@
             <el-radio :label="false">显示</el-radio>
           </el-radio-group>
         </el-form-item>
-<!--        <el-form-item>-->
-<!--          <el-button @click="closeDialog">取消</el-button>-->
-<!--          <el-button type="primary" @click="createRoute">确定</el-button>-->
-<!--        </el-form-item>-->
       </el-form>
       <span slot="footer">
         <el-button @click="closeDialog">取消</el-button>
-        <el-button type="primary" @click="createRoute">确定</el-button>
+        <el-button type="primary" @click="onSubmit">确定</el-button>
   </span>
     </el-dialog>
 
@@ -112,8 +108,9 @@ import Treeselect from '@riophae/vue-treeselect'
 // import the styles
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import RouteModel from '@/models/route'
-
+import UserModel from '@/models/user'
 import IconSelect from '@/components/base/IconSelect'
+
 
 let id = 1000
 
@@ -136,10 +133,13 @@ export default {
         title: ''
       },
       dragFlag: false,
-      dialogAddVisible: false
+      dialogVisible: false
     }
   },
   computed: {
+  },
+  async created() {
+    // await UserModel.getToken('Boss', '123456')
   },
   mounted() {
     this.getRouteTree()
@@ -179,19 +179,14 @@ export default {
         children: node.children
       }
     },
+
+    // 编辑菜单
     edit(note, data) {
       // 弹出浮层
       // el-tree作为浮动成，而el-table的树形数据与懒加载作为展现成
       // el-tree的拖动影响el-table的展示
-      console.log('data', data)
-    },
-    append(data) {
-      id += 1
-      const newChild = { id, label: 'test', children: [] }
-      if (!data.children) {
-        this.$set(data, 'children', [])
-      }
-      data.children.push(newChild)
+      this.dialogVisible = true
+      this.form = data
     },
 
     // 删除菜单
@@ -216,7 +211,7 @@ export default {
       this.$message.success('新增菜单成功')
       this.resetForm()
       this.getRouteTree()
-      this.dialogAddVisible = false
+      this.dialogVisible = false
     },
     // 重置新增表单
     resetForm() {
@@ -236,7 +231,7 @@ export default {
     },
 
     closeDialog() {
-      this.dialogAddVisible = false
+      this.dialogVisible = false
       this.resetForm()
     },
     // 拖动后保存路由
@@ -248,38 +243,58 @@ export default {
       } catch (e) {
         this.$message.error('菜单保存失败！')
       }
+    },
+
+    onSubmit() {
+      if (this.form.id) {
+        this.editRoute()
+      } else {
+        this.createRoute()
+      }
+    },
+
+    // 保存编辑后的路由
+    async editRoute() {
+      try {
+        await RouteModel.editRoute(this.form.id, this.form)
+        this.$message.success('菜单编辑成功')
+        this.getRouteTree()
+        this.dialogVisible = false
+      } catch (e) {
+        this.$message.error('菜单编辑失败！')
+      }
     }
   }
 }
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-.container {
-  min-width 900px
-  .block {
-    .custom-tree-node {
-      width 100%
-      line-height 44px
-      span {
-        margin-left 10px
-      }
-      .path {
-        color #1890ff
-        margin-left 10px
-      }
-      .btn {
-        float right !important
+  .container {
+    min-width 900px
+    .block {
+      .custom-tree-node {
+        width 100%
+        line-height 44px
+        span {
+          margin-left 10px
+        }
+        .path {
+          color #1890ff
+          margin-left 10px
+        }
+        .btn {
+          float right !important
+        }
       }
     }
   }
-}
 </style>
 <style lang="stylus" rel="stylesheet/stylus">
-.block {
-  .el-tree-node__content {
-    padding: 8px 10px
-    margin: 1px 0
-    border: 1px solid #ddd
+  .block {
+    .el-tree-node__content {
+      padding: 8px 10px
+      margin: 1px 0
+      border: 1px solid #ddd
+    }
   }
-}
 </style>
