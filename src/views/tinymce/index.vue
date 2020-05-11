@@ -4,10 +4,10 @@
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
 import Tinymce from 'comps/base/Tinymce'
-
 export default {
+  name: 'Tinymce',
   components: {
     Tinymce,
   },
