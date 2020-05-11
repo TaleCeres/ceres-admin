@@ -78,6 +78,7 @@ module.exports = {
     'import/extensions': 'off', // import不需要写文件扩展名
     'import/newline-after-import': 'off',
     'import/prefer-default-export': 'off',
+    'import/order': 'off',
     'max-len': ['error', { code: 200 }], // 代码行长度
     'consistent-return': 'off', // 函数需要返回数值
     'no-trailing-spaces': 'off', // 行末有多余空格

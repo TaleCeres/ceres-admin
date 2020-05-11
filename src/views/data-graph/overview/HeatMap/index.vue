@@ -5,8 +5,8 @@
 
 <script type="text/ecmascript-6">
 import resize from '@/mixins/resize'
-import option from './option'
 import echarts from 'echarts'
+import option from './option'
 
 export default {
   name: 'HeatMap',
