@@ -108,7 +108,7 @@ import Treeselect from '@riophae/vue-treeselect'
 // import the styles
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import RouteModel from '@/models/route'
-import UserModel from '@/models/user'
+// import UserModel from '@/models/user'
 import IconSelect from '@/components/base/IconSelect'
 
 

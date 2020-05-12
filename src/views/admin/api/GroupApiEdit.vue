@@ -35,8 +35,11 @@
           @getCacheAuthIds="getCacheAuthIds"
           @updateAllPermissions="updateAllPermissions" />
       </el-tab-pane>
+      <el-tab-pane label="配置菜单" name="third">
+        <GroupMenu :group-id="cacheGroup.id"></GroupMenu>
+      </el-tab-pane>
     </el-tabs>
-    <div class="submit">
+    <div v-if="activeName !== 'third'" class="submit">
       <el-button type="primary" @click="submitForm('form')">保 存</el-button>
       <el-button @click="resetForm('form')">重 置</el-button>
     </div>
@@ -46,10 +49,12 @@
 <script>
 import AdminModel from '@/models/admin'
 import GroupApiPermissions from './GroupApiPermissions'
+import GroupMenu from './GroupMenu'
 
 export default {
   components: {
     GroupApiPermissions,
+    GroupMenu
   },
   props: {
     cacheGroup: {
@@ -63,7 +68,7 @@ export default {
   },
   data() {
     return {
-      activeName: 'first',
+      activeName: 'third',
       allPermissions: [], // 所有权限
       permissions: [], // 最终选择的权限
       form: {

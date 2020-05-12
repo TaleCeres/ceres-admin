@@ -25,6 +25,7 @@
     "core-js": "^2.6.5",
     "d3": "^5.9.7",
     "echarts": "^4.2.1",
+    "el-tree-transfer": "^2.2.9",
     "element-ui": "^2.11.1",
     "font-awesome": "^4.7.0",
     "js-base64": "^2.5.2",
