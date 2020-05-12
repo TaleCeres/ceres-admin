@@ -5,9 +5,9 @@
 </template>
 
 <script type="text/ecmascript-6">
-import Tinymce from 'comps/base/Tinymce'
+import Tinymce from '@/components/base/Tinymce'
 export default {
-  name: 'Tinymce',
+  name: 'index',
   components: {
     Tinymce,
   },
