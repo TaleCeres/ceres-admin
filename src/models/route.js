@@ -29,4 +29,34 @@ export default class College {
     const data = await put('cms/route/tree', tree)
     return data
   }
+
+  // 按ID编辑路由
+  static async editRoute(id, route) {
+    const data = await put(`cms/route/${id}`, route)
+    return data
+  }
+
+  // 根据用户组ID, 获取菜单
+  static async getMenu(id) {
+    const data = await get(`cms/menu/?group_id=${id}`)
+    return data
+  }
+
+  // 分配用户组菜单
+  static async updateMenuById(id, routes) {
+    const data = await put('cms/menu/', {
+      group_id: id,
+      routes
+    })
+    return data
+  }
+
+  // 从指定用户组的菜单中, 删除路由节点
+  static async deleteMenuById(id, routes) {
+    const data = await _delete('cms/menu/', {
+      group_id: id,
+      routes
+    })
+    return data
+  }
 }
