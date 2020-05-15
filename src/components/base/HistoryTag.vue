@@ -207,9 +207,9 @@ export default {
           }
         }
         &.active {
-          background-color #42b983
+          background-color #409EFF
           color #fff
-          border-color #42b983
+          border-color #409EFF
 
           &::before {
             content ''
