@@ -16,7 +16,7 @@ export default class User {
     const data = await post('v1/token', {
       account,
       secret,
-      type: 101,
+      type: 100,
     })
     saveToken(data.token)
   }

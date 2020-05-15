@@ -24,7 +24,7 @@
 
 <script type="text/ecmascript-6">
 import { mapMutations, mapActions } from 'vuex'
-import defaultAvatar from 'assets/images/company/logo.png'
+import defaultAvatar from 'assets/images/company/logo-03.png'
 export default {
   name: 'UserCard',
   components: {},

@@ -1,8 +1,8 @@
 <template>
   <div class="sidebar">
     <router-link v-if="logoVisible" class="logo" to="/">
-      <img v-if="!isCollapse" class="name" src="../../../../assets/images/company/name.png" alt="">
-      <img v-else class="brand" src="../../../../assets/images/company/logo.png" alt="">
+      <img v-if="!isCollapse" class="name" src="../../../../assets/images/company/logo-02.png" alt="">
+      <img v-else class="brand" src="../../../../assets/images/company/logo-03.png" alt="">
     </router-link>
     <el-menu style="margin-bottom:50px" :default-active="defaultActive" :collapse="isCollapse" @open="handleOpen" @close="handleClose">
       <template v-for="item in routes">
