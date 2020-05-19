@@ -20,7 +20,7 @@ export default class College {
 
   // 新增路由
   static async createRoute(route) {
-    const data = await post('cms/route/', route)
+    const data = await post('cms/route', route)
     return data
   }
 
@@ -44,7 +44,7 @@ export default class College {
 
   // 分配用户组菜单
   static async updateMenuById(id, routes) {
-    const data = await put('cms/menu/', {
+    const data = await put('cms/menu', {
       group_id: id,
       routes
     })
@@ -53,7 +53,7 @@ export default class College {
 
   // 从指定用户组的菜单中, 删除路由节点
   static async deleteMenuById(id, routes) {
-    const data = await _delete('cms/menu/', {
+    const data = await _delete('cms/menu', {
       group_id: id,
       routes
     })

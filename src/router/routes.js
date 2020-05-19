@@ -36,18 +36,18 @@ const _import = file => () => import(`@/views/${file}.vue`)
  */
 
 // 处理「业务页面」的路由
-const normalViewRouters = [
-  redirectRouter,
-  dashboardRouter,
-  homeRouter,
-  aboutRouter,
-  adminRouter,
-  chartRouter,
-  toolsRouter,
-  userRouter,
-  fileRouter,
-  customRouter
-].map(item => loadingComponent(item))
+// const normalViewRouters = [
+//   redirectRouter,
+//   dashboardRouter,
+//   homeRouter,
+//   aboutRouter,
+//   adminRouter,
+//   chartRouter,
+//   toolsRouter,
+//   userRouter,
+//   fileRouter,
+//   customRouter
+// ].map(item => loadingComponent(item))
 
 /**
  * 可视化页面
@@ -61,14 +61,17 @@ const visualViewRouters = [
 /**
  * 默认页面(非「业务页面」)
  */
-const defaultViewRouters = [
+export const defaultViewRouters = [
   { path: '/login', component: _import('login/index'), hidden: true },
   { path: '/404', component: _import('error-page/404'), hidden: true },
+]
+// 404
+export const errorViewRouters = [
   { path: '*', redirect: '/404', hidden: true },
 ]
 
 const routes = [
-  ...normalViewRouters,
+  // ...normalViewRouters,
   ...visualViewRouters,
   ...defaultViewRouters,
 ]
@@ -86,7 +89,7 @@ export default routes
  * @param {object} rawRouter
  * @returns
  */
-function loadingComponent(rawRouter) {
+export function loadingComponent(rawRouter) {
   let { ...router } = rawRouter
   initLayout(router) // 一级路由的模版为 Layout
   // 遍历一级路由的子路由
@@ -102,7 +105,7 @@ function loadingComponent(rawRouter) {
  * Layout有三种选择 default、t-type、vertical
  * @param {object} router
  */
-function initLayout(router) {
+export function initLayout(router) {
   const _import_layout = file => () => import(`comps/layout/${file}/index.vue`)
   const layoutModeObj = {
     'default': _import_layout('default'),
@@ -118,7 +121,7 @@ function initLayout(router) {
  *  - 2. 如果无子路由，载入「router.component同名的组件」
  * @param {object} router
  */
-function initComponent(router) {
+export function initComponent(router) {
   // 1
   if (router.hasOwnProperty('children')) {
     router.component = Midlayer

@@ -9,7 +9,6 @@ import app from './modules/app'
 import user from './modules/user'
 import router from './modules/router'
 import visual from './modules/visual'
-
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'

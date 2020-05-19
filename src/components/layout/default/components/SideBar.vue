@@ -5,7 +5,7 @@
       <img v-else class="brand" src="../../../../assets/images/company/logo-03.png" alt="">
     </router-link>
     <el-menu style="margin-bottom:50px" :default-active="defaultActive" :collapse="isCollapse" @open="handleOpen" @close="handleClose">
-      <template v-for="item in routes">
+      <template v-for="item in sidebarList">
         <!-- 一级菜单(不含二级菜单) -->
         <router-link v-if="!canUnflod(item)" :key="item.name" :to="defaultRoute(item).path">
           <el-menu-item :index="defaultRoute(item).name">
@@ -32,7 +32,7 @@
             </router-link>
 
             <!-- 二级菜单有多个三级菜单 -->
-            <el-submenu v-else-if="subItem.children" :key="subItem.name" :index="subItem.name">
+            <el-submenu v-else-if="subItem.children && subItem.children.length > 0" :key="subItem.name" :index="subItem.name">
               <template slot="title">
                 <i :class="subItem.meta.icon"></i>
                 <span>{{ subItem.meta.title }}</span>
@@ -75,36 +75,11 @@ export default {
     }),
     ...mapGetters([
       'sidebar',
+      'sidebarList'
     ]),
     ...mapGetters({
       logoVisible: 'app/logoState'
     }),
-    routes() {
-      let { routes } = this.$router.options
-      routes.forEach(route => {
-        if (route.permission && route.permission.length > 0) {
-          if (!route.permission.find(auth => this.authList.includes(auth))) {
-            route.hidden = true
-          }
-          if (route.children && route.permission.length > 0) {
-            route.children.forEach(childRoute => {
-              if (childRoute.permission && childRoute.permission.length > 0) {
-                if (!childRoute.permission.find(auth => this.authList.includes(auth))) {
-                  childRoute.hidden = true
-                }
-              }
-            })
-          }
-        }
-      })
-      routes.forEach(route => {
-        if (route.children && route.children.length > 0) {
-          route.children = route.children.filter(item => item.hidden !== true)
-        }
-      })
-      let sidebarList = routes.filter(item => item.hidden !== true)
-      return flatten(sidebarList)
-    },
     isCollapse() {
       return this.sidebar.closed
     },
