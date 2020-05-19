@@ -23,8 +23,8 @@
               :expand-on-click-node="false"
               @node-drop="handleDrop">
               <div slot-scope="{ node, data }" class="custom-tree-node">
-                <i :class="data.icon"></i>
-                <span>{{ data.title }}</span>
+                <i :class="data.meta.icon"></i>
+                <span>{{ data.meta.title }}</span>
                 <router-link class="path" :to="data.path.toString()">{{data.path}}</router-link>
                 <div class="btn">
                   <el-button type="text" size="mini" :disabled="dragFlag" @click="edit(node, data)">
@@ -44,6 +44,7 @@
     <el-dialog
       :title="form.id? '编辑菜单': '新建菜单'"
       :visible.sync="dialogVisible"
+      :before-close="closeDialog"
       width="600px">
       <el-form ref="menuForm" :model="form" label-width="80px">
         <el-form-item label="父级">
@@ -130,7 +131,8 @@ export default {
         icon: '',
         name: '',
         parent_id: 0,
-        title: ''
+        title: '',
+        path: ''
       },
       dragFlag: false,
       dialogVisible: false
@@ -139,7 +141,7 @@ export default {
   computed: {
   },
   async created() {
-    await UserModel.getToken('Boss', '123456')
+    // await UserModel.getToken('Boss', '123456')
   },
   mounted() {
     this.getRouteTree()
@@ -151,7 +153,7 @@ export default {
     },
     async getRouteTree() {
       try {
-        const res = await RouteModel.getRouteTree()
+        const res = (await RouteModel.getRouteTree()) || []
         this.routeTree = [...res]
         this.getTreeSelect()
         this.dragFlag = false
@@ -163,8 +165,8 @@ export default {
     // 树形选择器结构
     async getTreeSelect() {
       this.menuOptions = []
-      const res = await RouteModel.getRouteTree()
-      const menu = { id: 0, title: '主类目', children: [] }
+      const res = (await RouteModel.getRouteTree()) || []
+      const menu = { id: 0, meta: { title: '主类目' }, children: [] }
       menu.children = [...res]
       this.menuOptions.push(menu)
     },
@@ -175,7 +177,7 @@ export default {
       }
       return {
         id: node.id,
-        label: node.title,
+        label: node.meta.title,
         children: node.children
       }
     },
@@ -186,7 +188,20 @@ export default {
       // el-tree作为浮动成，而el-table的树形数据与懒加载作为展现成
       // el-tree的拖动影响el-table的展示
       this.dialogVisible = true
-      this.form = data
+      console.log(data)
+      this.form = {
+        component: data.component,
+        hidden: data.hidden,
+        icon: data.meta.icon,
+        name: data.name,
+        parent_id: data.parent_id,
+        title: data.meta.title,
+        path: data.path,
+        id: data.id,
+        order: data.order,
+        children: data.children
+      }
+      console.log(this.form)
     },
 
     // 删除菜单
@@ -207,11 +222,16 @@ export default {
     },
     // 新增路由
     async createRoute() {
-      await RouteModel.createRoute(this.form)
-      this.$message.success('新增菜单成功')
-      this.resetForm()
-      this.getRouteTree()
-      this.dialogVisible = false
+      try {
+        await RouteModel.createRoute(this.form)
+        this.$message.success('新增菜单成功')
+        this.resetForm()
+        this.getRouteTree()
+        this.dialogVisible = false
+      } catch (e) {
+        console.log(e)
+        this.$message.error(`新增菜单失败：${e.message}`)
+      }
     },
     // 重置新增表单
     resetForm() {
@@ -221,7 +241,8 @@ export default {
         icon: '',
         name: '',
         parent_id: 0,
-        title: ''
+        title: '',
+        path: ''
       }
     },
 
