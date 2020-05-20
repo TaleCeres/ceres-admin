@@ -38,7 +38,7 @@ export default class College {
 
   // 根据用户组ID, 获取菜单
   static async getMenu(id) {
-    const data = await get(`cms/menu/?group_id=${id}`)
+    const data = await get(`cms/menu?group_id=${id}`)
     return data
   }
 

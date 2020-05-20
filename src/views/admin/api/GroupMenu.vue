@@ -58,16 +58,26 @@ export default {
       try {
         const res = await RouteModel.getRouteTree()
         this.routeTree = [...res]
+        this.getTreeId(this.routeTree)
         this.cacheTree = [...res]
       } catch (e) {
         console.log(e)
       }
+    },
+    getTreeId(tree) {
+      tree.forEach(item => {
+        item.title = item.meta.title
+        if (item.children && item.children.length > 0) {
+          this.getTreeId(item.children)
+        }
+      })
     },
 
     // 根据用户组ID, 获取菜单
     async getMenuById() {
       const res = (await RouteModel.getMenu(this.groupId)) || []
       this.toData = [...res]
+      this.getTreeId(this.toData)
       this.getFromData()
     },
 

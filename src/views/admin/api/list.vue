@@ -6,6 +6,7 @@
         <el-button type="primary" style="margin-left: 30px" size="medium" @click="showAdd = true">新增分组</el-button>
       </div>
       <ceres-table
+        v-loading="loading"
         :table-column="tableColumn"
         :table-data="tableData"
         :operate="operate"
@@ -31,6 +32,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       showAdd: false,
       showEdit: false,
       tableColumn: [
@@ -48,13 +50,15 @@ export default {
   computed: {},
   created() { },
   async mounted() {
-    await User.getToken('999@qq.com', '123456')
-    await User.getInfo()
+    // await User.getToken('999@qq.com', '123456')
+    // await User.getInfo()
     this.getAllGroups()
   },
   methods: {
     async getAllGroups() {
+      this.loading = true
       this.tableData = await AdminModel.getAllGroups()
+      this.loading = false
     },
     handleEdit(val) {
       this.showEdit = true
