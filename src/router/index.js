@@ -9,6 +9,7 @@ import { getToken } from '@/utils/cookie'
 
 Vue.use(Router)
 
+
 const router = new Router({
   mode: 'history',
   linkActiveClass: 'active-link',
@@ -30,11 +31,16 @@ router.beforeEach(async (to, from, next) => {
   } else if (store.getters.normalViewRouters.length > 0) {
     next()
   } else {
-    let accessRoutes = await store.dispatch('router/getRoutes')
-    const result = accessRoutes.concat(errorViewRouters)
-    router.addRoutes(result)
-    router.options.routes = router.options.routes.concat(result)
-    next({ ...to, replace: true })
+    try {
+      let accessRoutes = await store.dispatch('router/getRoutes')
+      const result = accessRoutes.concat(errorViewRouters)
+      router.addRoutes(result)
+      router.options.routes = router.options.routes.concat(result)
+      next({ ...to, replace: true })
+    } catch (e) {
+      console.log(e)
+      next({ path: '/login' })
+    }
   }
   // 权限验证
 

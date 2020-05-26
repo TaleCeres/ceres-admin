@@ -6,7 +6,7 @@
 import Vue from 'vue'
 import axios from 'axios'
 import store from '@/store'
-import { Notification } from 'element-ui'
+import { Notification, Message } from 'element-ui'
 import { getToken } from './cookie'
 import config from '../config'
 
@@ -48,6 +48,10 @@ _axios.interceptors.response.use(
     return data
   },
   error => {
+    Message({
+      message: error.response.data.msg,
+      type: "error"
+    })
     return Promise.reject(error)
   },
 )

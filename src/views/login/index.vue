@@ -8,7 +8,7 @@
     <div class="form-box">
       <div class="title">
         <h1 style="font-size: 50px">Hi,</h1>
-        <h2 style="margin-top: 20px;">欢迎使用CSS布局系统</h2>
+        <h2 style="margin-top: 20px;">欢迎使用物耀管理平台</h2>
       </div>
       <form class="login-form" @submit.prevent="handleLogin">
         <input v-model="form.username" type="text" class="form-item" autocomplete="off" placeholder="请输入用户名">
