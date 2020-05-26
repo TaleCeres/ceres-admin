@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <Tinymce upload_url="http://dev.lin.colorful3.com/cms/file/" @change="change" />
+    <Tinymce @change="change" />
   </div>
 </template>
 

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {
   post,
   get,
@@ -5,7 +6,7 @@ import {
   _delete
 } from '@/utils/request'
 
-export default class College {
+export default class Route {
   // 获取所有路由结构
   static async getRouteTree() {
     const data = await get('cms/route/tree')

@@ -36,18 +36,18 @@ const _import = file => () => import(`@/views/${file}.vue`)
  */
 
 // 处理「业务页面」的路由
-// const normalViewRouters = [
-//   redirectRouter,
-//   dashboardRouter,
-//   homeRouter,
-//   aboutRouter,
-//   adminRouter,
-//   chartRouter,
-//   toolsRouter,
-//   userRouter,
-//   fileRouter,
-//   customRouter
-// ].map(item => loadingComponent(item))
+const normalViewRouters = [
+  redirectRouter,
+  dashboardRouter,
+  // homeRouter,
+  // aboutRouter,
+  // adminRouter,
+  // chartRouter,
+  // toolsRouter,
+  // userRouter,
+  // fileRouter,
+  // customRouter
+].map(item => loadingComponent(item))
 
 /**
  * 可视化页面
@@ -71,7 +71,7 @@ export const errorViewRouters = [
 ]
 
 const routes = [
-  // ...normalViewRouters,
+  ...normalViewRouters,
   ...visualViewRouters,
   ...defaultViewRouters,
 ]
