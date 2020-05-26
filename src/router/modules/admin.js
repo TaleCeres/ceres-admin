@@ -32,7 +32,7 @@ export default {
       component: undefined,
       name: 'AdminApi',
       meta: {
-        title: '接口管理',
+        title: '权限管理',
         icon: 'fa fa-group',
       },
       children: [
