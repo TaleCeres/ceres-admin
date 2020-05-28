@@ -91,14 +91,12 @@ const actions = {
   getRoutes({ commit }) {
     return new Promise(resolve => {
       RouteModel.getRouteTree().then(response =>{
-        let routes = response.map(item => loadingComponent(item))
+        let routes = response.map(loadingComponent)
+        let sidebarList = response.map(loadingComponent)
         commit('SET_ROUTES', routes)
-        commit('SET_SIDEBARLIST', routes)
+        commit('SET_SIDEBARLIST', sidebarList)
         resolve(routes)
       })
-      //   .catch(error => {
-      //   reject(error)
-      // })
     })
   }
 }
