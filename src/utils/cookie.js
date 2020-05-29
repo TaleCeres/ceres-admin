@@ -1,4 +1,4 @@
-// ？ 将一切都存为字符串(数字和布尔值)
+// 将一切都存为字符串(数字和布尔值)
 /* eslint-disable */ 
 import cookies from 'js-cookie'
 import { Base64 } from 'js-base64'
@@ -10,7 +10,7 @@ import { Base64 } from 'js-base64'
  * @param {string} token
  */
 export function saveToken(token) {
-  cookies.set('token', `Basic ${Base64.encode(`${token}:randomPassword`)}`)
+  cookies.set('token', `Basic ${Base64.encode(`${token}:$`)}`)
 }
 
 /**
