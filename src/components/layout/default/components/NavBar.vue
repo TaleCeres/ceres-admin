@@ -14,6 +14,11 @@
         <Screenfull style="margin-right: 15px;" />
       </el-tooltip>
       <LangSelect style="margin-right: 15px;" />
+      <el-tooltip content="文档地址" effect="dark" placement="bottom">
+        <a target="_blank" href="http://blog.ivinetrue.com/ceres-admin/">
+          <fa-icon icon-name="book" style="margin-right: 15px;" />
+        </a>
+      </el-tooltip>
       <UserCard style="margin-right: 10px;" />
     </div>
   </nav>
