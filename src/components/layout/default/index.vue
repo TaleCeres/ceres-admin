@@ -81,5 +81,6 @@ export default {
 }
 .main {
   margin 2px 0 0 2px // 避免过于紧凑
+  overflow-x hidden
 }
 </style>

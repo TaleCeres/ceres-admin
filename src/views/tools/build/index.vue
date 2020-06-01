@@ -1,15 +1,16 @@
 <template>
-  <div class="container">
+  <div class="tool-container">
     <div class="left-board">
       <div class="logo-wrapper">
         <div class="logo">
-          <img :src="logo" alt="logo"> Form Generator
+          Form Generator
         </div>
       </div>
       <el-scrollbar class="left-scrollbar">
         <div class="components-list">
           <div class="components-title">
-            <svg-icon icon-class="component" />输入型组件
+            <i class="fa fa-puzzle-piece"></i>
+            输入型组件
           </div>
           <draggable
             class="components-draggable"
@@ -31,7 +32,7 @@
             </div>
           </draggable>
           <div class="components-title">
-            <svg-icon icon-class="component" />选择型组件
+            <i class="fa fa-puzzle-piece"></i>选择型组件
           </div>
           <draggable
             class="components-draggable"
@@ -55,7 +56,7 @@
             </div>
           </draggable>
           <div class="components-title">
-            <svg-icon icon-class="component" /> 布局型组件
+            <i class="fa fa-puzzle-piece"></i> 布局型组件
           </div>
           <draggable
             class="components-draggable" :list="layoutComponents"
@@ -248,12 +249,13 @@ export default {
     },
     cloneComponent(origin) {
       const clone = JSON.parse(JSON.stringify(origin))
-      clone.formId = ++this.idGlobal
+      clone.formId = this.idGlobal + 1
       clone.span = formConf.span
       clone.renderKey = +new Date() // 改变renderKey后可以实现强制更新组件
       if (!clone.layout) clone.layout = 'colFormItem'
       if (clone.layout === 'colFormItem') {
         clone.vModel = `field${this.idGlobal}`
+        // eslint-disable-next-line
         clone.placeholder !== undefined && (clone.placeholder += clone.label)
         tempActiveData = clone
       } else if (clone.layout === 'rowFormItem') {
@@ -273,6 +275,7 @@ export default {
     generate(data) {
       const func = this[`exec${titleCase(this.operationType)}`]
       this.generateConf = data
+      // eslint-disable-next-line
       func && func(data)
     },
     execRun(data) {
@@ -301,7 +304,7 @@ export default {
       this.activeFormItem(clone)
     },
     createIdAndKey(item) {
-      item.formId = ++this.idGlobal
+      item.formId = this.idGlobal + 1
       item.renderKey = +new Date()
       if (item.layout === 'colFormItem') {
         item.vModel = `field${this.idGlobal}`
@@ -517,7 +520,7 @@ input, textarea{
 $selectedColor = #f6f7ff;
 $lighterBlue = #409EFF;
 
-.container {
+.tool-container {
   position: relative;
   width: 100%;
   height: 100%;
