@@ -7,6 +7,8 @@
 
 const getters = {
   sidebar: state => state.app.sidebar,
-  sidebarList: state => { },
+  sidebarList: state => state.router.sidebarList,
+  drawer: state => state.app.drawer,
+  normalViewRouters: state => state.router.normalViewRouters
 }
 export default getters

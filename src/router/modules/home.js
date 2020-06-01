@@ -1,12 +1,7 @@
-/* Layout */
-import Layout from 'comps/layout/default'
-const _import = file => () => import(`@/views/${file}.vue`)
-
 export default {
-  path: '/',
-  component: Layout,
-  name: '首页',
-  redirect: '/home',
+  path: '/main',
+  name: 'Main',
+  component: undefined,
   meta: {
     title: '首页',
     icon: 'el-icon-menu',
@@ -14,17 +9,18 @@ export default {
   children: [
     {
       path: '/home',
-      name: 'Home', // 配套中英文切换
-      component: _import('home/index'),
+      name: 'Home',
+      component: 'home/index',
       meta: {
         title: '主页面',
         icon: 'el-icon-menu',
+        affix: true,
       },
     },
     {
       path: '/guide',
       name: 'guide',
-      component: _import('guide/index'),
+      component: 'guide/index',
       meta: {
         title: '规范指南',
         icon: 'el-icon-setting',

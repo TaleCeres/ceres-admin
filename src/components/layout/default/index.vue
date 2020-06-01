@@ -5,8 +5,9 @@
         <SideBar />
       </el-aside>
       <el-container>
-        <el-header class="header">
+        <el-header class="header" :height="navbarHeight">
           <NavBar />
+          <HistoryTag v-if="isVisible" />
         </el-header>
         <el-main class="main">
           <AppMain />
@@ -18,10 +19,10 @@
 
 <script type="text/ecmascript-6">
 import { mapGetters } from 'vuex'
-import ResizeMixin from './mixin/resize'
-import AppMain from './components/AppMain'
-import SideBar from './components/SideBar'
-import NavBar from './components/NavBar/index'
+import HistoryTag from 'comps/base/HistoryTag'
+import { AppMain, SideBar, NavBar } from './components'
+import ResizeMixin from '../mixin/resize'
+import config from '@/config'
 
 export default {
   name: 'DefalutLayout',
@@ -29,28 +30,44 @@ export default {
     AppMain,
     SideBar,
     NavBar,
+    HistoryTag,
   },
   mixins: [ResizeMixin],
   computed: {
     ...mapGetters([
       'sidebar',
     ]),
+    ...mapGetters({
+      isVisible: 'app/historyTagState'
+    }),
+    foldState() {
+      return this.sidebar.closed
+    },
     // 左侧菜单栏是否折叠
     isCollapse() {
       return this.sidebar.closed
     },
+    navbarHeight() {
+      return this.isVisible ? '84px' : '52px'
+    },
     // 左侧菜单栏展开的宽度
     sidebarWidth() {
-      return this.isCollapse === false ? '170px' : '64px'
+      const { layout: { sidebar: { minWidth, maxWidth } } } = config
+      return this.isCollapse === false ? maxWidth : minWidth
     },
   },
   mounted() { },
+  methods: {
+    toggleSlidebarState() {
+      this.$store.commit('app/TOGGLE_SIDEBAR')
+    },
+  },
 }
 
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .aside {
-  border 1px solid red
+  border-right 1px solid black
   overflow-x hidden
   &::-webkit-scrollbar {
     width 0px
@@ -58,12 +75,11 @@ export default {
   }
 }
 .header {
-  display flex
-  align-items center
+  width 100%
   padding 0
   box-shadow 0px 2px 6px 0px rgba(190, 204, 216, 0.4)
 }
 .main {
-  margin: 2px 0 0 2px // 避免过于紧凑
+  margin 2px 0 0 2px // 避免过于紧凑
 }
 </style>

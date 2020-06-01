@@ -79,12 +79,12 @@ video,
 input,
 menu,
 details,
-summary
+summary {
   margin 0
   padding 0
   border 0
   vertical-align baseline
-
+}
 /* HTML5 样式 */
 article,
 aside,
@@ -95,16 +95,16 @@ footer,
 header,
 menu,
 nav,
-section
+section {
   display block
-
+}
 html,
 body,
-#app
+#app {
   width 100%
   height 100%
-
-body
+}
+body {
   line-height 1
   font-size 100%
   font-family Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif
@@ -112,61 +112,76 @@ body
   -moz-osx-font-smoothing grayscale
   -webkit-font-smoothing antialiased
   text-rendering optimizeLegibility
-
+}
 blockquote:before,
 blockquote:after,
 q:before,
-q:after
+q:after {
   content none
-
-table
+}
+table {
   border-collapse collapse
   border-spacing 0
-
+}
 input,
-button
+button {
   padding 0
-
-  &:focus
+  &:focus {
     outline -webkit-focus-ring-color auto 0px
-
+  }
+}
 /* custom */
-a
+a {
   color #7e8c8d
   -webkit-backface-visibility hidden
   text-decoration none
   cursor pointer
-
-li
+}
+li {
   list-style none
-
-img
+}
+img {
   display block
   width 100%
   height auto
-
+}
 // *,
 // *:before,
 // *:after {
 // box-sizing: inherit;
 // }
 a:focus,
-a:active
+a:active {
   outline none
-
+}
 a,
 a:focus,
-a:hover
+a:hover {
   cursor pointer
   color inherit
   text-decoration none
-
+}
 /* 清除浮动 - clear float */
-.clearfix
-  &:after
+.clearfix {
+  &:after {
     visibility hidden
     display block
     font-size 0
     content ' '
     clear both
     height 0
+  }
+}
+.fade-enter {
+  opacity:0;
+}
+.fade-leave{
+  opacity:1;
+}
+.fade-enter-active{
+  transition:opacity 0.2s
+}
+.fade-leave-active {
+  opacity: 0
+  transition: opacity 0.2s
+}

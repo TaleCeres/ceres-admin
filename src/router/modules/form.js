@@ -1,10 +1,8 @@
-import Layout from 'comps/layout/default'
-const _import = file => () => import(`@/views/${file}.vue`)
-
 export default {
   path: '/form',
   name: 'Form',
-  component: Layout,
+  redirect: '/form/index',
+  component: undefined,
   meta: {
     title: '表单',
     icon: 'el-icon-tickets',
@@ -12,9 +10,9 @@ export default {
   children: [
     {
       path: '/form/index',
-      component: _import('form/index'),
-      name: '表单首页',
-      meta: { title: 'Index Form', icon: 'el-icon-house' },
+      component: 'form/index',
+      name: 'formIndex',
+      meta: { title: '表单', icon: 'el-icon-house' },
     },
   ],
 }

@@ -1,57 +1,68 @@
-import Layout from 'comps/layout/default'
-import Midlayer from 'comps/layout/midlayer'
-const _import = file => () => import(`@/views/${file}.vue`)
-
 export default {
   path: '/admin',
   name: 'Admin',
-  component: Layout,
+  component: undefined,
   meta: {
-    title: '权限管理',
+    title: '系统管理',
     icon: 'el-icon-user',
-    type: 'folder',
   },
   children: [
     {
       path: '/admin/user',
-      component: Midlayer,
+      component: undefined,
       name: 'AdminUser',
       meta: {
         title: '用户管理',
         icon: 'el-icon-house',
-        type: 'folder',
       },
       children: [
         {
           path: '/admin/user/list',
-          component: _import('admin/user/user-list'),
+          component: 'admin/user/list',
           name: 'UserList',
           meta: {
             title: '用户列表',
             icon: 'el-icon-collection-tag',
-            type: 'view',
           },
         },
       ],
     },
     {
-      path: '/admin/group',
-      component: Midlayer,
-      name: 'AdminGroup',
+      path: '/admin/api',
+      component: undefined,
+      name: 'AdminApi',
       meta: {
-        title: '分组管理',
+        title: '权限管理',
         icon: 'fa fa-group',
-        type: 'folder',
       },
       children: [
         {
-          path: '/admin/group/list',
-          component: _import('admin/user/group-list'),
-          name: 'GroupList',
+          path: '/admin/api/list',
+          component: 'admin/api/list',
+          name: 'AdminApiList',
           meta: {
-            title: '分组列表',
+            title: '接口列表',
             icon: 'el-icon-collection-tag',
-            type: 'view',
+          },
+        },
+      ],
+    },
+    {
+      path: '/admin/menu',
+      component: undefined,
+      name: 'AdminMenu',
+      meta: {
+        title: '菜单管理',
+        icon: 'fa fa-group',
+      },
+      children: [
+        {
+          path: '/admin/menu/list',
+          component: 'admin/menu/list',
+          name: 'AdminMenuList',
+          meta: {
+            title: '菜单列表',
+            icon: 'el-icon-collection-tag',
           },
         },
       ],

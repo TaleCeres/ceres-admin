@@ -39,6 +39,34 @@
       }
     }
   }
+  .icon-menu-horizontal {
+    .el-menu-item,
+    .el-menu-item.is-active {
+      span {
+        padding-left 30px
+        position relative
+        // 设置「二级菜单」的默认icon
+        &:before {
+          position absolute
+          left 10px
+          top 5px
+          width 5px
+          height 5px
+          content ''
+          border 1px solid $submenu-title-default-color
+          border-radius 50%
+        }
+      }
+      // 点击后的样式
+      &.is-active {
+        span {
+          &:before {
+            border 1px solid #409EFF
+          }
+        }
+      }
+    }
+  }
 }
 // sidebar展开时，无 icon的 menu-item的样式
 .el-menu > .el-submenu >.el-menu {
@@ -48,8 +76,8 @@
   }
   // 三级 menu-item
   & > .el-submenu > .el-menu {
-      & > .icon-menu > .el-menu-item {
-        padding-left 80px !important
+    & > .icon-menu > .el-menu-item {
+      padding-left 80px !important
     }
   }
 }
@@ -60,7 +88,6 @@
     padding-left 40px !important
   }
 }
-
 .el-submenu__title {
   color $submenu-title-default-color
   i {
@@ -88,5 +115,112 @@
   width 24px
   text-align center
   font-size 18px
+}
+.el-menu-item [class^=fa] {
+  vertical-align middle
+  margin-right 5px
+  width 24px
+  text-align center
+  font-size 18px
+}
+/* el-table */
+.el-table {
+  border-top 1px solid #dee2e6
+  border-left 2px solid #dee2e6
+  border-right 1px solid #dee2e6
+}
+.visual {
+  .el-table {
+    /* 表格字体颜色 */
+    color white
+    /* 表格边框颜色 */
+    /* border: 0.5px solid #758a99; */
+    background-color transparent
+  }
+  /* 表格内背景颜色 */
+  .el-table th,
+  .el-table tr,
+  .el-table td {
+    border 0
+    // background-color: transparent;
+  }
+  /* 使表格背景透明 */
+  .el-table th,
+  .el-table tr {
+    background-color transparent
+  }
+  /* 表格表头字体颜色 */
+  .el-table thead {
+    color white
+    background-color transparent
+  }
+  .el-table thead.is-group th {
+    background-color transparent
+  }
+  // 鼠标 hover
+  .el-table tbody tr:hover>td {
+    background-color rgba(255, 255, 255, 0.2) // 灰色透明
+  }
+  .el-table--border,
+  .el-table--group {
+    border 0
+  }
+  // 滚动条的样式
+  *::-webkit-scrollbar { /* 定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸 */
+    width 7px
+    height 10px
+    background-color transparent
+  }
+  /* 定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸 */
+  *::-webkit-scrollbar-track { /* 定义滚动条轨道 内阴影+圆角 */
+    background-color #f0f6ff
+  }
+  /* 定义滚动条轨道 内阴影+圆角 */
+  *::-webkit-scrollbar-thumb { /* 定义滑块 内阴影+圆角 */
+    background-color #2B91B6
+    border-radius 6px
+  }
+  /* 定义滑块 内阴影+圆角 */
+  .scrollbarHide::-webkit-scrollbar {
+    display none
+  }
+  .scrollbarShow::-webkit-scrollbar {
+    display block
+  }
+}
+/* el-select */
+.visual {
+  padding 10px
+  .el-select {
+    .el-input__inner { /* 定义输入框样式 */
+      border #fff 1px solid
+      background-color transparent
+      color #fff
+    }
+  }
+}
+.select-option { /* popper-class覆盖下拉框样式 */
+  /* 下拉框整体背景色 */
+  background-color transparent
+  .el-scrollbar {
+    .el-scrollbar__wrap {
+      .el-select-dropdown__list {
+        .el-select-dropdown__item {
+          /* 下拉列表中各元素样式 */
+          background-color transparent
+          color silver
+          border-bottom 1px solid silver
+          /* hover高亮 */
+          &:hover {
+            color #409EFF
+          }
+        }
+        /* 选中元素高亮 */
+        .el-select-dropdown__item.selected {
+          color #409EFF
+        }
+      }
+    }
+  }
 }
 /* el-button */

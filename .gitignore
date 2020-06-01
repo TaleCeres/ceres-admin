@@ -1,11 +1,14 @@
 .DS_Store
 .vscode
 node_modules
+package-lock.json
 /dist
+/guide
 
 # local env files
 .env.local
 .env.*.local
+.env.alpha
 
 # Log files
 npm-debug.log*
