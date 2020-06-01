@@ -15,6 +15,8 @@
             <el-button plain @click="addFolder">新建文件夹</el-button>
             <el-button plain :disabled="selectedIds.length === 0" @click="deleteFile">删除</el-button>
             <el-button plain :disabled="selectedIds.length !== 1 " @click="renameFile">重命名</el-button>
+            <el-button plain :disabled="selectedIds.length !== 1 " @click="copyFile">复制到</el-button>
+            <el-button plain :disabled="selectedIds.length !== 1 " @click="moveFile">移动到</el-button>
           </el-button-group>
           <div class="right-menu">
             <i :class="iconClass" @click="handleShowType"></i>
@@ -111,6 +113,13 @@
                        @change="handleCheckAllChange">全选</el-checkbox>
           <el-divider></el-divider>
           <el-checkbox-group v-model="selectedIds" @change="handleSelectionChange">
+            <el-alert
+              v-if="fileList.length === 0"
+              title="暂无文件"
+              type="info"
+              :closable="false"
+              center>
+            </el-alert>
           <li v-for="file in fileList" :key="file.id" class="list-item">
 
             <div v-if="file.isNew">
@@ -137,7 +146,8 @@
                   <span style="display: none">{{file.id}}</span>
                 </el-checkbox>
               </p>
-              <i v-if="file.extension" class="icon" :class="extensions[file.extension]" @click="changeParent(file)"></i>
+              <img v-if="file.extension === 'png' || file.extension === 'jpg'" :src="file.url"/>
+              <i v-else-if="file.extension" class="icon" :class="extensions[file.extension]" @click="changeParent(file)"></i>
               <i v-else class="fa fa-folder-o icon" @click="changeParent(file)"></i>
               <div v-if="file.rename" class="newFile">
                 <el-input
@@ -171,15 +181,55 @@
           @current-change="handleCurrentChange">
         </el-pagination>
       </div>
+
+      <el-dialog
+        title="复制到"
+        :visible.sync="showCopyDialog"
+        width="30%">
+        <treeselect
+          v-model="targetParentId"
+          :normalizer="normalizer"
+          :options="treeOptions"
+          :show-count="true"
+          placeholder="选择上级菜单"/>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="showCopyDialog = false">取 消</el-button>
+          <el-button type="primary" @click="submitCopy">确 定</el-button>
+        </span>
+      </el-dialog>
+
+      <el-dialog
+        title="移动到"
+        :visible.sync="showMoveDialog"
+        width="30%">
+        <treeselect
+          v-model="targetParentId"
+        :normalizer="normalizer"
+          :options="treeOptions"
+          :show-count="true"
+          placeholder="选择上级菜单"/>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="showMoveDialog = false">取 消</el-button>
+          <el-button type="primary" @click="submitMove">确 定</el-button>
+        </span>
+      </el-dialog>
+
     </div>
 </template>
 
 <script>
 import FileModel from '@/models/file'
+import Treeselect from '@riophae/vue-treeselect'
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 export default {
   name: 'index',
+  components: { Treeselect },
   data() {
     return {
+      treeOptions: [],
+      targetParentId: null,
+      showCopyDialog: false,
+      showMoveDialog: false,
       checkAll: false,
       isIndeterminate: false,
       parentId: 0,
@@ -223,11 +273,25 @@ export default {
     this.getFileList()
   },
   methods: {
+
+    /** 转换菜单数据结构 */
+    normalizer(node) {
+      if (node.children && !node.children.length) {
+        delete node.children
+      }
+      return {
+        id: node.id,
+        label: node.name,
+        children: node.children
+      }
+    },
+
     handleShowType() {
       this.isTable = !this.isTable
       this.getFileList()
     },
     async getFileList() {
+      this.selectedIds = []
       const res = await FileModel.getFileList(this.parentId, this.page, this.size)
       this.fileList = res.items
       this.total = res.total
@@ -390,6 +454,46 @@ export default {
       this.parentId = breadcrumb.value
       this.getFileList()
     },
+
+    async copyFile() {
+      this.targetParentId = null
+      this.showCopyDialog = true
+      this.treeOptions = []
+      const res = (await FileModel.getFileTree()) || {}
+      this.treeOptions = [res]
+      if (this.treeOptions[0]) {
+        this.treeOptions[0].name = '全部文件'
+      }
+    },
+
+    async moveFile() {
+      this.targetParentId = null
+      this.showMoveDialog = true
+      this.treeOptions = []
+      const res = (await FileModel.getFileTree()) || {}
+      this.treeOptions = [res]
+      if (this.treeOptions[0]) {
+        this.treeOptions[0].name = '全部文件'
+      }
+    },
+
+    async submitCopy() {
+      const [id] = this.selectedIds
+      await FileModel.copyFile(this.targetParentId, id)
+      this.$message.success('文件复制成功')
+      this.showCopyDialog = false
+      this.selectedIds = []
+    },
+
+    async submitMove() {
+      const [id] = this.selectedIds
+      await FileModel.moveFile(this.targetParentId, id)
+      this.$message.success('文件移动成功')
+      this.showMoveDialog = false
+      this.selectedIds = []
+      this.getFileList()
+    },
+
   }
 }
 </script>

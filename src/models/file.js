@@ -41,4 +41,22 @@ export default class File {
     const data = await get(`cms/file/${id}`)
     return data
   }
+
+  // 获取文件目录树
+  static async getFileTree() {
+    const data = await get('cms/file/folder')
+    return data
+  }
+
+  // 复制文件
+  static async copyFile(parent_id, file_id) {
+    const data = await post('cms/file/copy', {parent_id, file_id})
+    return data
+  }
+
+  // 移动文件
+  static async moveFile(parent_id, file_id) {
+    const data = await put('cms/file/move', {parent_id, file_id})
+    return data
+  }
 }
