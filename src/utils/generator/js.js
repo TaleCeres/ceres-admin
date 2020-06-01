@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { isArray } from 'util'
 import { exportDefault, titleCase } from '@/utils/index'
 import { trigger } from './config'

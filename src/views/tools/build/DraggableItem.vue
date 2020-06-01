@@ -1,5 +1,5 @@
-<script>
-import draggable from 'vuedraggable'
+<script>/* eslint-disable */
+  import draggable from 'vuedraggable'
 import render from '@/utils/generator/render'
 
 function renderChildren(h, element, index, parent) {
@@ -73,7 +73,6 @@ const layouts = {
     )
   }
 }
-
 
 
 export default {

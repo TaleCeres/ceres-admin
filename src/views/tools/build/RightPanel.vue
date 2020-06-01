@@ -114,18 +114,44 @@
             <el-input v-model="activeData.append" placeholder="请输入后缀" />
           </el-form-item>
           <el-form-item v-if="activeData['prefix-icon']!==undefined" label="前图标">
-            <el-input v-model="activeData['prefix-icon']" placeholder="请输入前图标名称">
-              <el-button slot="append" icon="el-icon-thumb" @click="openIconsDialog('prefix-icon')">
-                选择
-              </el-button>
-            </el-input>
+            <el-popover
+              placement="bottom-start"
+              width="460"
+              trigger="click"
+              @show="$refs['iconSelect'].reset()"
+            >
+              <IconSelect ref="iconSelect" @selected="selectedPrefix" />
+              <el-input slot="reference" v-model="activeData['prefix-icon']" placeholder="点击选择图标" readonly>
+                <i
+                  v-if="activeData['prefix-icon']"
+                  slot="prepend"
+                  :class="activeData['prefix-icon']"
+                  class="el-input__icon"
+                  style="height: 32px;width: 16px;"
+                />
+                <i v-else slot="prepend" class="el-icon-search el-input__icon" />
+              </el-input>
+            </el-popover>
           </el-form-item>
           <el-form-item v-if="activeData['suffix-icon'] !== undefined" label="后图标">
-            <el-input v-model="activeData['suffix-icon']" placeholder="请输入后图标名称">
-              <el-button slot="append" icon="el-icon-thumb" @click="openIconsDialog('suffix-icon')">
-                选择
-              </el-button>
-            </el-input>
+            <el-popover
+              placement="bottom-start"
+              width="460"
+              trigger="click"
+              @show="$refs['iconSelect'].reset()"
+            >
+              <IconSelect ref="iconSelect" @selected="selectedSuffix" />
+              <el-input slot="reference" v-model="activeData['suffix-icon']" placeholder="点击选择图标" readonly>
+                <i
+                  v-if="activeData['suffix-icon']"
+                  slot="append"
+                  :class="activeData['suffix-icon']"
+                  class="el-input__icon"
+                  style="height: 32px;width: 16px;"
+                />
+                <i v-else slot="append" class="el-icon-search el-input__icon" />
+              </el-input>
+            </el-popover>
           </el-form-item>
           <el-form-item v-if="activeData.tag === 'el-cascader'" label="选项分隔符">
             <el-input v-model="activeData.separator" placeholder="请输入选项分隔符" />
@@ -572,6 +598,7 @@
 </template>
 
 <script>
+import IconSelect from '@/components/base/IconSelect'
 import { isArray } from 'util'
 import TreeNodeDialog from './TreeNodeDialog'
 import { isNumberStr } from '@/utils/index'
@@ -596,7 +623,8 @@ const dateTimeFormat = {
 export default {
   components: {
     TreeNodeDialog,
-    IconsDialog
+    IconsDialog,
+    IconSelect
   },
   props: ['showField', 'activeData', 'formConf'],
   data() {
@@ -726,6 +754,13 @@ export default {
     }
   },
   methods: {
+    // 选择图标
+    selectedPrefix(name) {
+      this.activeData['prefix-icon'] = `fa ${name}`
+    },
+    selectedSuffix(name) {
+      this.activeData['suffix-icon'] = `fa ${name}`
+    },
     addReg() {
       this.activeData.regList.push({
         pattern: '',
