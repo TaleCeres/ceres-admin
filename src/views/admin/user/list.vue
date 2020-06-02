@@ -30,7 +30,10 @@ export default {
     return {
       loading: false,
       tableColumn: [
-        { prop: 'nickname', label: '用户名' },
+        { prop: 'nickname', label: '昵称' },
+        { prop: 'username', label: '用户名' },
+        { prop: 'auth_scope', label: '用户组' },
+        { prop: 'mobile', label: '手机号' },
         { prop: 'email', label: '邮箱' },
       ],
       tableData: [],

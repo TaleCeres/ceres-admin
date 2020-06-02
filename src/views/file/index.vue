@@ -146,7 +146,7 @@
                   <span style="display: none">{{file.id}}</span>
                 </el-checkbox>
               </p>
-              <img v-if="file.extension === 'png' || file.extension === 'jpg'" :src="file.url"/>
+              <img v-if="file.extension === 'png' || file.extension === 'jpg'" :src="file.url" style="height:40px"/>
               <i v-else-if="file.extension" class="icon" :class="extensions[file.extension]" @click="changeParent(file)"></i>
               <i v-else class="fa fa-folder-o icon" @click="changeParent(file)"></i>
               <div v-if="file.rename" class="newFile">
