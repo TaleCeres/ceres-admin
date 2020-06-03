@@ -5,6 +5,7 @@
       <Breadcrumb />
     </div>
     <div class="right-menu">
+      <search id="header-search" style="margin-right: 15px;"></search>
       <el-tooltip effect="dark" content="数据大屏" placement="bottom">
         <router-link to="/data-graph/overview">
           <fa-icon icon-name="area-chart" style="margin-right: 15px;" />
@@ -30,6 +31,7 @@ import UserCard from 'comps/base/UserCard'
 import Breadcrumb from 'comps/base/Breadcrumb'
 import LangSelect from 'comps/base/LangSelect'
 import Screenfull from 'comps/base/Screenfull'
+import Search from 'comps/base/HeaderSearch'
 export default {
   name: 'NavBar',
   components: {
@@ -37,6 +39,7 @@ export default {
     Breadcrumb,
     LangSelect,
     Screenfull,
+    Search
   },
   data() {
     return {}
