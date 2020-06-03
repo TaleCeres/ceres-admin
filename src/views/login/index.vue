@@ -50,7 +50,7 @@ export default {
         await UserModel.getToken(account, secret)
         await this.assignUserInfo()
         this.loading = false
-        this.$router.push('/admin')
+        this.$router.push('/')
         // this.$message.success('登录成功')
       } catch (e) {
         this.loading = false

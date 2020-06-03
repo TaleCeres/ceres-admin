@@ -214,10 +214,21 @@
         </span>
       </el-dialog>
 
+      <el-dialog
+        :title="previewImage.name"
+        :visible.sync="showImageDialog">
+        <img :src="previewImage.url" alt="预览">
+        <span slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="handleCopy(previewImage.url, $event)" >复制图片链接</el-button>
+          <el-button @click="showImageDialog = false">关闭</el-button>
+        </span>
+      </el-dialog>
+
     </div>
 </template>
 
 <script>
+import clip from '@/utils/clipboard'
 import FileModel from '@/models/file'
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
@@ -226,10 +237,12 @@ export default {
   components: { Treeselect },
   data() {
     return {
+      previewImage: {},
       treeOptions: [],
       targetParentId: null,
       showCopyDialog: false,
       showMoveDialog: false,
+      showImageDialog: false,
       checkAll: false,
       isIndeterminate: false,
       parentId: 0,
@@ -273,6 +286,10 @@ export default {
     this.getFileList()
   },
   methods: {
+    // 按钮点击复制
+    handleCopy(text, event) {
+      clip(text, event)
+    },
 
     /** 转换菜单数据结构 */
     normalizer(node) {
@@ -310,8 +327,9 @@ export default {
     uploadFile(param) { // 上传的函数
       const formData = new FormData()
       formData.append('file', param.file)
-      FileModel.uploadFile(0, formData).then(res => {
+      FileModel.uploadFile(this.parentId, formData).then(res => {
         this.$message.success('上传成功')
+        this.getFileList()
       })
     },
     addFolder() {
@@ -430,9 +448,11 @@ export default {
     async changeParent(file) {
       if (file.extension) {
         const res = await FileModel.getFile(file.id)
-        this.$alert(res.url, res.name, {
-          confirmButtonText: '确定',
-        })
+        const imgs = ['png', 'jpg', 'jpeg']
+        if (imgs.find(item => item === file.extension)) {
+          this.previewImage = res
+          this.showImageDialog = true
+        }
       } else {
         this.parentId = file.id
         const res = await FileModel.getFile(file.id)
