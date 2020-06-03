@@ -7,7 +7,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import store from '@/store'
 import { Notification, Message } from 'element-ui'
-import { getToken } from './cookie'
+import { getToken, removeToken } from './cookie'
 import config from '../config'
 
 // 拦截器，使用mock数据代替
@@ -52,6 +52,10 @@ _axios.interceptors.response.use(
       message: error.response.data.msg,
       type: "error"
     })
+    if (error.response.data.error_code === 1002) {
+      removeToken()
+      window.location.reload()
+    }
     return Promise.reject(error)
   },
 )
