@@ -60,7 +60,7 @@
           </el-input>
         </el-form-item>
         <el-form-item label="内容">
-          <Tinymce upload_url="http://192.168.10.59:8010/cms/file/0" :default-content="article.content" @change="changeContent"/>
+          <Tinymce :upload_url=uploadUrl :default-content="article.content" @change="changeContent"/>
         </el-form-item>
       </el-form>
 
@@ -74,6 +74,7 @@
 import Article from '@/models/article'
 import Tinymce from '@/components/base/Tinymce'
 import FileModel from '@/models/file'
+import config from '../../config'
 export default {
   name: 'ArticleForm',
   components: {
@@ -97,6 +98,7 @@ export default {
   },
   data() {
     return {
+      uploadUrl: `${config.baseURL}/cms/file/0`,
       dialogVisible: false,
       typeList: [
         {

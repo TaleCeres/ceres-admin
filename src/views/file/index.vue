@@ -146,7 +146,7 @@
                   <span style="display: none">{{file.id}}</span>
                 </el-checkbox>
               </p>
-              <img v-if="file.extension === 'png' || file.extension === 'jpg'" :src="file.url" style="height:40px"/>
+              <img v-if="file.extension === '.png' || file.extension === '.jpg' || file.extension === '.jpeg'" :src="file.url" style="height:40px"/>
               <i v-else-if="file.extension" class="icon" :class="extensions[file.extension]" @click="changeParent(file)"></i>
               <i v-else class="fa fa-folder-o icon" @click="changeParent(file)"></i>
               <div v-if="file.rename" class="newFile">
@@ -254,20 +254,20 @@ export default {
       isTable: false,
       fileList: [],
       extensions: {
-        jpg: 'fa fa-file-image-o',
-        jpeg: 'fa fa-file-image-o',
-        png: 'fa fa-file-image-o',
-        pdf: 'fa fa-file-pdf-o',
-        xlsx: 'fa fa-file-excel-o',
-        doc: 'fa fa-file-word-o',
-        docx: 'fa fa-file-word-o',
-        txt: 'fa fa-file-text-o',
-        mp3: 'fa fa-file-sound-o',
-        ppt: 'fa fa-file-powerpoint-o',
-        pptx: 'fa fa-file-powerpoint-o',
-        mp4: 'fa fa-file-video-o',
-        zip: 'fa fa-file-zip-o',
-        md: 'fa fa-file-text-o'
+        '.jpg': 'fa fa-file-image-o',
+        '.jpeg': 'fa fa-file-image-o',
+        '.png': 'fa fa-file-image-o',
+        '.pdf': 'fa fa-file-pdf-o',
+        '.xlsx': 'fa fa-file-excel-o',
+        '.doc': 'fa fa-file-word-o',
+        '.docx': 'fa fa-file-word-o',
+        '.txt': 'fa fa-file-text-o',
+        '.mp3': 'fa fa-file-sound-o',
+        '.ppt': 'fa fa-file-powerpoint-o',
+        '.pptx': 'fa fa-file-powerpoint-o',
+        '.mp4': 'fa fa-file-video-o',
+        '.zip': 'fa fa-file-zip-o',
+        '.md': 'fa fa-file-text-o'
       },
       breadcrumbList: [
         {
@@ -448,10 +448,13 @@ export default {
     async changeParent(file) {
       if (file.extension) {
         const res = await FileModel.getFile(file.id)
-        const imgs = ['png', 'jpg', 'jpeg']
+
+        const imgs = ['.png', '.jpg', '.jpeg']
         if (imgs.find(item => item === file.extension)) {
           this.previewImage = res
           this.showImageDialog = true
+        } else {
+          this.$alert(res.url, res.name)
         }
       } else {
         this.parentId = file.id
