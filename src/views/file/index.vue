@@ -247,7 +247,7 @@ export default {
       isIndeterminate: false,
       parentId: 0,
       page: 1,
-      size: 10,
+      size: 30,
       total: 0,
       selectedIds: [],
       activeName: 'tab-all',
@@ -305,6 +305,7 @@ export default {
 
     handleShowType() {
       this.isTable = !this.isTable
+      this.size = this.isTable ? 10 : 30
       this.getFileList()
     },
     async getFileList() {
@@ -382,6 +383,7 @@ export default {
       await FileModel.addFolder(parent_id, filename)
       this.getFileList(this.parentId)
       this.$message.success('创建文件夹成功')
+      this.$refs.newFolder = undefined
     },
 
     handleSelectionChange(selection) {
@@ -438,6 +440,7 @@ export default {
       await FileModel.renameFile(item.name, item.id)
       this.$message.success('重命名文件成功')
       this.getFileList(this.parentId)
+      this.$refs.rename = undefined
     },
 
     cancelRename() {
@@ -463,6 +466,7 @@ export default {
           label: res.name,
           value: res.id
         })
+        this.page = 1
         await this.getFileList()
       }
     },

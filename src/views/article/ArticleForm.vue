@@ -98,7 +98,7 @@ export default {
   },
   data() {
     return {
-      uploadUrl: `${config.baseURL}/cms/file/0`,
+      uploadUrl: `${config.baseURL}/cms/file/68`,
       dialogVisible: false,
       typeList: [
         {

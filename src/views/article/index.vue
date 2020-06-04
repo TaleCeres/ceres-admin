@@ -32,7 +32,7 @@ export default {
     return {
       currentPage: 1,
       size: 10,
-      type: 1,
+      type: 0,
       articleList: [],
       tableColumn: [
         { prop: 'title', label: '标题' },
