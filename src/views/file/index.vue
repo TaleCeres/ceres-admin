@@ -7,8 +7,7 @@
             action=""
             :http-request="uploadFile"
             multiple
-            :show-file-list="false"
-            :limit="3">
+            :show-file-list="false">
             <el-button type="primary" icon="el-icon-upload">上传</el-button>
           </el-upload>
           <el-button-group style="margin-left: 20px">

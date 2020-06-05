@@ -8,7 +8,8 @@ import Editor from '@tinymce/tinymce-vue'
 import 'tinymce/themes/silver'
 import './importAll'
 import FileModel from '@/models/file'
-
+import '@/plugins/tinymce/lineheight/plugin' // 行高
+import '@/plugins/tinymce/indent2em/plugin' // 首行缩进
 export default {
   name: 'TinymceEditor',
   components: {
@@ -39,8 +40,8 @@ export default {
       type: String,
       default: ` undo redo
       | formatselect
-      | bold italic strikethrough forecolor backcolor formatpainter
-      | link image | alignleft aligncenter alignright alignjustify
+      | indent2em bold italic strikethrough forecolor backcolor formatpainter
+      | link image | lineheight alignleft aligncenter alignright alignjustify
       | numlist bullist outdent indent
       | removeformat
       | preview fullscreen code`,
@@ -85,7 +86,7 @@ export default {
       statusbar: false, // 隐藏编辑器底部的状态栏
       paste_data_images: true, // 允许粘贴图像
       menubar: this.showMenubar, // 隐藏最上方menu
-      plugins: `print searchreplace autolink directionality visualblocks
+      plugins: `indent2em print searchreplace autolink directionality visualblocks lineheight
         visualchars template codesample charmap hr pagebreak nonbreaking anchor toc insertdatetime
         wordcount textpattern help advlist table lists paste preview fullscreen image imagetools code link`,
       toolbar: this.toolbar,
