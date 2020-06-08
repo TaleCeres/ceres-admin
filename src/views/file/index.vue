@@ -145,7 +145,12 @@
                   <span style="display: none">{{file.id}}</span>
                 </el-checkbox>
               </p>
-              <img v-if="file.extension === '.png' || file.extension === '.jpg' || file.extension === '.jpeg'" :src="file.url" style="height:40px"/>
+                <img
+                  v-if="imgTypes.find(item => item === file.extension) !== undefined"
+                  :src="file.url"
+                  style="height:40px; cursor: pointer;"
+                  @click="changeParent(file)"
+                />
               <i v-else-if="file.extension" class="icon" :class="extensions[file.extension]" @click="changeParent(file)"></i>
               <i v-else class="fa fa-folder-o icon" @click="changeParent(file)"></i>
               <div v-if="file.rename" class="newFile">
@@ -198,6 +203,7 @@
       </el-dialog>
 
       <el-dialog
+        style="width: 100%"
         title="移动到"
         :visible.sync="showMoveDialog"
         width="30%">
@@ -216,7 +222,7 @@
       <el-dialog
         :title="previewImage.name"
         :visible.sync="showImageDialog">
-        <img :src="previewImage.url" alt="预览">
+        <img :src="previewImage.url" alt="预览" style="max-width: 100%">
         <span slot="footer" class="dialog-footer">
           <el-button type="primary" @click="handleCopy(previewImage.url, $event)" >复制图片链接</el-button>
           <el-button @click="showImageDialog = false">关闭</el-button>
@@ -273,7 +279,8 @@ export default {
           label: '全部文件',
           value: 0
         }
-      ]
+      ],
+      imgTypes: ['.jpg', '.jpeg', '.png']
     }
   },
   computed: {
@@ -451,8 +458,7 @@ export default {
       if (file.extension) {
         const res = await FileModel.getFile(file.id)
 
-        const imgs = ['.png', '.jpg', '.jpeg']
-        if (imgs.find(item => item === file.extension)) {
+        if (this.imgTypes.find(item => item === file.extension)) {
           this.previewImage = res
           this.showImageDialog = true
         } else {

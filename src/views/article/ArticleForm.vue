@@ -60,7 +60,7 @@
           </el-input>
         </el-form-item>
         <el-form-item label="内容">
-          <Tinymce :upload_url=uploadUrl :default-content="article.content" @change="changeContent"/>
+          <Tinymce :upload_url="uploadUrl" :default-content="article.content" @change="changeContent"/>
         </el-form-item>
       </el-form>
 
@@ -124,7 +124,7 @@ export default {
     uploadFile(param) { // 上传的函数
       const formData = new FormData()
       formData.append('file', param.file)
-      FileModel.uploadFile(0, formData).then(res => {
+      FileModel.uploadFile(68, formData).then(res => {
         this.article.img = res[0].url
       })
     },
