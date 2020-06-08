@@ -96,7 +96,7 @@ export default {
           type: 'image/*',
         })
         formData.append('file', file)
-        FileModel.uploadFile(0, formData).then(res => {
+        FileModel.uploadFile(68, formData).then(res => {
           if (res[0] && res[0].url) {
             success(res[0].url)
           }
