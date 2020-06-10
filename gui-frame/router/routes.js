@@ -4,16 +4,7 @@ import appStore from '@/store/modules/app'
 import Midlayer from 'comps/layout/midlayer'
 /* Router Modules(业务页面的路由) */
 import dashboardRouter from './modules/dashboard'
-import homeRouter from './modules/home'
-import adminRouter from './modules/admin'
-import categoryRouter from './modules/category'
-import aboutRouter from './modules/about'
-import chartRouter from './modules/chart'
-import userRouter from './modules/user'
-import toolsRouter from './modules/tools'
 import redirectRouter from './modules/redirect'
-import fileRouter from './modules/file'
-import customRouter from './modules/custom'
 // lazy-loaded when the route is visited
 // const _import = file => () => import(/* webpackChunkName: "about" */ `@/views/${file}.vue`)
 const _import = file => () => import(`@/views/${file}.vue`)
@@ -39,14 +30,6 @@ const _import = file => () => import(`@/views/${file}.vue`)
 const normalViewRouters = [
   redirectRouter,
   dashboardRouter,
-  // homeRouter,
-  // aboutRouter,
-  // adminRouter,
-  // chartRouter,
-  // toolsRouter,
-  // userRouter,
-  // fileRouter,
-  // customRouter
 ].map(item => loadingComponent(item))
 
 /**
@@ -83,7 +66,7 @@ export default routes
  * 一级路由的模版目前有三种:
  *  1. 左右布局(Layout), 默认
  *  2. T型布局
- *  3. 上下布局
+ *  3. c
  * 如果三级路由存在，则其父级(二级)路由为 Midlayer；否则为具体的页面组件
  *
  * @param {object} rawRouter
