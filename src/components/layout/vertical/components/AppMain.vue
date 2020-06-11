@@ -7,6 +7,7 @@
         </keep-alive>
       </transition>
     </div>
+    <LayoutSetting />
   </section>
 </template>
 

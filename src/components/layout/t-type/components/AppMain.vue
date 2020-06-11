@@ -6,6 +6,7 @@
           <router-view></router-view>
         </keep-alive>
       </transition>
+      <LayoutSetting />
     </div>
   </section>
 </template>

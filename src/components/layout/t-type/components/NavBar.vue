@@ -2,8 +2,7 @@
   <nav class="nav-bar">
     <div class="left-menu">
       <router-link class="logo" to="/">
-        <img class="icon" src="@/assets/images/company/logo.png" alt="">
-        <img class="name" src="@/assets/images/company/name.png" alt="">
+        <img class="icon" src="../../../../assets/images/company/logo-02.png" alt="">
       </router-link>
     </div>
     <div class="right-menu">
@@ -76,14 +75,8 @@ export default {
     margin-left 20px
     display flex
     .icon{
-      margin-top 5px
-      width 40px
-      height 40px
-    }
-    .name{
-      margin 10px
       width 148px
-      height 35px
+      transition height 0, width 0.3s linear // all 0.3s linear
     }
   }
 
