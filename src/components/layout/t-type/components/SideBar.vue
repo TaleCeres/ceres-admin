@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar">
     <el-menu style="margin-bottom:50px" :default-active="defaultActive" :collapse="isCollapse" @open="handleOpen" @close="handleClose">
-      <template v-for="item in routes">
+      <template v-for="item in sidebarList">
         <!-- 一级菜单(不含二级菜单) -->
         <router-link v-if="!canUnflod(item)" :key="item.name" :to="defaultRoute(item).path">
           <el-menu-item :index="defaultRoute(item).name">
@@ -18,7 +18,17 @@
           </template>
           <!-- 二级菜单 -->
           <template v-for="(subItem) in item.children">
-            <el-submenu v-if="subItem.children" :key="subItem.name" :index="subItem.name">
+
+
+            <!-- 二级菜单有且只有一个三级菜单 -->
+            <router-link v-if="!canUnflod(subItem)" :key="subItem.name" class="icon-menu" :to="defaultRoute(subItem).path">
+              <el-menu-item :index="defaultRoute(subItem).name">
+                <span>{{ subItem.meta.title }}</span>
+              </el-menu-item>
+            </router-link>
+
+            <!-- 二级菜单有多个三级菜单 -->
+            <el-submenu v-else-if="subItem.children && subItem.children.length > 0" :key="subItem.name" :index="subItem.name">
               <template slot="title">
                 <i :class="subItem.meta.icon"></i>
                 <span>{{ subItem.meta.title }}</span>
@@ -31,16 +41,16 @@
               </router-link>
             </el-submenu>
 
-            <!-- 二级菜单else -->
+            <!-- 二级菜单没有三级菜单 -->
             <router-link v-else :key="subItem.name" class="icon-menu" :to="subItem.path">
               <el-menu-item :index="subItem.name">
                 <span>{{ subItem.meta.title }}</span>
               </el-menu-item>
             </router-link>
-          </template>
 
+
+          </template>
         </el-submenu>
-        
       </template>
     </el-menu>
   </div>
@@ -58,6 +68,7 @@ export default {
   computed: {
     ...mapGetters([
       'sidebar',
+      'sidebarList'
     ]),
     routes() {
       let { routes } = this.$router.options
