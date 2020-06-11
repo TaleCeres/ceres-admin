@@ -1,44 +1,57 @@
 <template>
   <div class="sidebar">
-    <el-menu mode="horizontal" :default-active="defaultActive" @open="handleOpen" @close="handleClose">
-      <template v-for="item in routes">
+    <el-menu
+      :router="true"
+      mode="horizontal"
+      :default-active="defaultActive"
+      @open="handleOpen"
+      @close="handleClose">
+      <template v-for="item in sidebarList">
+        <!-- 一级菜单(不含二级菜单) -->
+          <el-menu-item v-if="!canUnflod(item)" :key="item.name" :index="defaultRoute(item).path">
+            <i :class="item.meta.icon"></i>
+              <span slot="title">
+                {{ item.meta.title }}
+              </span>
+          </el-menu-item>
+
         <!-- 一级菜单(含二级菜单) -->
-        <el-submenu v-if="item.children" :key="item.name" :index="item.name">
+        <el-submenu v-else :key="item.name" :index="item.path">
           <template slot="title">
             <i :class="item.meta.icon"></i>
             <span>{{ item.meta.title }}</span>
           </template>
           <!-- 二级菜单 -->
           <template v-for="(subItem) in item.children">
-            <el-submenu v-if="subItem.children" :key="subItem.name" :index="subItem.name">
+
+
+            <!-- 二级菜单有且只有一个三级菜单 -->
+              <el-menu-item v-if="!canUnflod(subItem)" :key="subItem.name" :index="defaultRoute(subItem).path">
+                <i :class="subItem.meta.icon"></i>
+                <span>{{ subItem.meta.title }}</span>
+              </el-menu-item>
+
+            <!-- 二级菜单有多个三级菜单 -->
+            <el-submenu v-else-if="subItem.children && subItem.children.length > 0" :key="subItem.name" :index="subItem.path">
               <template slot="title">
                 <i :class="subItem.meta.icon"></i>
                 <span>{{ subItem.meta.title }}</span>
               </template>
               <!-- 三级菜单 -->
-              <router-link v-for="(grandchildItem) in subItem.children" :key="grandchildItem.name" class="icon-menu-horizontal" :to="grandchildItem.path">
-                <el-menu-item :index="grandchildItem.name">
+                <el-menu-item v-for="(grandchildItem) in subItem.children" :key="grandchildItem.name" :index="grandchildItem.path">
                   <span>{{ grandchildItem.meta.title }}</span>
                 </el-menu-item>
-              </router-link>
             </el-submenu>
 
-            <!-- 二级菜单else -->
-            <router-link v-else :key="subItem.name" class="icon-menu-horizontal" :to="subItem.path">
-              <el-menu-item :index="subItem.name">
+            <!-- 二级菜单没有三级菜单 -->
+              <el-menu-item v-else :key="subItem.name" :index="subItem.path">
+                <i :class="subItem.meta.icon"></i>
                 <span>{{ subItem.meta.title }}</span>
               </el-menu-item>
-            </router-link>
+
+
           </template>
         </el-submenu>
-        <!-- 一级菜单(不含二级菜单) -->
-        <router-link v-else :key="item.name" :to="item.path">
-          <el-menu-item :index="item.name">
-            <i :class="item.meta.icon"></i>
-            <span slot="title">{{ item.meta.title }}</span>
-          </el-menu-item>
-        </router-link>
-
       </template>
     </el-menu>
   </div>
@@ -56,6 +69,7 @@ export default {
   computed: {
     ...mapGetters([
       'sidebar',
+      'sidebarList'
     ]),
     routes() {
       let { routes } = this.$router.options
@@ -63,7 +77,7 @@ export default {
       return flatten(sidebarList)
     },
     defaultActive() {
-      return this.$route.name
+      return this.$route.path
     },
   },
   created() { },
@@ -71,6 +85,13 @@ export default {
     // this._testRouterAttrs()
   },
   methods: {
+    defaultRoute(route) {
+      return route.children[0]
+    },
+    canUnflod(route) {
+      if (route.children && route.children.length === 1 && !route.children.children) return false
+      return true
+    },
     handleOpen(key, keyPath) {
       // 打开&关闭 el-menu
       // console.log(key, keyPath)
@@ -108,6 +129,9 @@ export default {
     .brand {
       width 40px
       transition height 0, width 0.3s linear
+    }
+    a {
+      display block
     }
   }
 }
