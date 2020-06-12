@@ -37,6 +37,16 @@ export default {
       tableColumn: [
         { prop: 'title', label: '标题' },
         { prop: 'type', label: '类型' },
+        { 
+          prop: 'img', 
+          label: '主图', 
+          // eslint-disable-next-line 
+          render: (row, column, cell) => {
+            return (
+              <el-image src={row.img} preview-src-list={[row.img]}></el-image>
+            )
+          }
+        },
         { prop: 'author', label: '作者' },
         { prop: 'create_time', label: '上次编辑' },
         { prop: 'views', label: '阅读数' },
