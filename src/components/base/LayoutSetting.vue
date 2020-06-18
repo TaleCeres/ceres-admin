@@ -12,7 +12,7 @@
       </div>
       <div class="drawer-item" style="position: relative">
         <span>切换 Layout</span>
-        <el-select v-model="layoutMode" placeholder="切换布局" style="position: absolut; left: 40px;">
+        <el-select v-model="layoutMode" placeholder="切换布局" style="left: 40px;">
           <el-option v-for="item in layoutOptions" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
       </div>
@@ -38,7 +38,7 @@ export default {
     layoutMode: {
       get() {
         // - 方式 1
-        return this.$store.getters['app/layoutMode'] 
+        return this.$store.getters['app/layoutMode']
         // - 方式 2
         // const { ['app/layoutMode']: val } = this.$store.getters
         // return val

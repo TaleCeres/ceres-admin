@@ -3,11 +3,26 @@ import Router from 'vue-router'
 import NProgress from 'nprogress' // progress bar
 import routes, { errorViewRouters } from './routes'
 import store from '../store'
+import cookies from 'js-cookie'
 import 'nprogress/nprogress.css' // progress bar style
 
 import { getToken } from '@/utils/cookie'
+import { get } from '@/utils/request'
 
 Vue.use(Router)
+
+// 初始化布局模板
+async function initLayout() {
+  try {
+    let data = await get('cms/config/key/sys.layout.theme')
+    const mode = data.value
+    if (mode !== store.state.app.layout.mode) {
+      store.commit('app/SET_LAYOUT_MODE', data.value)
+    }
+  } catch (e) {
+    cookies.set('layoutMode', 'default')
+  }
+}
 
 
 const router = new Router({
@@ -31,6 +46,7 @@ router.beforeEach(async (to, from, next) => {
   } else if (store.getters.normalViewRouters.length > 0) {
     next()
   } else {
+    // initLayout()
     try {
       let accessRoutes = await store.dispatch('router/getRoutes')
       const result = accessRoutes.concat(errorViewRouters)
@@ -38,11 +54,9 @@ router.beforeEach(async (to, from, next) => {
       router.options.routes = router.options.routes.concat(result)
       next({ ...to, replace: true })
     } catch (e) {
-      console.log(e)
       next({ path: '/login' })
     }
   }
-  // 权限验证
 
   // 路由发生变化时，修改页面title
   if (to.meta.title) {
@@ -50,6 +64,7 @@ router.beforeEach(async (to, from, next) => {
   }
   next()
 })
+
 
 router.afterEach(() => {
   // finish progress bar

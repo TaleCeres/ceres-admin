@@ -15,7 +15,7 @@ const state = {
   logo: {
     visible: true,
   },
-  // 
+  //
   drawer: {
     closed: !config.showLayoutSetting,
   },
@@ -71,16 +71,16 @@ const mutations = {
   OPEN_DRAWER: state => {
     state.drawer.closed = false
   },
-  // 
+  //
   TOGGLE_LOGO: state => {
     state.logo.visible = !state.logo.visible
   },
-  // 
+  //
   TOGGLE_HISTORY_TAG: state => {
     appStorage.historyTagState = !state.historyTag.hidden
     state.historyTag.hidden = !state.historyTag.hidden
   },
-  // 
+  //
   SET_LAYOUT_MODE: (state, mode) => {
     // 设置
     cookies.set('layoutMode', mode)
