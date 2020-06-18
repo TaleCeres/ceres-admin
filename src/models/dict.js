@@ -47,4 +47,16 @@ export default class Dict {
     const data = await post('cms/dict', dictData)
     return data
   }
+
+  // 删除字典数据
+  static async deleteDictData(id) {
+    const data = await _delete(`cms/dict/${id}`)
+    return data
+  }
+
+  // 更新字典数据
+  static async editDictData(id, dict) {
+    const data = await put(`cms/dict/${id}`, dict)
+    return data
+  }
 }
