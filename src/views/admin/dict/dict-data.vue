@@ -14,9 +14,10 @@
     />
     <DictDataForm
       :type="type"
-      :visible="dialogAddVisible"
-      @close="dialogAddVisible = false"
-      @handleSubmit="addDictData">
+      :dict-data="dictData"
+      :visible="dialogEditVisible"
+      @close="dialogEditVisible = false"
+      @handleSubmit="editDictData">
     </DictDataForm>
   </div>
 </template>
@@ -29,7 +30,9 @@ export default {
   components: { DictDataForm },
   data() {
     return {
+      dictData: {},
       dialogAddVisible: false,
+      dialogEditVisible: false,
       currentPage: 1,
       pagination: {
         pageSize: 10,
@@ -83,15 +86,29 @@ export default {
       this.pagination.pageTotal = total
     },
     handleEdit(val) {
-      console.log(val)
+      this.dictData = val.row
+      this.dialogEditVisible = true
     },
-    handleDelete(val) {
-      console.log(val)
+    async handleDelete(val) {
+      const { id } = val.row
+      await DictModel.deleteDictData(id)
+      this.$message.success('删除字典数据成功')
+      await this.getDictDataList()
     },
 
     async addDictData(data) {
       data.type = this.type
       await DictModel.addDictData(data)
+      this.$message.success('新增字典数据成功')
+      this.dialogAddVisible = false
+      await this.getDictDataList()
+    },
+
+    async editDictData(val) {
+      await DictModel.editDictData(val.id, val)
+      this.$message.success('更新字典数据成功')
+      this.dialogEditVisible = false
+      await this.getDictDataList()
     }
   },
 }
@@ -99,7 +116,6 @@ export default {
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
   .container {
-    margin 20px 0
     .header {
       display flex
       align-items center
