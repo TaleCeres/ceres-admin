@@ -70,8 +70,7 @@
     </div>
 </template>
 
-<script>
-import Article from '@/models/article'
+<script type="text/ecmascript-6">
 import Tinymce from '@/components/base/Tinymce'
 import FileModel from '@/models/file'
 import config from '../../config'

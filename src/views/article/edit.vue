@@ -4,11 +4,11 @@
   </el-card>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
 import Article from '@/models/article'
 import ArticleForm from './ArticleForm'
 export default {
-  name: 'edit',
+  name: 'ArticleEdit',
   components: {
     ArticleForm
   },

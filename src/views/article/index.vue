@@ -3,12 +3,7 @@
     <div class="header">
       <div class="title">文章列表</div>
       <el-select v-model="type" style="margin-left: 30px"  @change="handleArticleType">
-        <el-option
-          v-for="item in typeList"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value">
-        </el-option>
+        <el-option v-for="item in typeList" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
     </div>
     <ceres-table
@@ -24,10 +19,10 @@
   </el-card>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
 import Article from '@/models/article'
 export default {
-  name: 'index',
+  name: 'ArticleList',
   data() {
     return {
       currentPage: 1,

@@ -4,12 +4,12 @@
   </el-card>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
 import Article from '@/models/article'
 import Tinymce from '@/components/base/Tinymce'
 import ArticleForm from './ArticleForm'
 export default {
-  name: 'add',
+  name: 'ArticleAdd',
   components: {
     Tinymce,
     ArticleForm

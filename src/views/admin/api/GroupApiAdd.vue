@@ -10,15 +10,8 @@
     <el-row>
       <el-col :lg="16" :md="20" :sm="24" :xs="24">
         <div class="content">
-          <el-form
-            ref="form"
-            v-loading="loading"
-            status-icon
-            :rules="rules"
-            :model="form"
-            label-position="right"
-            label-width="100px"
-            @submit.native.prevent
+          <el-form ref="form" v-loading="loading" status-icon :rules="rules" :model="form"
+                   label-position="right" label-width="100px" @submit.native.prevent
           >
             <el-form-item label="分组名称" prop="name">
               <el-input v-model="form.name" size="medium" clearable/>
@@ -27,11 +20,9 @@
               <el-input v-model="form.info" size="medium" clearable/>
             </el-form-item>
             <el-form-item>
-              <GroupApiPermissions
-                ref="groupPermissions"
-                title="分配权限"
-                @updatePermissions="updatePermissions"
-                @updateAllPermissions="updateAllPermissions"
+              <GroupApiPermissions ref="groupPermissions" title="分配权限"
+                                   @updatePermissions="updatePermissions"
+                                   @updateAllPermissions="updateAllPermissions"
               />
             </el-form-item>
             <el-form-item class="submit">
@@ -45,7 +36,7 @@
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
 import AdminModel from '@/models/admin'
 import GroupApiPermissions from './GroupApiPermissions'
 

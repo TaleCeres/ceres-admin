@@ -21,7 +21,7 @@
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
 import treeTransfer from 'el-tree-transfer'
 import RouteModel from '@/models/route'
 import * as _ from 'lodash'
@@ -153,6 +153,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="stylus" scoped>
 
 </style>

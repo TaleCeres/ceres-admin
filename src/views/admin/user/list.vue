@@ -1,10 +1,9 @@
 <template>
-  <el-card  style = "{ -moz-user-select : none }">
+  <el-card style = "{ -moz-user-select : none }">
     <div v-show="!showEdit && !showAdd" class="container">
-      <div class="header">
-        <div class="title">用户列表</div>
-        <el-button style="margin-left: 30px" type="primary" @click="showAdd=!showAdd">添加用户</el-button>
-      </div>
+      <el-card class="header">
+        <el-button icon="el-icon-plus" type="primary" @click="showAdd=!showAdd">新增</el-button>
+      </el-card>
       <ceres-table
         v-loading="loading"
         :table-column="tableColumn"
@@ -81,6 +80,8 @@ export default {
   .container {
     .header {
       display flex
+      margin 0 0 10px
+      height 60px
       align-items center
       .title {
         height 59px

@@ -23,7 +23,6 @@
 import GroupApiAdd from './GroupApiAdd'
 import GroupApiEdit from './GroupApiEdit'
 import AdminModel from '@/models/admin'
-import User from '@/models/user'
 export default {
   name: 'GroupApiList',
   components: {

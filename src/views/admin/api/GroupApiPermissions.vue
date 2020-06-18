@@ -7,13 +7,8 @@
       <div class="details">
         <div v-for="(permission, moduleName) in allPermissions" :key="moduleName" class="permissions-box">
           <el-checkbox-group v-model="permission_module_name">
-            <div class="module-box">
-              <el-checkbox
-                class="module"
-                :label="moduleName"
-                :indeterminate="halfPermissions.includes(moduleName)"
-                @change="moduleCheck($event, permission, moduleName)"/>
-            </div>
+            <el-checkbox class="module" :label="moduleName" :indeterminate="halfPermissions.includes(moduleName)"
+                         @change="moduleCheck($event, permission, moduleName)"/>
           </el-checkbox-group>
           <ul class="permissions-ul">
             <li v-for="(item, key) in permission" :key="key" class="permissions-li">
@@ -29,7 +24,7 @@
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
 import AdminModel from '@/models/admin'
 
 export default {
