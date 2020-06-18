@@ -1,6 +1,6 @@
 <template>
-    <div>
-      <el-card class="file-container" onselectstart = "return false" style = "{ -moz-user-select : none }">
+    <section>
+      <el-card class="file-container" onselectstart="return false" style = "{ -moz-user-select : none }">
         <div slot="header" >
           <el-upload
             style="display: inline-block"
@@ -229,10 +229,11 @@
         </span>
       </el-dialog>
 
-    </div>
+    </section>
 </template>
 
 <script>
+import { fileExt } from './config'
 import clip from '@/utils/clipboard'
 import FileModel from '@/models/file'
 import Treeselect from '@riophae/vue-treeselect'
@@ -258,22 +259,7 @@ export default {
       activeName: 'tab-all',
       isTable: false,
       fileList: [],
-      extensions: {
-        '.jpg': 'fa fa-file-image-o',
-        '.jpeg': 'fa fa-file-image-o',
-        '.png': 'fa fa-file-image-o',
-        '.pdf': 'fa fa-file-pdf-o',
-        '.xlsx': 'fa fa-file-excel-o',
-        '.doc': 'fa fa-file-word-o',
-        '.docx': 'fa fa-file-word-o',
-        '.txt': 'fa fa-file-text-o',
-        '.mp3': 'fa fa-file-sound-o',
-        '.ppt': 'fa fa-file-powerpoint-o',
-        '.pptx': 'fa fa-file-powerpoint-o',
-        '.mp4': 'fa fa-file-video-o',
-        '.zip': 'fa fa-file-zip-o',
-        '.md': 'fa fa-file-text-o'
-      },
+      extensions: fileExt,
       breadcrumbList: [
         {
           label: '全部文件',

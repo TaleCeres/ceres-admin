@@ -1,5 +1,5 @@
 <template>
-  <div class="tool-container">
+  <el-card class="tool-container" style = "{ -moz-user-select : none }">
     <div class="left-board">
       <div class="logo-wrapper">
         <div class="logo">
@@ -133,7 +133,7 @@
       @confirm="generate"
     />
     <input id="copyNode" type="hidden">
-  </div>
+  </el-card>
 </template>
 
 <script>
@@ -609,7 +609,7 @@ $lighterBlue = #409EFF;
   height: 42px;
   text-align: right;
   padding: 0 15px;
-  box-sizing: border-box;;
+  box-sizing: border-box;
   border: 1px solid #f1e8e8;
   border-top: none;
   border-left: none;
@@ -652,7 +652,6 @@ $lighterBlue = #409EFF;
   padding: 12px 12px 15px 12px;
   box-sizing: border-box;
   & > .el-form {
-    // 69 = 12+15+42
     height: calc(100vh - 69px);
   }
 }

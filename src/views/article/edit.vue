@@ -1,5 +1,7 @@
 <template>
-  <article-form title="编辑文章" :article="article"  @submit-article="handleSubmitArticle"></article-form>
+  <el-card class="container" style = "{ -moz-user-select : none }">
+    <ArticleForm title="编辑文章" :article="article"  @submit-article="handleSubmitArticle" />
+  </el-card>
 </template>
 
 <script>
@@ -28,7 +30,6 @@ export default {
       this.article = await Article.getArticle(this.id)
     },
     async handleSubmitArticle(article) {
-      console.log(article)
       await Article.editArticle(this.id, article)
       this.$message.success('更新文章成功！')
     }

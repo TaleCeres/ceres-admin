@@ -1,21 +1,21 @@
 <template>
-  <div>
-  <div v-show="!showEdit && !showAdd" class="container">
-    <div class="header">
-      <div class="title">用户列表</div>
-      <el-button style="margin-left: 30px" type="primary" @click="showAdd=!showAdd">添加用户</el-button>
+  <el-card  style = "{ -moz-user-select : none }">
+    <div v-show="!showEdit && !showAdd" class="container">
+      <div class="header">
+        <div class="title">用户列表</div>
+        <el-button style="margin-left: 30px" type="primary" @click="showAdd=!showAdd">添加用户</el-button>
+      </div>
+      <ceres-table
+        v-loading="loading"
+        :table-column="tableColumn"
+        :table-data="tableData"
+        :operate="operate"
+        @handleEdit="handleEdit"
+        @handleDelete="handleDelete"
+      />
     </div>
-    <ceres-table
-      v-loading="loading"
-      :table-column="tableColumn"
-      :table-data="tableData"
-      :operate="operate"
-      @handleEdit="handleEdit"
-      @handleDelete="handleDelete"
-    />
-  </div>
     <user-edit v-if="showEdit" :edit-id="editID" @handleHide="handleHide" />
-  </div>
+  </el-card>
 </template>
 
 <script type="text/ecmascript-6">

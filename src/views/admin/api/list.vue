@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <el-card class="container" style = "{ -moz-user-select : none }">
     <div v-show="!showEdit && !showAdd" class="container">
       <div class="header">
         <div class="title">分组列表</div>
@@ -16,7 +16,7 @@
     </div>
     <GroupApiAdd v-if="showAdd" @handleHide="handleHide"/>
     <GroupApiEdit v-if="showEdit" :cache-group="cacheGroup" @handleHide="handleHide"/>
-  </div>
+  </el-card>
 </template>
 
 <script type="text/ecmascript-6">

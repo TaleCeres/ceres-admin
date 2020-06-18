@@ -1,11 +1,10 @@
 <template>
-    <div class="container">
-      <article-form title="新增文章" @submit-article="handleSubmitArticle"></article-form>
-    </div>
+  <el-card class="container" style = "{ -moz-user-select : none }">
+    <ArticleForm title="新增文章" @submit-article="handleSubmitArticle" />
+  </el-card>
 </template>
 
 <script>
-import FileModel from '@/models/file'
 import Article from '@/models/article'
 import Tinymce from '@/components/base/Tinymce'
 import ArticleForm from './ArticleForm'

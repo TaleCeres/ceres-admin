@@ -4,16 +4,7 @@ import appStore from '@/store/modules/app'
 import Midlayer from 'comps/layout/midlayer'
 /* Router Modules(业务页面的路由) */
 import dashboardRouter from './modules/dashboard'
-import homeRouter from './modules/home'
-import adminRouter from './modules/admin'
-import categoryRouter from './modules/category'
-import aboutRouter from './modules/about'
-import chartRouter from './modules/chart'
-import userRouter from './modules/user'
-import toolsRouter from './modules/tools'
 import redirectRouter from './modules/redirect'
-import fileRouter from './modules/file'
-import customRouter from './modules/custom'
 // lazy-loaded when the route is visited
 // const _import = file => () => import(/* webpackChunkName: "about" */ `@/views/${file}.vue`)
 const _import = file => () => import(`@/views/${file}.vue`)
@@ -21,9 +12,9 @@ const _import = file => () => import(`@/views/${file}.vue`)
 /**
  *
  *
- * hidden: true                   if set true, item will not show in the sidebar(default is false)
+ * hidden: true                  if set true, item will not show in the sidebar(default is false)
  *
- * redirect: noRedirect           if set noRedirect will no redirect in the breadcrumb
+ * redirect: noRedirect          if set noRedirect will no redirect in the breadcrumb
  * path: 'route'
  * name:'route-name'             the name is used by <keep-alive> (must set)
  * meta : {
@@ -39,14 +30,6 @@ const _import = file => () => import(`@/views/${file}.vue`)
 const normalViewRouters = [
   redirectRouter,
   dashboardRouter,
-  // homeRouter,
-  // aboutRouter,
-  // adminRouter,
-  // chartRouter,
-  // toolsRouter,
-  // userRouter,
-  // fileRouter,
-  // customRouter
 ].map(item => loadingComponent(item))
 
 /**
