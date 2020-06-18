@@ -56,7 +56,7 @@ export default {
         { name: '删除', func: 'handleDelete', type: 'danger' },
       ],
       pagination: {
-        pageSize: 10,
+        pageSize: this.$pagination.pageSize,
         pageTotal: 0
       },
       typeList: [

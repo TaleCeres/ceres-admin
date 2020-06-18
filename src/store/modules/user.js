@@ -1,6 +1,5 @@
 /* 用户配置 */
 /* eslint-disable */
-
 import { removeToken } from '@/utils/cookie'
 
 const state = {
@@ -24,11 +23,9 @@ const mutations = {
 
 const actions = {
   setUser({ commit }, user) {
-    // console.log('commit', commit)
     commit('SET_LOGINED', true)
     let { nick_name, wx_nick, email, modify_limit, auth } = user
     commit('SET_USER', { nick_name, wx_nick, email, modify_limit, auth })
-    // commit('SET_USER_AUTH', user.auth)
   },
   logout({ commit }) {
     removeToken()

@@ -1,9 +1,6 @@
-/* 路由权限配置 */
 /* eslint-disable */
-import RouteModel from "@/models/route"
-import appStore from "@/store/modules/app"
-import Midlayer from "comps/layout/midlayer"
-// import { loadingComponent } from '@/router/util'
+import appStore from "@/store/modules/app";
+import Midlayer from "comps/layout/midlayer";
 const _import = file => () => import(`@/views/${file}.vue`)
 
 /**
@@ -17,7 +14,7 @@ const _import = file => () => import(`@/views/${file}.vue`)
  * @param {object} rawRouter
  * @returns
  */
-function loadingComponent(rawRouter) {
+export function loadingComponent(rawRouter) {
   let { ...router } = rawRouter
   initLayout(router) // 一级路由的模版为 Layout
   // 遍历一级路由的子路由
@@ -33,14 +30,13 @@ function loadingComponent(rawRouter) {
  * Layout有三种选择 default、t-type、vertical
  * @param {object} router
  */
-function initLayout(router) {
+export function initLayout(router) {
   const _import_layout = file => () => import(`comps/layout/${file}/index.vue`)
   const layoutModeObj = {
     'default': _import_layout('default'),
     'vertical': _import_layout('vertical'),
     't-type': _import_layout('t-type'),
   }
-
   router.component = layoutModeObj[appStore.state.layout.mode]
 }
 
@@ -50,9 +46,9 @@ function initLayout(router) {
  *  - 2. 如果无子路由，载入「router.component同名的组件」
  * @param {object} router
  */
-function initComponent(router) {
+export function initComponent(router) {
   // 1
-  if (router.hasOwnProperty('children') && router.children.length > 0) {
+  if (router.hasOwnProperty('children')) {
     router.component = Midlayer
     let { children: childrenRouter } = router
     childrenRouter.forEach(item => {
@@ -60,52 +56,8 @@ function initComponent(router) {
     })
     return
   }
+  // 2
   if (typeof (router.component) === 'string') {
     router.component = _import(router.component)
   }
-}
-
-
-const state = {
-  normalViewRouters: [],
-  sidebarList: []
-}
-
-const getters = {
-}
-
-const mutations = {
-  SET_ROUTES(state, data) {
-    state.normalViewRouters = data
-  },
-  SET_SIDEBARLIST(state, data) {
-    data.forEach(route => {
-      if (route.children && route.children.length > 0) {
-        route.children = route.children.filter(item => item.hidden !== true)
-      }
-    })
-    state.sidebarList = data.filter(item => item.hidden !== true)
-  },
-}
-
-const actions = {
-  getRoutes({ commit }) {
-    return new Promise(resolve => {
-      RouteModel.getRouteTree().then(res => {
-        let routes = res.map(loadingComponent)
-        let sidebarList = res.map(loadingComponent)
-        commit('SET_ROUTES', routes)
-        commit('SET_SIDEBARLIST', sidebarList)
-        resolve(routes)
-      })
-    })
-  }
-}
-
-export default {
-  namespaced: true,
-  state,
-  getters,
-  mutations,
-  actions,
 }

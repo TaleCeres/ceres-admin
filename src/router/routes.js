@@ -1,10 +1,9 @@
 /* eslint-disable */
-import appStore from '@/store/modules/app'
 /* 页面嵌套的Layout中间层模版 */
-import Midlayer from 'comps/layout/midlayer'
 /* Router Modules(业务页面的路由) */
 import dashboardRouter from './modules/dashboard'
 import redirectRouter from './modules/redirect'
+import { loadingComponent } from './util'
 // lazy-loaded when the route is visited
 // const _import = file => () => import(/* webpackChunkName: "about" */ `@/views/${file}.vue`)
 const _import = file => () => import(`@/views/${file}.vue`)
@@ -26,7 +25,7 @@ const _import = file => () => import(`@/views/${file}.vue`)
   * route是一条路由配置, routes是一堆路由配置，router是路由功能集合
  */
 
-// 处理「业务页面」的路由
+// 「项目自带页面」的路由
 const normalViewRouters = [
   redirectRouter,
   dashboardRouter,
@@ -60,62 +59,3 @@ const routes = [
 ]
 
 export default routes
-
-/**
- * 处理router对应的组件(component)，包含三个级别的路由
- * 一级路由的模版目前有三种:
- *  1. 左右布局(Layout), 默认
- *  2. T型布局
- *  3. 上下布局
- * 如果三级路由存在，则其父级(二级)路由为 Midlayer；否则为具体的页面组件
- *
- * @param {object} rawRouter
- * @returns
- */
-export function loadingComponent(rawRouter) {
-  let { ...router } = rawRouter
-  initLayout(router) // 一级路由的模版为 Layout
-  // 遍历一级路由的子路由
-  if (router.hasOwnProperty('children')) {
-    router.children.forEach(item => {
-      initComponent(item)
-    })
-  }
-  return router
-}
-
-/**
- * Layout有三种选择 default、t-type、vertical
- * @param {object} router
- */
-export function initLayout(router) {
-  const _import_layout = file => () => import(`comps/layout/${file}/index.vue`)
-  const layoutModeObj = {
-    'default': _import_layout('default'),
-    'vertical': _import_layout('vertical'),
-    't-type': _import_layout('t-type'),
-  }
-  router.component = layoutModeObj[appStore.state.layout.mode]
-}
-
-/**
- * 二级路由开始
- *  - 1. 如果有子路由，载入「Midlayer」
- *  - 2. 如果无子路由，载入「router.component同名的组件」
- * @param {object} router
- */
-export function initComponent(router) {
-  // 1
-  if (router.hasOwnProperty('children')) {
-    router.component = Midlayer
-    let { children: childrenRouter } = router
-    childrenRouter.forEach(item => {
-      initComponent(item)
-    })
-    return
-  }
-  // 2
-  if (typeof (router.component) === 'string') {
-    router.component = _import(router.component)
-  }
-}
