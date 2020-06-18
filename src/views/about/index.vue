@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <el-card class="about-container" style = "{ -moz-user-select : none }">
     <h2>关于Ceres团队</h2>
     <el-table :data="tableData" style="width: 100%">
       <el-table-column prop="id" label="编号" width="80" />
@@ -7,7 +7,7 @@
       <el-table-column prop="position" label="职位" />
       <el-table-column prop="join_time" label="入职时间" />
     </el-table>
-  </div>
+  </el-card>
 </template>
 
 <script type="text/ecmascript-6">
@@ -17,54 +17,6 @@ export default {
   data() {
     return {
       tableData: [
-        {
-          id: '005',
-          name: '董冬伟',
-          position: '前端开发',
-          join_time: '2017-04-20',
-        },
-        {
-          id: '005',
-          name: '董冬伟',
-          position: '前端开发',
-          join_time: '2017-04-20',
-        },
-        {
-          id: '005',
-          name: '董冬伟',
-          position: '前端开发',
-          join_time: '2017-04-20',
-        },
-        {
-          id: '005',
-          name: '董冬伟',
-          position: '前端开发',
-          join_time: '2017-04-20',
-        },
-        {
-          id: '005',
-          name: '董冬伟',
-          position: '前端开发',
-          join_time: '2017-04-20',
-        },
-        {
-          id: '005',
-          name: '董冬伟',
-          position: '前端开发',
-          join_time: '2017-04-20',
-        },
-        {
-          id: '005',
-          name: '董冬伟',
-          position: '前端开发',
-          join_time: '2017-04-20',
-        },
-        {
-          id: '005',
-          name: '董冬伟',
-          position: '前端开发',
-          join_time: '2017-04-20',
-        },
         {
           id: '005',
           name: '董冬伟',
@@ -139,4 +91,5 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus" rel="stylesheet/stylus"></style>
+<style scoped lang="stylus" rel="stylesheet/stylus">
+</style>

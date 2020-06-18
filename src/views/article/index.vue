@@ -1,27 +1,27 @@
 <template>
-    <div class="container">
-      <div class="header">
-        <div class="title">文章列表</div>
-        <el-select v-model="type" style="margin-left: 30px"  @change="handleArticleType">
-          <el-option
-            v-for="item in typeList"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-      </div>
-      <ceres-table
-        :pagination="pagination"
-        :table-column="tableColumn"
-        :table-data="articleList"
-        :operate="operate"
-        :current-page="currentPage"
-        @handleEdit="handleEdit"
-        @handleDelete="handleDelete"
-        @currentChange = "currentChange"
-      />
+  <el-card class="container" style = "{ -moz-user-select : none }">
+    <div class="header">
+      <div class="title">文章列表</div>
+      <el-select v-model="type" style="margin-left: 30px"  @change="handleArticleType">
+        <el-option
+          v-for="item in typeList"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
     </div>
+    <ceres-table
+      :pagination="pagination"
+      :table-column="tableColumn"
+      :table-data="articleList"
+      :operate="operate"
+      :current-page="currentPage"
+      @handleEdit="handleEdit"
+      @handleDelete="handleDelete"
+      @currentChange = "currentChange"
+    />
+  </el-card>
 </template>
 
 <script>
@@ -37,10 +37,10 @@ export default {
       tableColumn: [
         { prop: 'title', label: '标题' },
         { prop: 'type', label: '类型' },
-        { 
-          prop: 'img', 
-          label: '主图', 
-          // eslint-disable-next-line 
+        {
+          prop: 'img',
+          label: '主图',
+          // eslint-disable-next-line
           render: (row, column, cell) => {
             return (
               <el-image src={row.img} preview-src-list={[row.img]}></el-image>
@@ -92,7 +92,7 @@ export default {
     handleEdit(data) {
       const { row } = data
       this.$router.push({
-        path: `/article/${row.id}`
+        path: `/article/edit/${row.id}`
       })
     },
     async handleDelete(data) {

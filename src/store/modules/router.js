@@ -2,8 +2,8 @@
 /* eslint-disable */
 import RouteModel from '@/models/route'
 // import { loadingComponent, initLayout, initComponent } from '@/router/routes'
-import appStore from "@/store/modules/app";
-import Midlayer from "comps/layout/midlayer";
+import appStore from "@/store/modules/app"
+import Midlayer from "comps/layout/midlayer"
 const _import = file => () => import(`@/views/${file}.vue`)
 
 /**
@@ -40,6 +40,7 @@ function initLayout(router) {
     'vertical': _import_layout('vertical'),
     't-type': _import_layout('t-type'),
   }
+
   router.component = layoutModeObj[appStore.state.layout.mode]
 }
 
