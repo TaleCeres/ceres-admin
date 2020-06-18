@@ -9,15 +9,8 @@
     </div>
     <el-tabs v-model="activeName">
       <el-tab-pane label="修改信息" name="first">
-        <el-form
-          ref="form"
-          v-loading="loading"
-          status-icon
-          :model="form"
-          label-position="right"
-          label-width="100px"
-          @submit.native.prevent
-        >
+        <el-form ref="form" v-loading="loading" status-icon :model="form"
+                 label-position="right" label-width="100px" @submit.native.prevent>
           <el-form-item label="分组名称" prop="name">
             <el-input v-model="form.name" size="medium" clearable/>
           </el-form-item>
@@ -27,13 +20,10 @@
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="配置权限" name="second">
-        <GroupApiPermissions
-          :id="id"
-          ref="groupPermissions"
-          title="分配权限"
-          @updatePermissions="updatePermissions"
-          @getCacheAuthIds="getCacheAuthIds"
-          @updateAllPermissions="updateAllPermissions" />
+        <GroupApiPermissions :id="id" ref="groupPermissions" title="分配权限"
+                             @updatePermissions="updatePermissions"
+                             @getCacheAuthIds="getCacheAuthIds"
+                             @updateAllPermissions="updateAllPermissions" />
       </el-tab-pane>
       <el-tab-pane label="配置菜单" name="third">
         <GroupMenu :group-id="cacheGroup.id"></GroupMenu>
@@ -46,7 +36,7 @@
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
 import AdminModel from '@/models/admin'
 import GroupApiPermissions from './GroupApiPermissions'
 import GroupMenu from './GroupMenu'
