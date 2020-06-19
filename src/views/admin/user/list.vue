@@ -1,17 +1,16 @@
 <template>
-  <el-card style = "{ -moz-user-select : none }">
+  <el-card style="{ -moz-user-select : none }">
     <div v-show="!showEdit && !showAdd" class="container">
       <el-card class="header">
         <el-button icon="el-icon-plus" type="primary" @click="showAdd=!showAdd">新增</el-button>
+        <CrudOperation class="crud-opts" :table-column="tableColumn"
+          @handleColumnChange="handleColumnChange"
+          @handleCheckAllChange="handleCheckAllChange"
+          @refresh="getList"/>
       </el-card>
-      <ceres-table
-        v-loading="loading"
-        :table-column="tableColumn"
-        :table-data="tableData"
-        :operate="operate"
-        @handleEdit="handleEdit"
-        @handleDelete="handleDelete"
-      />
+      <CeresTable v-loading="loading" 
+                  :table-column="tableColumn" :table-data="tableData" :operate="operate" 
+                  @handleEdit="handleEdit" @handleDelete="handleDelete" />
     </div>
     <user-edit v-if="showEdit" :edit-id="editID" @handleHide="handleHide" />
   </el-card>
@@ -20,20 +19,23 @@
 <script type="text/ecmascript-6">
 import UserModel from '@/models/user'
 import UserEdit from './UserEdit'
+import CrudOperation from 'comps/base/crud/CRUD.Operation'
+
 export default {
   name: 'UserList',
   components: {
-    UserEdit
+    UserEdit,
+    CrudOperation
   },
   data() {
     return {
       loading: false,
       tableColumn: [
-        { prop: 'nickname', label: '昵称' },
-        { prop: 'username', label: '用户名' },
-        { prop: 'auth_scope', label: '用户组' },
-        { prop: 'mobile', label: '手机号' },
-        { prop: 'email', label: '邮箱' },
+        { prop: 'nickname', label: '昵称', visible: true },
+        { prop: 'username', label: '用户名', visible: true },
+        { prop: 'auth_scope', label: '用户组', visible: true },
+        { prop: 'mobile', label: '手机号', visible: true },
+        { prop: 'email', label: '邮箱', visible: true },
       ],
       tableData: [],
       operate: [
@@ -42,21 +44,26 @@ export default {
       ],
       showEdit: false,
       showAdd: false,
-      editID: ''
+      editID: '',
+      currentPage: 1,
+      pagination: {
+        pageSize: 10,
+        pageTotal: 0
+      },
     }
   },
   computed: {},
-  created() {},
+  created() { },
   async mounted() {
     // await this.$mockApi.inject(this, 'name').get('user')
     await UserModel.getToken('999@qq.com', '123456')
     await UserModel.getInfo()
-    this.getUserList(1, 10)
+    this.getList()
   },
   methods: {
-    async getUserList(page, size) {
+    async getList() {
       this.loading = true
-      const res = await UserModel.getUserList(page, size)
+      const res = await UserModel.getUserList(this.currentPage, this.pagination.pageSize)
       this.tableData = [...res.items]
       this.loading = false
     },
@@ -70,25 +77,39 @@ export default {
     handleHide() {
       this.showAdd = false
       this.showEdit = false
-      this.getUserList(1, 10)
+      this.getList()
+    },
+    handleColumnChange(item) {
+      this.tableColumn.forEach(el => {
+        if (el.prop === item.prop) {
+          item.visible = !item.visible
+        }
+      })
+    },
+    handleCheckAllChange(val) {
+      this.tableColumn.forEach(item => {
+        item.visible = val
+      })
     }
   },
 }
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-  .container {
-    .header {
-      display flex
-      margin 0 0 10px
-      height 60px
-      align-items center
-      .title {
-        height 59px
-        line-height 59px
-        font-size 16px
-        font-weight 500
-      }
+.container {
+  .header {
+    display flex
+    height 60px
+    margin 0 0 10px
+    align-items center
+    .title {
+      height 59px
+      line-height 59px
+      font-size 16px
+      font-weight 500
+    }
+    .crud-opts {
     }
   }
+}
 </style>

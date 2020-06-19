@@ -112,7 +112,6 @@ import RouteModel from '@/models/route'
 import UserModel from '@/models/user'
 import IconSelect from '@/components/base/IconSelect'
 
-
 let id = 1000
 
 export default {
@@ -188,7 +187,6 @@ export default {
       // el-tree作为浮动成，而el-table的树形数据与懒加载作为展现成
       // el-tree的拖动影响el-table的展示
       this.dialogVisible = true
-      console.log(data)
       this.form = {
         component: data.component,
         hidden: data.hidden,
@@ -201,7 +199,6 @@ export default {
         order: data.order,
         children: data.children
       }
-      console.log(this.form)
     },
 
     // 删除菜单

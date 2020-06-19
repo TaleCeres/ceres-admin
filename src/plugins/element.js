@@ -29,6 +29,9 @@ import { loadPlugins } from '../utils/index'
 loadPlugins([...])
 */
 
+import cookies from 'js-cookie'
 import Vue from 'vue'
 import ElementUI from 'element-ui'
-Vue.use(ElementUI)
+Vue.use(ElementUI, {
+  size: cookies.get('size') || 'small' // set element-ui default size
+})

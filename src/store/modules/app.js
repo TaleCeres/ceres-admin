@@ -12,6 +12,8 @@ const state = {
   sidebar: {
     closed: false,
   },
+  // 字体大小设置
+  size: cookies.get('size') || 'small',
   logo: {
     visible: true,
   },
@@ -46,6 +48,7 @@ const getters = {
   layoutOptions: state => state.layout.options,
   drawerState: state => !state.drawer.closed,
   sidebarState: state => state.sidebar.closed,
+  size: state => state.size,
   logoState: state => state.logo.visible,
   historyTagState: state => state.historyTag.hidden,
 }
@@ -60,6 +63,11 @@ const mutations = {
   },
   OPEN_SIDEBAR: state => {
     state.sidebar.closed = false
+  },
+  // 字体大小设置
+  SET_SIZE: (state, size) => {
+    state.size = size
+    cookies.set('size', size)
   },
   // 布局配置是否显示
   TOGGLE_DRAWER: state => {

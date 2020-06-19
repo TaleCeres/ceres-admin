@@ -1,8 +1,9 @@
 <template>
   <div class="ceres-table">
     <el-table :data="tableData" border style="width: 100%">
-      <el-table-column v-for="item in tableColumn" :key="item.prop" :prop="item.prop" :label="item.label"
-                       :formatter="item.render" :show-overflow-tooltip="true"/>
+      <el-table-column v-for="item in $tableColumn" :key="item.prop" :prop="item.prop" :label="item.label"
+                       :formatter="item.render" :show-overflow-tooltip="true">
+      </el-table-column>
       <el-table-column v-if="operate.length > 0" fixed="right" label="操作" width="300">
         <template slot-scope="scope">
           <el-button v-for="item in operate" :key="item.func" :type="item.type" size="small" @click="buttonMethod(item.func, scope.$index, scope.row)">
@@ -52,7 +53,17 @@ export default {
   data() {
     return {}
   },
-  computed: {},
+  computed: {
+    // 配合CRUD.operation.vue来使用
+    $tableColumn() {
+      return this.tableColumn.filter(item => {
+        if ('visible' in item) {
+          return item.visible
+        }
+        return true
+      })
+    }
+  },
   created() { },
   mounted() { },
   methods: {

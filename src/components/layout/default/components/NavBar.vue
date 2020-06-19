@@ -5,7 +5,7 @@
       <Breadcrumb />
     </div>
     <div class="right-menu">
-      <search id="header-search" style="margin-right: 15px;"></search>
+      <Search id="header-search" style="margin-right: 15px;" />
       <el-tooltip effect="dark" content="数据大屏" placement="bottom">
         <router-link to="/data-graph/overview">
           <fa-icon icon-name="area-chart" style="margin-right: 15px;" />
@@ -15,6 +15,7 @@
         <Screenfull style="margin-right: 15px;" />
       </el-tooltip>
       <LangSelect style="margin-right: 15px;" />
+      <SizeSelect style="margin-right: 15px;" />
       <el-tooltip content="文档地址" effect="dark" placement="bottom">
         <a target="_blank" href="http://blog.ivinetrue.com/ceres-admin/">
           <fa-icon icon-name="book" style="margin-right: 15px;" />
@@ -30,6 +31,7 @@ import { mapGetters } from 'vuex'
 import UserCard from 'comps/base/UserCard'
 import Breadcrumb from 'comps/base/Breadcrumb'
 import LangSelect from 'comps/base/LangSelect'
+import SizeSelect from 'comps/base/SizeSelect'
 import Screenfull from 'comps/base/Screenfull'
 import Search from 'comps/base/HeaderSearch'
 export default {
@@ -38,6 +40,7 @@ export default {
     UserCard,
     Breadcrumb,
     LangSelect,
+    SizeSelect,
     Screenfull,
     Search
   },
