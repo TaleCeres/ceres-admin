@@ -21,7 +21,7 @@
       <DictForm
         :visible="dialogAddVisible"
         @close="dialogAddVisible = false"
-        @handleSubmit="handelAdd">
+        @handleSubmit="handleAdd">
       </DictForm>
 
       <DictForm
