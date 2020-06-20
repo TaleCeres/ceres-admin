@@ -6,9 +6,24 @@
       </el-table-column>
       <el-table-column v-if="operate.length > 0" fixed="right" label="操作" width="300">
         <template slot-scope="scope">
-          <el-button v-for="item in operate" :key="item.func" :type="item.type" size="small" @click="buttonMethod(item.func, scope.$index, scope.row)">
-            {{item.name}}
-          </el-button>
+          <template v-for="item in operate">
+            <el-popconfirm 
+              v-if="item.func === 'handleDelete'" :key="item.func"
+              confirm-button-text='确定'
+              cancel-button-text='取消'
+              icon="el-icon-info"
+              icon-color="red"
+              title="确定删除本条数据吗？"
+              @onConfirm="buttonMethod(item.func, scope.$index, scope.row)">
+              <el-button slot="reference" :type="item.type" size="small">
+              {{item.name}}
+              </el-button>
+            </el-popconfirm>
+
+            <el-button v-else :key="item.func" :type="item.type" size="small" @click="buttonMethod(item.func, scope.$index, scope.row)">
+              {{item.name}}
+            </el-button>
+          </template>
         </template>
       </el-table-column>
     </el-table>
@@ -62,6 +77,17 @@ export default {
         }
         return true
       })
+    },
+    $operate: {
+      get() {
+        return this.operate.map(item => {
+          item.pop = false
+          return item
+        })
+      },
+      set() {
+        //
+      }
     }
   },
   created() { },

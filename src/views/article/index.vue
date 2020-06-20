@@ -10,7 +10,8 @@
           @refresh="getList"/>
     </div>
     <CeresTable 
-      v-loading="loading" 
+      ref="ceresTable" 
+      v-loading="loading"
       :pagination="pagination"
       :table-column="tableColumn"
       :table-data="articleList"
@@ -100,16 +101,10 @@ export default {
         path: `/article/edit/${row.id}`
       })
     },
-    async handleDelete({ row }) {
-      this.$confirm('此操作将永久删除该文章, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(async () => {
-        await Article.deleteArticle(row.id)
-        this.$message.success('删除文章成功')
-        this.getList()
-      })
+    async handleDelete({ index, row }) {
+      await Article.deleteArticle(row.id)
+      this.$message.success('删除文章成功')
+      this.getList()
     },
     currentChange(val) {
       this.currentPage = val
