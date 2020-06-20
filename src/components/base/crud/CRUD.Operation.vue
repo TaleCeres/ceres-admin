@@ -1,5 +1,5 @@
 <template>
-  <el-button-group class="crud-opts-right">
+  <el-button-group class="crud-opts-container ">
     <el-button size="mini" plain type="info" icon="el-icon-search" @click="toggleSearch()" />
     <el-button size="mini" icon="el-icon-refresh" @click="refresh()" />
 
@@ -24,7 +24,7 @@
 <script type="text/ecmascript-6">
 import { get } from '../../../utils/request'
 export default {
-  name: 'CRUD.Operation',
+  name: 'CrudOperation',
   components: {},
   props: {
     tableColumn: {

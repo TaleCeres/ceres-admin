@@ -138,7 +138,8 @@ export default {
     },
 
     async handleSubmitArticle() {
-      this.$emit('submit-article', this.article)
+      this.$emit('submitArticle', this.article)
+      this.backtoList()
       // await Article.createArticle(this.article)
       // this.$message.success('新建文章成功！')
     },

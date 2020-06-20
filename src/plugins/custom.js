@@ -1,12 +1,15 @@
 import Vue from 'vue'
 import FaIcon from 'comps/base/FaIcon'
 import CeresTable from 'comps/base/CeresTable'
+import CrudOperation from 'comps/base/crud/CRUD.Operation'
 import color from 'assets/data/color'
 import model from '@/models'
 import { get } from '@/utils/request'
 
 Vue.component(FaIcon.name, FaIcon)
 Vue.component(CeresTable.name, CeresTable)
+Vue.component(CrudOperation.name, CrudOperation)
+
 get('cms/config/key/sys.paginator.size').then(res => {
   Vue.prototype.$pagination = { 'pageSize': res.value }
 })

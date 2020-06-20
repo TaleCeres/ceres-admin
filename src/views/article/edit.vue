@@ -1,6 +1,6 @@
 <template>
   <el-card class="container" style = "{ -moz-user-select : none }">
-    <ArticleForm title="编辑文章" :article="article"  @submit-article="handleSubmitArticle" />
+    <ArticleForm title="编辑文章" :article="article"  @submitArticle="handleSubmitArticle" />
   </el-card>
 </template>
 

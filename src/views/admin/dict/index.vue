@@ -1,10 +1,14 @@
 <template>
-    <div class="container">
+    <el-card class="container">
       <div class="header">
-        <div class="title">字典列表</div>
-        <el-button style="margin-left: 30px" type="primary" @click="dialogAddVisible = true">新增字典</el-button>
+        <el-button icon="el-icon-plus" type="primary" @click="dialogAddVisible = true">新增</el-button>
+        <CrudOperation class="crud-opts-right" :table-column="tableColumn"
+          @handleColumnChange="handleColumnChange"
+          @handleCheckAllChange="handleCheckAllChange"
+          @refresh="getList"/>
       </div>
-      <ceres-table
+      <CeresTable
+        v-loading="loading" 
         :pagination="pagination"
         :table-column="tableColumn"
         :table-data="tableData"
@@ -17,7 +21,7 @@
       <DictForm
         :visible="dialogAddVisible"
         @close="dialogAddVisible = false"
-        @handleSubmit="addDict">
+        @handleSubmit="handelAdd">
       </DictForm>
 
       <DictForm
@@ -27,17 +31,21 @@
         @handleSubmit="editDict">
       </DictForm>
 
-    </div>
+    </el-card>
 </template>
 
 <script>
 import DictModel from '@/models/dict'
 import DictForm from './components/DictForm'
+import crudMixin from '@/mixins/crud'
+
 export default {
   name: 'index',
   components: { DictForm },
+  mixins: [crudMixin],
   data() {
     return {
+      loading: true,
       dict: {},
       newDictRules: {
         name: [
@@ -55,8 +63,8 @@ export default {
         pageTotal: 0
       },
       tableColumn: [
-        { prop: 'id', label: '字典编号' },
-        { prop: 'name', label: '字典名称' },
+        { prop: 'id', label: '字典编号', visible: true },
+        { prop: 'name', label: '字典名称', visible: true },
         {
           prop: 'type',
           label: '字典类型',
@@ -65,7 +73,8 @@ export default {
             return (
               <router-link class="path" to={`/admin/dict/data/${row.id}`}>{[row.type]}</router-link>
             )
-          }
+          }, 
+          visible: true
         },
         {
           prop: 'status',
@@ -75,9 +84,10 @@ export default {
             return (
               <span>{[row.status ? '正常' : '停用']}</span>
             )
-          }
+          }, 
+          visible: true
         },
-        { prop: 'remark', label: '备注' },
+        { prop: 'remark', label: '备注', visible: true },
       ],
       tableData: [],
       operate: [
@@ -95,26 +105,27 @@ export default {
   methods: {
     async getList() {
       // eslint-disable-next-line camelcase
+      this.loading = true
       const { current_page: currentPage, items, total } = await DictModel.getDictTypeList(this.currentPage, 10)
       this.currentPage = currentPage
       this.tableData = [...items]
       this.pagination.pageTotal = total
+      this.loading = false
     },
-    async addDict(dict) {
+    async handleAdd(dict) {
       const res = await DictModel.addDict(dict)
       this.dialogAddVisible = false
       this.$message.success('新增字典成功!')
       this.getList()
     },
-    handleEdit(val) {
-      this.dict = val.row
+    handleEdit({ row }) {
+      this.dict = row
       this.$nextTick(() => {
         this.dialogEditVisible = true
       })
     },
-    async handleDelete(val) {
-      const { id } = val.row
-      await DictModel.deleteDictType(id)
+    async handleDelete({ row }) {
+      await DictModel.deleteDictType(row.id)
       this.$message.success('删除字典成功!')
       await this.getList()
     },
@@ -123,7 +134,6 @@ export default {
       this.getList()
     },
     async editDict(dict) {
-      console.log(dict)
       const {
         id, name, remark, status, type
       } = dict
@@ -142,12 +152,10 @@ export default {
   .container {
     .header {
       display flex
+      height 60px
       align-items center
-      .title {
-        height 59px
-        line-height 59px
-        font-size 16px
-        font-weight 500
+      .crud-opts-right {
+
       }
     }
     .path {

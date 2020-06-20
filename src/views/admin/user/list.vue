@@ -1,13 +1,15 @@
 <template>
   <el-card style="{ -moz-user-select : none }">
     <div v-show="!showEdit && !showAdd" class="container">
-      <el-card class="header">
-        <el-button icon="el-icon-plus" type="primary" @click="showAdd=!showAdd">新增</el-button>
-        <CrudOperation class="crud-opts" :table-column="tableColumn"
+      <div class="header">
+        <div class="crud-opts-left">
+          <el-button icon="el-icon-plus" type="primary" @click="showAdd=!showAdd">新增</el-button>
+        </div>
+        <CrudOperation class="crud-opts-right" :table-column="tableColumn"
           @handleColumnChange="handleColumnChange"
           @handleCheckAllChange="handleCheckAllChange"
           @refresh="getList"/>
-      </el-card>
+      </div>
       <CeresTable v-loading="loading" 
                   :table-column="tableColumn" :table-data="tableData" :operate="operate" 
                   @handleEdit="handleEdit" @handleDelete="handleDelete" />
@@ -19,14 +21,14 @@
 <script type="text/ecmascript-6">
 import UserModel from '@/models/user'
 import UserEdit from './UserEdit'
-import CrudOperation from 'comps/base/crud/CRUD.Operation'
+import crudMixin from '@/mixins/crud'
 
 export default {
   name: 'UserList',
   components: {
-    UserEdit,
-    CrudOperation
+    UserEdit
   },
+  mixins: [crudMixin],
   data() {
     return {
       loading: false,
@@ -63,8 +65,8 @@ export default {
   methods: {
     async getList() {
       this.loading = true
-      const res = await UserModel.getUserList(this.currentPage, this.pagination.pageSize)
-      this.tableData = [...res.items]
+      const data = await UserModel.getUserList(this.currentPage, this.pagination.pageSize)
+      this.tableData = [...data.items]
       this.loading = false
     },
     handleEdit(val) {
@@ -72,25 +74,13 @@ export default {
       this.editID = val.row.id
     },
     handleDelete(val) {
-      console.log(val, 13123)
+      console.log(val, 'delete')
     },
     handleHide() {
       this.showAdd = false
       this.showEdit = false
       this.getList()
     },
-    handleColumnChange(item) {
-      this.tableColumn.forEach(el => {
-        if (el.prop === item.prop) {
-          item.visible = !item.visible
-        }
-      })
-    },
-    handleCheckAllChange(val) {
-      this.tableColumn.forEach(item => {
-        item.visible = val
-      })
-    }
   },
 }
 </script>
@@ -99,16 +89,11 @@ export default {
 .container {
   .header {
     display flex
+    // justify-content space-around
     height 60px
     margin 0 0 10px
     align-items center
-    .title {
-      height 59px
-      line-height 59px
-      font-size 16px
-      font-weight 500
-    }
-    .crud-opts {
+    .crud-opts-right {
     }
   }
 }
