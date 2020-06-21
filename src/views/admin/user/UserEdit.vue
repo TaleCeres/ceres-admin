@@ -65,15 +65,15 @@ export default {
     }
   },
   mounted() {
-    this.getOneUser()
+    this.getUser()
     this.getAllGroups()
   },
   methods: {
     async getAllGroups() {
       this.groups = await AdminModel.getAllGroups()
     },
-    async getOneUser() {
-      const res = await User.getOneUser(this.editId)
+    async getUser() {
+      const res = await User.getUser(this.editId)
       this.form.name = res.nickname
       this.form.group_id = res.group_id
     },
@@ -93,7 +93,7 @@ export default {
       //   if (this.cacheGroup.name !== this.form.name || this.cacheGroup.info !== this.form.info) {
       //       // eslint-disable-line
       //     this.loading = true
-      //     const res = await AdminModel.updateOneGroup(this.form.name, this.form.info, this.id)
+      //     const res = await AdminModel.updateGroup(this.form.name, this.form.info, this.id)
       //     this.loading = false
       //     this.$message.success('权限组信息更新成功！')
       //   }
@@ -122,7 +122,7 @@ export default {
       // }
     },
     resetForm(formName) {
-      this.getOneUser()
+      this.getUser()
     },
   },
 }

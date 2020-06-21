@@ -10,7 +10,6 @@
           @refresh="getList"/>
     </div>
     <CeresTable 
-      ref="ceresTable" 
       v-loading="loading"
       :pagination="pagination"
       :table-column="tableColumn"

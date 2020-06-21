@@ -14,12 +14,12 @@ export default class Admin {
     return groups
   }
 
-  static async getOneGroup(id) {
+  static async getGroup(id) {
     const group = await get(`cms/group/${id}`)
     return group
   }
 
-  static async createOneGroup(name, info, auth_ids) {
+  static async createGroup(name, info, auth_ids) {
     const res = await post('cms/group', {
       name,
       info,
@@ -28,7 +28,7 @@ export default class Admin {
     return res
   }
 
-  static async updateOneGroup(name, info, id) {
+  static async updateGroup(name, info, id) {
     const res = await put(`cms/group/${id}`, {
       name,
       info,
@@ -52,7 +52,7 @@ export default class Admin {
     return res
   }
 
-  static async deleteOneGroup(id) {
+  static async deleteGroup(id) {
     const group = await _delete(`cms/group/${id}`)
     return group
   }

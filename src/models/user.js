@@ -31,7 +31,7 @@ export default class User {
     return user
   }
 
-  static async getOneUser(uid) {
+  static async getUser(uid) {
     const user = await get(`/cms/user/${uid}`)
     return user
   }

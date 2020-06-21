@@ -2,10 +2,13 @@
   <el-card class="container" style = "{ -moz-user-select : none }">
     <div v-show="!showEdit && !showAdd" class="container">
       <div class="header">
-        <div class="title">分组列表</div>
-        <el-button type="primary" style="margin-left: 30px" size="medium" @click="showAdd = true">新增分组</el-button>
+        <el-button icon="el-icon-plus" type="primary" @click="showAdd = true">新增</el-button>
+        <CrudOperation class="crud-opts-right" :table-column="tableColumn"
+          @handleColumnChange="handleColumnChange"
+          @handleCheckAllChange="handleCheckAllChange"
+          @refresh="getList"/>
       </div>
-      <ceres-table
+      <CeresTable
         v-loading="loading"
         :table-column="tableColumn"
         :table-data="tableData"
@@ -23,20 +26,23 @@
 import GroupApiAdd from './GroupApiAdd'
 import GroupApiEdit from './GroupApiEdit'
 import AdminModel from '@/models/admin'
+import crudMixin from '@/mixins/crud'
+
 export default {
-  name: 'GroupApiList',
+  name: 'GroupAuthList',
   components: {
     GroupApiAdd,
     GroupApiEdit
   },
+  mixins: [crudMixin],
   data() {
     return {
       loading: false,
       showAdd: false,
       showEdit: false,
       tableColumn: [
-        { prop: 'name', label: '名称' },
-        { prop: 'info', label: '信息' },
+        { prop: 'name', label: '名称', visible: true },
+        { prop: 'info', label: '信息', visible: true },
       ],
       tableData: [],
       operate: [
@@ -46,32 +52,34 @@ export default {
       cacheGroup: {}
     }
   },
-  computed: {},
+  computed: { },
   created() { },
   async mounted() {
     // await User.getToken('999@qq.com', '123456')
     // await User.getInfo()
-    this.getAllGroups()
+    this.getList()
   },
   methods: {
-    async getAllGroups() {
+    async getList() {
       this.loading = true
-      this.tableData = await AdminModel.getAllGroups()
+      const data = await AdminModel.getAllGroups()
+      this.tableData = data.items
       this.loading = false
     },
     handleEdit(val) {
       this.showEdit = true
+      console.log('cacheGroup', val.row)
       this.cacheGroup = { ...val.row }
     },
     async handleDelete(val) {
-      await AdminModel.deleteOneGroup(val.row.id)
+      await AdminModel.deleteGroup(val.row.id)
       this.$message.success('删除成功')
-      this.getAllGroups()
+      this.getList()
     },
     handleHide() {
       this.showAdd = false
       this.showEdit = false
-      this.getAllGroups()
+      this.getList()
     }
   },
 }
@@ -81,6 +89,7 @@ export default {
   .container {
     .header {
       display flex
+      height 60px
       align-items center
       .title {
         height 59px

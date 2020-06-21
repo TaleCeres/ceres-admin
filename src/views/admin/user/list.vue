@@ -89,7 +89,6 @@ export default {
 .container {
   .header {
     display flex
-    // justify-content space-around
     height 60px
     margin 0 0 10px
     align-items center

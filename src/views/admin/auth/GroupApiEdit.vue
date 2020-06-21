@@ -50,9 +50,9 @@ export default {
     cacheGroup: {
       type: Object,
       default: () => ({
-        name: '',
-        info: '',
-        id: ''
+        id: undefined,
+        name: undefined,
+        info: undefined,
       })
     }
   },
@@ -75,13 +75,13 @@ export default {
     }
   },
   mounted() {
-    this.getOneGroup()
+    this.getGroup()
   },
   methods: {
-    async getOneGroup() {
-      const res = await AdminModel.getOneGroup(this.id)
-      this.form.name = res.name
-      this.form.info = res.info
+    async getGroup() {
+      const data = await AdminModel.getGroup(this.id)
+      this.form.name = data.name
+      this.form.info = data.info
     },
     handleHide() {
       this.$emit('handleHide', false)
@@ -106,7 +106,7 @@ export default {
         if (this.cacheGroup.name !== this.form.name || this.cacheGroup.info !== this.form.info) {
           // eslint-disable-line
           this.loading = true
-          const res = await AdminModel.updateOneGroup(this.form.name, this.form.info, this.id)
+          const res = await AdminModel.updateGroup(this.form.name, this.form.info, this.id)
           this.loading = false
           this.$message.success('权限组信息更新成功！')
         }
@@ -135,7 +135,7 @@ export default {
       }
     },
     resetForm(formName) {
-      this.getOneGroup()
+      this.getGroup()
       this.$refs.groupPermissions.getGroupPermissions()
     },
   },

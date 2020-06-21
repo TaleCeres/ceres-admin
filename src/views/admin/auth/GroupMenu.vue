@@ -33,7 +33,7 @@ export default {
   props: {
     groupId: {
       type: Number,
-      default: null
+      default: 1
     }
   },
   data() {
@@ -56,10 +56,10 @@ export default {
     // 获取所有路由
     async getRouteTree() {
       try {
-        const res = await RouteModel.getRouteTree()
-        this.routeTree = [...res]
+        const data = await RouteModel.getRouteTree()
+        this.routeTree = [...data]
         this.getTreeId(this.routeTree)
-        this.cacheTree = [...res]
+        this.cacheTree = [...data]
       } catch (e) {
         console.log(e)
       }

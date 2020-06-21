@@ -42,7 +42,7 @@
     </el-row>
 
     <el-dialog
-      :title="form.id? '编辑菜单': '新建菜单'"
+      :title="form.id ? '编辑菜单': '新建菜单'"
       :visible.sync="dialogVisible"
       :before-close="closeDialog"
       width="600px">

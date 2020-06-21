@@ -46,7 +46,7 @@ export default {
   },
   data() {
     const checkName = (rule, value, callback) => {
-        // eslint-disable-line
+      // eslint-disable-line
       if (!value) {
         return callback(new Error('分组名称不能为空'))
       }
@@ -60,7 +60,13 @@ export default {
         info: '',
       },
       rules: {
-        name: [{ validator: checkName, trigger: ['blur', 'change'], required: true }],
+        name: [
+          { 
+            validator: checkName, 
+            trigger: ['blur', 'change'], 
+            required: true 
+          }
+        ],
         info: [],
       },
       loading: false,
@@ -84,7 +90,7 @@ export default {
           const finalPermissions = this.permissions.filter(x => Object.keys(this.allPermissions).indexOf(x) < 0)
           try {
             this.loading = true
-            res = await AdminModel.createOneGroup(this.form.name, this.form.info, finalPermissions, this.id) // eslint-disable-line
+            res = await AdminModel.createGroup(this.form.name, this.form.info, finalPermissions, this.id) // eslint-disable-line
           } catch (e) {
             this.loading = false
             console.log(e)

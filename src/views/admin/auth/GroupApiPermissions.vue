@@ -72,7 +72,7 @@ export default {
       // id为group_id
       if (this.id) {
         this.permission_module_ids = []
-        const group = await AdminModel.getOneGroup(this.id)
+        const group = await AdminModel.getGroup(this.id)
         let temp = []
         const cache = {}
         group.auth_list.forEach(v => {

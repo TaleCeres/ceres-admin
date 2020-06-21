@@ -1,7 +1,7 @@
 <template>
   <el-button-group class="crud-opts-container ">
-    <el-button size="mini" plain type="info" icon="el-icon-search" @click="toggleSearch()" />
-    <el-button size="mini" icon="el-icon-refresh" @click="refresh()" />
+    <el-button icon="el-icon-search" size="mini" @click="toggleSearch" />
+    <el-button icon="el-icon-refresh" size="mini" @click="refresh" />
 
     <el-popover placement="bottom-end" width="150" trigger="click">
       <el-button slot="reference" size="mini" icon="el-icon-s-grid">
@@ -68,6 +68,9 @@ export default {
     },
     handleCheckAllChange(val) {
       this.$emit('handleCheckAllChange', val)
+    },
+    toggleSearch() {
+      //
     },
     refresh() {
       this.$emit('refresh')

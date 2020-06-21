@@ -9,11 +9,12 @@
           <template v-for="item in operate">
             <el-popconfirm 
               v-if="item.func === 'handleDelete'" :key="item.func"
+              style="margin: 0 10px;"
+              title="确定删除本条数据吗？"
               confirm-button-text='确定'
               cancel-button-text='取消'
               icon="el-icon-info"
               icon-color="red"
-              title="确定删除本条数据吗？"
               @onConfirm="buttonMethod(item.func, scope.$index, scope.row)">
               <el-button slot="reference" :type="item.type" size="small">
               {{item.name}}
@@ -77,17 +78,6 @@ export default {
         }
         return true
       })
-    },
-    $operate: {
-      get() {
-        return this.operate.map(item => {
-          item.pop = false
-          return item
-        })
-      },
-      set() {
-        //
-      }
     }
   },
   created() { },

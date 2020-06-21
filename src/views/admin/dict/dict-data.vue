@@ -1,10 +1,14 @@
 <template>
-  <div class="container">
+  <el-card class="container">
     <div class="header">
-      <div class="title">字典数据列表</div>
-      <el-button style="margin-left: 30px" type="primary" @click="dialogAddVisible = true">新增字典数据</el-button>
+      <el-button icon="el-icon-plus" type="primary" @click="dialogAddVisible = true">新增</el-button>
+      <CrudOperation class="crud-opts-right" :table-column="tableColumn"
+        @handleColumnChange="handleColumnChange"
+        @handleCheckAllChange="handleCheckAllChange"
+        @refresh="getDictDataList"/>
     </div>
-    <ceres-table
+    <CeresTable
+      v-loading="loading" 
       :pagination="pagination"
       :table-column="tableColumn"
       :table-data="tableData"
@@ -12,6 +16,7 @@
       @handleEdit="handleEdit"
       @handleDelete="handleDelete"
     />
+
     <DictDataForm
       :type="type"
       :dict-data="dictData"
@@ -19,17 +24,20 @@
       @close="dialogEditVisible = false"
       @handleSubmit="editDictData">
     </DictDataForm>
-  </div>
+  </el-card>
 </template>
 
 <script>
 import DictModel from '@/models/dict'
 import DictDataForm from './components/DictDataForm'
+import crudMixin from '@/mixins/crud'
 export default {
-  name: 'dict-data',
+  name: 'DictDataList',
   components: { DictDataForm },
+  mixins: [crudMixin],
   data() {
     return {
+      loading: true,
       dictData: {},
       dialogAddVisible: false,
       dialogEditVisible: false,
@@ -40,10 +48,10 @@ export default {
       },
       type: '',
       tableColumn: [
-        { prop: 'id', label: '字典编码' },
-        { prop: 'label', label: '字典标签' },
-        { prop: 'value', label: '字典键值' },
-        { prop: 'order', label: '字典排序' },
+        { prop: 'id', label: '字典编码', visible: true },
+        { prop: 'label', label: '字典标签', visible: true },
+        { prop: 'value', label: '字典键值', visible: true },
+        { prop: 'order', label: '字典排序', visible: true },
         {
           prop: 'status',
           label: '状态',
@@ -52,9 +60,10 @@ export default {
             return (
               <span>{[row.status ? '正常' : '停用']}</span>
             )
-          }
+          }, 
+          visible: true
         },
-        { prop: 'remark', label: '备注' },
+        { prop: 'remark', label: '备注', visible: true },
       ],
       tableData: [],
       operate: [
@@ -81,9 +90,11 @@ export default {
     },
 
     async getDictDataList() {
+      this.loading = true
       const { items, total } = await DictModel.getDictDataList(this.type, this.currentPage, 10)
       this.tableData = [...items]
       this.pagination.pageTotal = total
+      this.loading = false
     },
     handleEdit(val) {
       this.dictData = val.row
@@ -92,23 +103,23 @@ export default {
     async handleDelete(val) {
       const { id } = val.row
       await DictModel.deleteDictData(id)
-      this.$message.success('删除字典数据成功')
-      await this.getDictDataList()
+      this.$message.success('删除字典数据成功!')
+      this.getDictDataList()
     },
 
     async addDictData(data) {
       data.type = this.type
       await DictModel.addDictData(data)
-      this.$message.success('新增字典数据成功')
+      this.$message.success('新增字典数据成功!')
       this.dialogAddVisible = false
-      await this.getDictDataList()
+      this.getDictDataList()
     },
 
     async editDictData(val) {
       await DictModel.editDictData(val.id, val)
-      this.$message.success('更新字典数据成功')
+      this.$message.success('更新字典数据成功!')
       this.dialogEditVisible = false
-      await this.getDictDataList()
+      this.getDictDataList()
     }
   },
 }
@@ -118,12 +129,10 @@ export default {
   .container {
     .header {
       display flex
+      height 60px
       align-items center
-      .title {
-        height 59px
-        line-height 59px
-        font-size 16px
-        font-weight 500
+      .crud-opts-right {
+
       }
     }
   }

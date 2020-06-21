@@ -1,37 +1,36 @@
 <template>
-    <el-card class="container">
-      <div class="header">
-        <el-button icon="el-icon-plus" type="primary" @click="dialogAddVisible = true">新增</el-button>
-        <CrudOperation class="crud-opts-right" :table-column="tableColumn"
-          @handleColumnChange="handleColumnChange"
-          @handleCheckAllChange="handleCheckAllChange"
-          @refresh="getList"/>
-      </div>
-      <CeresTable
-        v-loading="loading" 
-        :pagination="pagination"
-        :table-column="tableColumn"
-        :table-data="tableData"
-        :operate="operate"
-        @handleEdit="handleEdit"
-        @handleDelete="handleDelete"
-        @currentChange = "currentChange"
-      />
+  <el-card class="container">
+    <div class="header">
+      <el-button icon="el-icon-plus" type="primary" @click="dialogAddVisible = true">新增</el-button>
+      <CrudOperation class="crud-opts-right" :table-column="tableColumn"
+        @handleColumnChange="handleColumnChange"
+        @handleCheckAllChange="handleCheckAllChange"
+        @refresh="getList"/>
+    </div>
+    <CeresTable
+      v-loading="loading" 
+      :pagination="pagination"
+      :table-column="tableColumn"
+      :table-data="tableData"
+      :operate="operate"
+      @handleEdit="handleEdit"
+      @handleDelete="handleDelete"
+      @currentChange = "currentChange"
+    />
 
-      <DictForm
-        :visible="dialogAddVisible"
-        @close="dialogAddVisible = false"
-        @handleSubmit="handleAdd">
-      </DictForm>
+    <DictForm
+      :visible="dialogAddVisible"
+      @close="dialogAddVisible = false"
+      @handleSubmit="handleAdd">
+    </DictForm>
 
-      <DictForm
-        :dict="dict"
-        :visible="dialogEditVisible"
-        @close="dialogEditVisible = false"
-        @handleSubmit="editDict">
-      </DictForm>
-
-    </el-card>
+    <DictForm
+      :dict="dict"
+      :visible="dialogEditVisible"
+      @close="dialogEditVisible = false"
+      @handleSubmit="editDict">
+    </DictForm>
+  </el-card>
 </template>
 
 <script>
