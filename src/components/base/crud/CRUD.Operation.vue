@@ -69,8 +69,9 @@ export default {
     handleCheckAllChange(val) {
       this.$emit('handleCheckAllChange', val)
     },
+    // 切换搜索框
     toggleSearch() {
-      //
+      this.$emit('toggleSearch')
     },
     refresh() {
       this.$emit('refresh')

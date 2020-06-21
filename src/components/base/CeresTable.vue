@@ -4,10 +4,10 @@
       <el-table-column v-for="item in $tableColumn" :key="item.prop" :prop="item.prop" :label="item.label"
                        :formatter="item.render" :show-overflow-tooltip="true">
       </el-table-column>
-      <el-table-column v-if="operate.length > 0" fixed="right" label="操作" width="300">
+      <el-table-column v-if="operate.length > 0" fixed="right" label="操作" width="240">
         <template slot-scope="scope">
           <template v-for="item in operate">
-            <el-popconfirm 
+            <el-popconfirm
               v-if="item.func === 'handleDelete'" :key="item.func"
               style="margin: 0 10px;"
               title="确定删除本条数据吗？"
