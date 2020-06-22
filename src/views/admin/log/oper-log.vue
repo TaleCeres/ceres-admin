@@ -16,7 +16,7 @@
       <el-button icon="el-icon-refresh" type="warning" @click="resetQuery">重置</el-button>
     </div>
     <div class="header">
-      <CrudOperation class="crud-opts-right" :table-column="tableColumn"
+      <CrudOperation class="crud-opts-resetQueryright" :table-column="tableColumn"
                      @handleColumnChange="handleColumnChange"
                      @handleCheckAllChange="handleCheckAllChange"
                      @toggleSearch="toggleSearch"
@@ -45,8 +45,8 @@ export default {
   data() {
     return {
       loading: true,
-      currentPage: 1,
       query: {},
+      currentPage: 1,
       timeInterval: [],
       size: 10,
       pagination: {

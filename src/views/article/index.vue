@@ -1,15 +1,21 @@
 <template>
   <el-card class="container" style = "{ -moz-user-select : none }">
-    <div class="header">
-      <el-select v-model="type" @change="handleArticleType">
+    <div v-show="searchToggle" class="search-container">
+      <el-select v-model="type">
         <el-option v-for="item in typeList" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
-      <CrudOperation class="crud-opts-right" :table-column="tableColumn"
-          @handleColumnChange="handleColumnChange"
-          @handleCheckAllChange="handleCheckAllChange"
-          @refresh="getList"/>
+      <el-button icon="el-icon-search" type="primary" @click="getList">搜索</el-button>
+      <el-button icon="el-icon-refresh" type="warning" @click="resetQuery">重置</el-button>
     </div>
-    <CeresTable 
+    <div class="header">
+      <el-button icon="el-icon-plus" type="primary">新增</el-button>
+      <CrudOperation class="crud-opts-right" :table-column="tableColumn"
+                     @handleColumnChange="handleColumnChange"
+                     @handleCheckAllChange="handleCheckAllChange"
+                     @toggleSearch="toggleSearch"
+                     @refresh="getList"/>
+    </div>
+    <CeresTable
       v-loading="loading"
       :pagination="pagination"
       :table-column="tableColumn"
@@ -33,6 +39,7 @@ export default {
   data() {
     return {
       loading: true,
+      query: {},
       currentPage: 1,
       size: 10,
       type: 0,
@@ -85,16 +92,20 @@ export default {
   methods: {
     async getList() {
       this.loading = true
-      const res = await Article.getArticleList(this.currentPage, this.size, this.type)
+      this.query = {
+        page: this.currentPage,
+        size: this.size,
+        type: this.type,
+      }
+      const res = await Article.getArticleList(this.query)
       this.articleList = [...res.items]
       this.pagination.pageTotal = res.total
       this.loading = false
     },
-    handleArticleType(val) {
-      this.type = val
-      this.getList()
+    resetQuery() {
+      this.type = 0
+      this.__resetQuery()
     },
-
     handleEdit({ row }) {
       this.$router.push({
         path: `/article/edit/${row.id}`
@@ -102,7 +113,7 @@ export default {
     },
     async handleDelete({ index, row }) {
       await Article.deleteArticle(row.id)
-      this.$message.success('删除文章成功')
+      this.$message.success('删除成功')
       this.getList()
     },
     currentChange(val) {

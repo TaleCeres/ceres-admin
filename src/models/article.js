@@ -6,7 +6,7 @@ import {
 } from '@/utils/request'
 
 export default class Article {
-  static getArticleList(page, size, type) {
+  static getArticleList({page, size, type}) {
     return get(`cms/article/list?page=${page}&size=${size}&type=${type}`)
   }
 
