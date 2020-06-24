@@ -55,7 +55,7 @@ export default {
       },
       tableColumn: [
         { prop: 'id', label: '编号', visible: true },
-        { prop: 'method', label: '请求方式', visible: true },
+        { prop: 'request_method', label: '请求方式', visible: true },
         { prop: 'type', label: '操作类型', visible: true },
         { prop: 'path', label: '请求地址', visible: true },
         { prop: 'message', label: '操作信息', visible: true },
