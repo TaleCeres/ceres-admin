@@ -1,6 +1,11 @@
 <template>
   <div class="ceres-table">
-    <el-table :data="tableData" border style="width: 100%">
+    <el-table :data="tableData" border style="width: 100%" @selection-change="handleSelectionChange">
+      <el-table-column
+        v-if="selection"
+        type="selection"
+        width="55">
+      </el-table-column>
       <el-table-column v-for="item in $tableColumn" :key="item.prop" :prop="item.prop" :label="item.label"
                        :formatter="item.render" :show-overflow-tooltip="true">
       </el-table-column>
@@ -65,6 +70,11 @@ export default {
       type: [Object, Boolean],
       default: false,
     },
+    selection: {
+      // 选择
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {}
@@ -100,6 +110,12 @@ export default {
     currentChange(page) {
       this.$emit('currentChange', page)
     },
+    // 表格行选中
+    handleSelectionChange(val) {
+      if (this.selection) {
+        this.$emit('selectionChange', val)
+      }
+    }
   },
 }
 </script>

@@ -2,6 +2,21 @@
   <el-card class="container" style = "{ -moz-user-select : none }">
     <div class="header">
       <el-button type="primary" icon="el-icon-plus" @click="dialogAddVisible =true">新增</el-button>
+      <el-popconfirm
+        style="margin: 0 10px;"
+        title="确定删除当前选中的通知公告吗？"
+        confirm-button-text='确定'
+        cancel-button-text='取消'
+        icon="el-icon-info"
+        icon-color="red"
+        @onConfirm="deleteNotice">
+        <el-button
+          slot="reference"
+          type="danger"
+          icon="el-icon-delete"
+          :disabled="multipleSelection.length === 0"
+        >删除</el-button>
+      </el-popconfirm>
       <CrudOperation class="crud-opts-right" :table-column="tableColumn"
                      @handleColumnChange="handleColumnChange"
                      @handleCheckAllChange="handleCheckAllChange"
@@ -9,11 +24,13 @@
     </div>
     <CeresTable
       v-loading="loading"
+      :selection="true"
       :pagination="pagination"
       :table-column="tableColumn"
       :table-data="tableData"
       :operate="operate"
       :current-page="currentPage"
+      @selectionChange="handleSelectionChange"
       @handleEdit="handleEdit"
       @handleDelete="handleDelete"
       @currentChange = "currentChange"
@@ -43,6 +60,7 @@ export default {
   mixins: [crudMixin],
   data() {
     return {
+      multipleSelection: [],
       editId: null,
       dialogAddVisible: false,
       dialogEditVisible: false,
@@ -135,6 +153,15 @@ export default {
     closeEditForm() {
       this.dialogEditVisible = false
       this.editId = null
+    },
+    handleSelectionChange(val) {
+      this.multipleSelection = val
+    },
+    async deleteNotice() {
+      const ids = this.multipleSelection.map(item => item.id).join(',')
+      await NoticeModel.deleteNotice(ids)
+      this.$message.success('删除通知成功')
+      this.getList()
     }
   },
 }
