@@ -95,7 +95,6 @@ export default {
   created() {
   },
   mounted() {
-    console.log(this.id)
   },
   methods: {
     async getNotice() {
