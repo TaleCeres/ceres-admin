@@ -10,8 +10,8 @@
           @handleCheckAllChange="handleCheckAllChange"
           @refresh="getList"/>
       </div>
-      <CeresTable v-loading="loading" 
-                  :table-column="tableColumn" :table-data="tableData" :operate="operate" 
+      <CeresTable v-loading="loading"
+                  :table-column="tableColumn" :table-data="tableData" :operate="operate"
                   @handleEdit="handleEdit" @handleDelete="handleDelete" />
     </div>
     <user-edit v-if="showEdit" :edit-id="editID" @handleHide="handleHide" />
@@ -24,7 +24,7 @@ import UserEdit from './UserEdit'
 import crudMixin from '@/mixins/crud'
 
 export default {
-  name: 'UserList',
+  name: 'AdminUser',
   components: {
     UserEdit
   },

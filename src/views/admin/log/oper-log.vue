@@ -39,7 +39,7 @@
 import OperLogModel from '@/models/oper-log'
 import crudMixin from '@/mixins/crud'
 export default {
-  name: 'OperLog',
+  name: 'AdminOperLog',
   mixins: [crudMixin],
   props: {},
   data() {

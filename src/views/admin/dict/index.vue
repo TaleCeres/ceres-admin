@@ -15,7 +15,7 @@
       :operate="operate"
       @handleEdit="handleEdit"
       @handleDelete="handleDelete"
-      @currentChange = "currentChange"
+      @currentChange="currentChange"
     />
 
     <DictForm
@@ -39,7 +39,7 @@ import DictForm from './components/DictForm'
 import crudMixin from '@/mixins/crud'
 
 export default {
-  name: 'index',
+  name: 'AdminDict',
   components: { DictForm },
   mixins: [crudMixin],
   data() {
@@ -103,8 +103,8 @@ export default {
   },
   methods: {
     async getList() {
-      // eslint-disable-next-line camelcase
       this.loading = true
+      // eslint-disable-next-line camelcase
       const { current_page: currentPage, items, total } = await DictModel.getDictTypeList(this.currentPage, 10)
       this.currentPage = currentPage
       this.tableData = [...items]
@@ -114,7 +114,7 @@ export default {
     async handleAdd(dict) {
       const res = await DictModel.addDict(dict)
       this.dialogAddVisible = false
-      this.$message.success('新增字典成功!')
+      this.$message.success('新增成功!')
       this.getList()
     },
     handleEdit({ row }) {
@@ -125,7 +125,7 @@ export default {
     },
     async handleDelete({ row }) {
       await DictModel.deleteDictType(row.id)
-      this.$message.success('删除字典成功!')
+      this.$message.success('删除成功!')
       await this.getList()
     },
     currentChange(val) {
@@ -139,7 +139,7 @@ export default {
       await DictModel.editDictType(id, {
         name, remark, status, type
       })
-      this.$message.success('更新字典成功!')
+      this.$message.success('更新成功!')
       await this.getList()
       this.dialogEditVisible = false
     }
@@ -148,18 +148,18 @@ export default {
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-  .container {
-    .header {
-      display flex
-      height 60px
-      align-items center
-      .crud-opts-right {
+.container {
+  .header {
+    display flex
+    height 60px
+    align-items center
+    .crud-opts-right {
 
-      }
-    }
-    .path {
-      color #1890ff
-      margin-left 10px
     }
   }
+  .path {
+    color #1890ff
+    margin-left 10px
+  }
+}
 </style>

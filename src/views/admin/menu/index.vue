@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <el-row :gutter="20" style="padding: 20px 0">
-      <el-col :span="12">
+      <el-col :span="16">
         <el-card>
           <div slot="header">
             <el-button size="medium" type="primary" @click="updateRouteTree">保存</el-button>
@@ -115,7 +115,7 @@ import IconSelect from '@/components/base/IconSelect'
 let id = 1000
 
 export default {
-  name: 'GroupMenuList',
+  name: 'AdminMenu',
   components: {
     Treeselect,
     IconSelect,
@@ -139,9 +139,7 @@ export default {
   },
   computed: {
   },
-  async created() {
-    // await UserModel.getToken('Boss', '123456')
-  },
+  created() { },
   mounted() {
     this.getRouteTree()
   },

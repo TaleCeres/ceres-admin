@@ -4,18 +4,16 @@
       <el-button type="primary" icon="el-icon-plus" @click="dialogAddVisible =true">新增</el-button>
       <el-popconfirm
         style="margin: 0 10px;"
-        title="确定删除当前选中的通知公告吗？"
+        title="确定删除当前选中的内容吗？"
         confirm-button-text='确定'
         cancel-button-text='取消'
         icon="el-icon-info"
         icon-color="red"
         @onConfirm="deleteNotice">
-        <el-button
-          slot="reference"
-          type="danger"
-          icon="el-icon-delete"
-          :disabled="multipleSelection.length === 0"
-        >删除</el-button>
+        <el-button slot="reference" type="danger" icon="el-icon-delete"
+                   :disabled="multipleSelection.length === 0">
+                   删除
+        </el-button>
       </el-popconfirm>
       <CrudOperation class="crud-opts-right" :table-column="tableColumn"
                      @handleColumnChange="handleColumnChange"
@@ -53,7 +51,7 @@ import NoticeModel from '@/models/notice'
 import crudMixin from '@/mixins/crud'
 import NoticeForm from './NoticeForm'
 export default {
-  name: 'list',
+  name: 'AdminNotice',
   components: {
     NoticeForm
   },
@@ -74,11 +72,12 @@ export default {
         pageTotal: 0
       },
       tableColumn: [
-        { prop: 'id', label: '编号', visible: true },
-        { prop: 'title', label: '公告标题', visible: true },
+        { prop: 'id', label: '编号', width: '60', visible: true },
+        { prop: 'title', label: '标题', visible: true },
         {
           prop: 'type',
-          label: '公告类型',
+          label: '类型',
+          width: '100',
           // eslint-disable-next-line
           render: (row, column, cell) => {
             return (
@@ -90,10 +89,13 @@ export default {
         {
           prop: 'status',
           label: '状态',
+          width: '100',
           // eslint-disable-next-line
           render: (row, column, cell) => {
             return (
-              <span>{[row.status ? '正常' : '关闭']}</span>
+              <el-tag type={row.type ? 'success' : 'danger'}>
+                {row.type ? '正常' : '关闭'}
+              </el-tag>
             )
           },
           visible: true

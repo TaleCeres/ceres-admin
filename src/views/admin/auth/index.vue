@@ -29,7 +29,7 @@ import AdminModel from '@/models/admin'
 import crudMixin from '@/mixins/crud'
 
 export default {
-  name: 'GroupAuthList',
+  name: 'AdminAuth',
   components: {
     GroupApiAdd,
     GroupApiEdit

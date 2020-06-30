@@ -23,7 +23,7 @@
 import LoginLogModel from '@/models/login-log'
 import crudMixin from '@/mixins/crud'
 export default {
-  name: 'LoginLog',
+  name: 'AdminLoginLog',
   mixins: [crudMixin],
   props: {},
   data() {
