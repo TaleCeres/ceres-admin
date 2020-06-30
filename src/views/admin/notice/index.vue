@@ -90,14 +90,11 @@ export default {
           prop: 'status',
           label: '状态',
           width: '100',
-          // eslint-disable-next-line
-          render: (row, column, cell) => {
-            return (
-              <el-tag type={row.type ? 'success' : 'danger'}>
-                {row.type ? '正常' : '关闭'}
-              </el-tag>
-            )
-          },
+          render: (row, column, cell) => (
+            <el-tag type={row.type ? 'success' : 'danger'}>
+              {row.type ? '正常' : '关闭'}
+            </el-tag>
+          ),
           visible: true
         },
         { prop: 'create_by', label: '创建者', visible: true },
@@ -118,6 +115,7 @@ export default {
   methods: {
     async getList() {
       this.loading = true
+
       this.query = {
         page: this.currentPage,
         size: this.size,
@@ -125,6 +123,7 @@ export default {
       const data = await NoticeModel.getList(this.query)
       this.tableData = [...data.items]
       this.pagination.pageTotal = data.total
+
       this.loading = false
     },
     async handleEdit({ index, row }) {
@@ -142,13 +141,13 @@ export default {
     },
     async addNotice(query) {
       await NoticeModel.addNotice(query)
-      this.$message.success('新增通知成功')
+      this.$message.success('新增成功')
       this.dialogAddVisible = false
       this.getList()
     },
     async editNotice(query) {
       await NoticeModel.updateNotice(this.editId, query)
-      this.$message.success('更新通知成功')
+      this.$message.success('更新成功')
       this.dialogEditVisible = false
       this.getList()
     },
@@ -162,7 +161,7 @@ export default {
     async deleteNotice() {
       const ids = this.multipleSelection.map(item => item.id).join(',')
       await NoticeModel.deleteNotice(ids)
-      this.$message.success('删除通知成功')
+      this.$message.success('删除成功')
       this.getList()
     }
   },

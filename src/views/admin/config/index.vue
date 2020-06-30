@@ -22,10 +22,12 @@
 
 <script type="text/ecmascript-6">
 import ConfigModel from '@/models/config'
+import crudMixin from '@/mixins/crud'
 
 export default {
   name: 'AdminConfig',
   components: {},
+  mixins: [crudMixin],
   data() {
     return {
       loading: true,
