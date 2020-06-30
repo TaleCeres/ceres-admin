@@ -1,36 +1,61 @@
 <template>
-  <div class="login">
-    <div class="decorate">
-      <img class="img-wave_1" src="./images/wave_1.png" alt="">
-      <img class="img-student" src="./images/student.png" alt="">
-      <img class="img-wave_2" src="./images/wave_2.png" alt="">
-    </div>
-    <div class="form-box">
-      <div class="title">
-        <h1 style="font-size: 50px">Hi,</h1>
-        <h2 style="margin-top: 20px;">欢迎使用物耀管理平台</h2>
-      </div>
-      <form class="login-form" @submit.prevent="handleLogin">
-        <input v-model="form.username" type="text" class="form-item" autocomplete="off" placeholder="请输入用户名">
-        <input v-model="form.password" type="password" class="form-item" autocomplete="off" placeholder="请输入密码">
-        <button type="submit" class="form-item submit-btn">立即登录</button>
-      </form>
-    </div>
+  <div class="login" :style="'background-image:url('+ Background +');'">
+    <el-form
+      ref="loginForm"
+      :model="form"
+      :rules="loginRules"
+      label-position="left"
+      label-width="0px"
+      class="login-form">
+      <h3 class="title">
+        Ceres-Admin
+      </h3>
+      <el-form-item prop="username">
+        <el-input v-model="form.username" type="text" auto-complete="off" placeholder="用户名">
+          <svg-icon slot="prefix" icon-class="user" class="el-input__icon input-icon" />
+        </el-input>
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input v-model="form.password" type="password" auto-complete="off" placeholder="密码" @keyup.enter.native="handleLogin">
+          <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon" />
+        </el-input>
+      </el-form-item>
+      <el-form-item style="width:100%;">
+        <el-button :loading="loading" size="medium" type="primary" style="width:100%;margin-top: 15px" @click.native.prevent="handleLogin">
+          <span v-if="!loading">安 全 登 录</span>
+          <span v-else>登 录 中...</span>
+        </el-button>
+      </el-form-item>
+      <el-form-item class="guest">
+        <el-button :loading="loading" size="medium" type="primary" style="width:100%" @click.native.prevent="handleGuestLogin">
+          <span v-if="!loading">访 客 登 录</span>
+          <span v-else>登 录 中...</span>
+        </el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 import UserModel from '@/models/user'
 import { mapState, mapActions } from 'vuex'
+import Background from './images/背景.png'
+import FormBackground from './images/登陆框.png'
 export default {
   name: 'LoginIndex',
   components: {},
   data() {
     return {
+      FormBackground,
+      Background,
       loading: false, // 加载动画
       form: {
         username: '999@qq.com',
         password: '123456',
+      },
+      loginRules: {
+        username: [{ required: true, trigger: 'blur', message: '用户名不能为空' }],
+        password: [{ required: true, trigger: 'blur', message: '密码不能为空' }],
       },
     }
   },
@@ -60,79 +85,78 @@ export default {
       const user = await UserModel.getInfo()
       this.setUser(user)
     },
+    async handleGuestLogin() {
+      this.handleLogin()
+    }
   },
 }
 </script>
 
-<style scoped lang="stylus" rel="stylesheet/stylus">
-.login {
-  height 100%
-  background linear-gradient(#6D9FFF, #1D82FF)
-  .decorate {
-    position relative
-    .img-wave_1 {
-      position absolute
-      top 0
-      left 0
-      width 207px
-      height 76px
-    }
-    .img-student {
-      position fixed
-      right 0
-      bottom 13px
-      width 650px
-      height 520px
-    }
-    .img-wave_2 {
-      position fixed
-      right 0
-      bottom 0
-      width 280px
-      height 132px
-    }
+<style lang="stylus" rel="stylesheet/stylus">
+  .login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-size: cover;
+    background-position center
   }
-  .form-box {
-    position fixed
-    left 254px
-    top 30%
-    z-index 100
-    color #FFFFFF
-    .login-form {
-      margin-top 54px
-      .form-item {
-        display block
-        margin-top 30px
-      }
+  .title {
+    margin: 0 auto 30px auto;
+    text-align: center;
+    color: #fff;
+  }
+  .login-form {
+    border-radius: 6px;
+    width 320px
+    height: 320px;
+    padding: 80px 120px 50px 120px;
+    background-image url("./images/登陆框.png")
+    background-size 100% 100%
+    .el-input {
+      height: 38px;
       input {
-        width 285px
-        padding 0 0 5px 5px
-        border-bottom 1px solid $color-white
-        font-size 16px
-        box-sizing border-box
-        color $color-white
-        background-color transparent
-        &::-webkit-input-placeholder {
-          color rgba(192, 216, 255, 1)
-        }
-        &:-webkit-autofill {
-          // 通过延长增加自动填充背景色的方式, 是用户感受不到样式的变化
-          -webkit-transition-delay 99999s
-          -webkit-transition color 99999s ease-out, background-color 99999s ease-out
-        }
-      }
-      .submit-btn {
-        width 108px
-        height 30px
-        line-height 30px
-        text-align center
-        border 1px solid $color-white
-        border-radius 2px
-        color $color-white
-        background-color transparent
-        cursor pointer
+        padding-left 42px
+        height: 38px;
+        background-color #1171B4
+        border 1px #0092FE solid
+        color #fff
       }
     }
+    .input-icon{
+      color #8ECCFF
+      height: 39px;
+      width: 14px;
+      margin-left: 12px;
+    }
+    .guest {
+      width:100%
+      .el-button--primary {
+        background-color #707070
+        border-color #707070
+      }
+    }
+  .el-button--primary {
+    background-color #46B0E2
+    span {
+      font-weight bold
+      font-size 18px
+    }
   }
-}
+  }
+  .login-tip {
+    font-size: 13px;
+    text-align: center;
+    color: #bfbfbf;
+  }
+  .login-code {
+    width: 33%;
+    display: inline-block;
+    height: 38px;
+    float: right;
+    img{
+      cursor: pointer;
+      vertical-align:middle
+    }
+  }
 </style>
