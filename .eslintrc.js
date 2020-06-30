@@ -84,7 +84,7 @@ module.exports = {
     'no-trailing-spaces': 'off', // 行末有多余空格
     'linebreak-style': 'off',
     'semi': ['error', 'never'], // 无分号
-    'object-curly-newline': ["error", "off"], // 允许对象大括号和其他令牌内部的换行符
+    'object-curly-newline': "off", // 允许对象大括号和其他令牌内部的换行符
     'indent': ['error', 2, { // 2格缩进
       'SwitchCase': 1, // 针对switch case的缩进（默认：0）
     }],

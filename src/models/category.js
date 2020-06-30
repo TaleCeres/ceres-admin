@@ -6,7 +6,7 @@ import {
 
 export default class Category {
   static async getAll() {
-    const data = await get('category/all')
+    const data = await get('v1/category/all')
     return data
   }
 }
