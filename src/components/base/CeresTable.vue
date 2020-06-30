@@ -1,12 +1,9 @@
 <template>
   <div class="ceres-table">
     <el-table :data="tableData" border style="width: 100%" @selection-change="handleSelectionChange">
-      <el-table-column
-        v-if="selection"
-        type="selection"
-        width="55">
+      <el-table-column v-if="selection" type="selection" width="55">
       </el-table-column>
-      <el-table-column v-for="item in $tableColumn" :key="item.prop" :prop="item.prop" :label="item.label"
+      <el-table-column v-for="item in $tableColumn" :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width"
                        :formatter="item.render" :show-overflow-tooltip="true">
       </el-table-column>
       <el-table-column v-if="operate.length > 0" fixed="right" label="操作" width="240">
