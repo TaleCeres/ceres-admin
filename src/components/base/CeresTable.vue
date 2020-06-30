@@ -80,9 +80,7 @@ export default {
     // 配合CRUD.operation.vue来使用
     $tableColumn() {
       return this.tableColumn.filter(item => {
-        if ('visible' in item) {
-          return item.visible
-        }
+        if ('visible' in item) return item.visible
         return true
       })
     }
@@ -93,16 +91,17 @@ export default {
     buttonMethod(funcName, index, row) {
       const _this = this
       const { methods } = this.$options
-      methods[funcName](_this, index, row)
+      // methods[funcName](_this, index, row)
+      this.$emit(funcName, { index, row })
     },
-    handleEdit(_this, index, row) {
-      // 行内编辑, 调用父组件执行
-      _this.$emit('handleEdit', { index, row })
-    },
-    handleDelete(_this, index, row) {
-      // 行内删除，调用父组件执行
-      _this.$emit('handleDelete', { index, row })
-    },
+    // handleEdit(_this, index, row) {
+    //   // 行内编辑, 调用父组件执行
+    //   _this.$emit('handleEdit', { index, row })
+    // },
+    // handleDelete(_this, index, row) {
+    //   // 行内删除，调用父组件执行
+    //   _this.$emit('handleDelete', { index, row })
+    // },
     // 切换当前页
     currentChange(page) {
       this.$emit('currentChange', page)
