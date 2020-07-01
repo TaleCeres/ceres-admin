@@ -1,15 +1,13 @@
 <template>
   <div class="image-upload">
-    <el-upload
-      class="img-uploader"
-      action=""
-      :show-file-list="false"
-      :http-request="uploadFile"
-      :on-success="handleImageSuccess">
+    <el-upload class="img-uploader" action=""
+               :show-file-list="false"
+               :http-request="uploadFile"
+               :on-success="handleImageSuccess">
       <div v-if="img">
         <img :src="img" class="img" alt="暂无图片">
         <div class="control">
-          <i class="el-icon-close del" title="删除" @click.prevent.stop="delImage()"></i>
+          <i class="el-icon-close del" title="删除" @click.prevent.stop="delImage"></i>
           <div class="preview" title="更换图片">
             <i class="el-icon-edit"></i>
           </div>
@@ -18,7 +16,7 @@
               class="control-bottom-btn el-icon-view"
               title="预览"
               style="cursor: pointer;"
-              @click.stop="previewImg()"
+              @click.stop="previewImg"
             ></i>
           </div>
         </div>
