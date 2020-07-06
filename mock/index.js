@@ -7,12 +7,13 @@ import Mock from 'mockjs'
 import axios from 'axios'
 import { Notification } from 'element-ui'
 import { getUserInfo } from './modules/user'
+import { getRouteTree } from "./modules/menu";
 import { assignHandle } from '@/utils/request'
 
 Mock.mock('/mock/user', 'get', getUserInfo)
-
+// Mock.mock('http://192.168.10.59:8010/cms/route/tree', 'get', getRouteTree)
 Mock.setup({
-  timeout: 0, // Mock数据响应时间 
+  timeout: 0, // Mock数据响应时间
 })
 
 // 用于组件内调用: this.$mockApi.get('*')
@@ -39,7 +40,7 @@ function initAxiosInterceptor(_axios) {
         return Promise.reject(msg || '服务端异常')
       }
       return data
-    }, 
+    },
     error => {
       return Promise.reject(error)
     })

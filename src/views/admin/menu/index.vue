@@ -41,84 +41,19 @@
       </el-col>
     </el-row>
 
-    <el-dialog
-      :title="form.id ? '编辑菜单': '新建菜单'"
-      :visible.sync="dialogVisible"
-      :before-close="closeDialog"
-      width="600px">
-      <el-form ref="menuForm" :model="form" label-width="80px">
-        <el-form-item label="父级">
-          <treeselect
-            v-model="form.parent_id"
-            :normalizer="normalizer"
-            :options="menuOptions"
-            :show-count="true"
-            placeholder="选择上级菜单"/>
-        </el-form-item>
-        <el-form-item label="菜单名">
-          <el-input v-model="form.name"></el-input>
-        </el-form-item>
-        <el-form-item label="Title">
-          <el-input v-model="form.title"></el-input>
-        </el-form-item>
-        <el-form-item label="路径">
-          <el-input v-model="form.path"></el-input>
-        </el-form-item>
-        <el-form-item label="图标">
-          <el-popover
-            placement="bottom-start"
-            width="460"
-            trigger="click"
-            @show="$refs['iconSelect'].reset()"
-          >
-            <IconSelect ref="iconSelect" @selected="selected" />
-            <el-input slot="reference" v-model="form.icon" placeholder="点击选择图标" readonly>
-              <i
-                v-if="form.icon"
-                slot="prepend"
-                :class="form.icon"
-                class="el-input__icon"
-                style="height: 32px;width: 16px;"
-              />
-              <i v-else slot="prepend" class="el-icon-search el-input__icon" />
-            </el-input>
-          </el-popover>
-        </el-form-item>
-        <el-form-item label="组件路径">
-          <el-input v-model="form.component"></el-input>
-        </el-form-item>
-        <el-form-item label="菜单状态">
-          <el-radio-group v-model="form.hidden">
-            <el-radio :label="true">隐藏</el-radio>
-            <el-radio :label="false">显示</el-radio>
-          </el-radio-group>
-        </el-form-item>
-      </el-form>
-      <span slot="footer">
-        <el-button @click="closeDialog">取消</el-button>
-        <el-button type="primary" @click="onSubmit">确定</el-button>
-  </span>
-    </el-dialog>
+    <MenuForm :dialog-visible="dialogVisible" :form="form" @closeDialog="closeDialog" @handleSubmit="onSubmit"></MenuForm>
 
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-// import the component
-import Treeselect from '@riophae/vue-treeselect'
-// import the styles
-import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import RouteModel from '@/models/route'
-import UserModel from '@/models/user'
-import IconSelect from '@/components/base/IconSelect'
-
-let id = 1000
+import MenuForm from './MenuForm'
 
 export default {
   name: 'AdminMenu',
   components: {
-    Treeselect,
-    IconSelect,
+    MenuForm
   },
   data() {
     return {
@@ -144,38 +79,14 @@ export default {
     this.getRouteTree()
   },
   methods: {
-    // 选择图标
-    selected(name) {
-      this.form.icon = `fa ${name}`
-    },
+
     async getRouteTree() {
       try {
         const res = (await RouteModel.getRouteTree()) || []
         this.routeTree = [...res]
-        this.getTreeSelect()
         this.dragFlag = false
       } catch (e) {
         console.log(e)
-      }
-    },
-
-    // 树形选择器结构
-    async getTreeSelect() {
-      this.menuOptions = []
-      const res = (await RouteModel.getRouteTree()) || []
-      const menu = { id: 0, meta: { title: '主类目' }, children: [] }
-      menu.children = [...res]
-      this.menuOptions.push(menu)
-    },
-    /** 转换菜单数据结构 */
-    normalizer(node) {
-      if (node.children && !node.children.length) {
-        delete node.children
-      }
-      return {
-        id: node.id,
-        label: node.meta.title,
-        children: node.children
       }
     },
 
@@ -216,9 +127,9 @@ export default {
       })
     },
     // 新增路由
-    async createRoute() {
+    async createRoute(menu) {
       try {
-        await RouteModel.createRoute(this.form)
+        await RouteModel.createRoute(menu)
         this.$message.success('新增菜单成功')
         this.resetForm()
         this.getRouteTree()
@@ -261,21 +172,22 @@ export default {
       }
     },
 
-    onSubmit() {
-      if (this.form.id) {
-        this.editRoute()
+    onSubmit(menu) {
+      if (menu.id) {
+        this.editRoute(menu)
       } else {
-        this.createRoute()
+        this.createRoute(menu)
       }
     },
 
     // 保存编辑后的路由
-    async editRoute() {
+    async editRoute(menu) {
       try {
-        await RouteModel.editRoute(this.form.id, this.form)
+        await RouteModel.editRoute(menu.id, menu)
         this.$message.success('菜单编辑成功')
         this.getRouteTree()
         this.dialogVisible = false
+        this.resetForm()
       } catch (e) {
         this.$message.error('菜单编辑失败！')
       }
