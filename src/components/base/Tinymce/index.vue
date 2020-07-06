@@ -1,5 +1,5 @@
 <template>
-  <Editor id="tinymceEditor" :key="tinymceFlag" v-model="content" :init="tinymceInit" />
+  <Editor :id="id" :key="tinymceFlag" v-model="content" :init="tinymceInit" />
 </template>
 <script>
 /* eslint-disable */
@@ -16,6 +16,10 @@ export default {
     Editor,
   },
   props: {
+    id: {
+      type: String,
+      default: 'tinymceEditor',
+    },
     defaultContent: {
       type: String,
       default: '',

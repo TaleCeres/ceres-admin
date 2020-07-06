@@ -34,15 +34,13 @@
       @currentChange = "currentChange"
     />
     <NoticeForm
-      :dialog-visible="dialogAddVisible"
-      @submit="addNotice"
-      @close="dialogAddVisible = false"></NoticeForm>
+      :dialog-visible.sync="dialogAddVisible"
+      @submit="addNotice"></NoticeForm>
 
     <NoticeForm
       :id="editId"
-      :dialog-visible="dialogEditVisible"
-      @submit="editNotice"
-      @close="closeEditForm"></NoticeForm>
+      :dialog-visible.sync="dialogEditVisible"
+      @submit="editNotice"></NoticeForm>
   </el-card>
 </template>
 

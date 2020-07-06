@@ -21,7 +21,7 @@
         <el-radio v-model="notice.status" :label="false">关闭</el-radio>
       </el-form-item>
       <el-form-item label="内容" prop="content">
-        <Tinymce :default-content="notice.content" :height="240" @change="changeContent"/>
+        <Tinymce :id="formName" :default-content="notice.content" :height="240" @change="changeContent"/>
       </el-form-item>
     </el-form>
     <span slot="footer">
@@ -116,7 +116,8 @@ export default {
     },
     handleClose() {
       this.$refs[this.formName].resetFields()
-      this.$emit('close')
+      // this.$emit('close')
+      this.$emit('update:dialogVisible', false)
     },
     changeContent(val) {
       this.notice.content = val

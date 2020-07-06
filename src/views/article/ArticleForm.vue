@@ -23,33 +23,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="主图">
-          <el-upload
-            class="img-uploader"
-            action=""
-            :show-file-list="false"
-            :http-request="uploadFile"
-            :on-success="handleImageSuccess">
-            <div v-if="article.img">
-              <img :src="article.img" class="img">
-              <div class="control">
-                <i class="el-icon-close del" title="删除" @click.prevent.stop="delImage()"></i>
-                <div class="preview" title="更换图片">
-                  <i class="el-icon-edit"></i>
-                </div>
-                <div class="control-bottom">
-                  <i
-                    class="control-bottom-btn el-icon-view"
-                    title="预览"
-                    style="cursor: pointer;"
-                    @click.stop="previewImg()"
-                  ></i>
-                </div>
-              </div>
-            </div>
-            <div v-else class="img-uploader-icon">
-              <i slot="trigger" class="el-icon-plus"></i>
-            </div>
-          </el-upload>
+          <ImageUpload :img.sync="article.img" @uploadImage="uploadFile"></ImageUpload>
         </el-form-item>
         <el-form-item label="摘要">
           <el-input
@@ -63,10 +37,6 @@
           <Tinymce :upload_url="uploadUrl" :default-content="article.content" @change="changeContent"/>
         </el-form-item>
       </el-form>
-
-      <el-dialog :visible.sync="dialogVisible">
-        <img width="100%" :src="article.img" alt="">
-      </el-dialog>
     </div>
 </template>
 
@@ -74,10 +44,12 @@
 import Tinymce from '@/components/base/Tinymce'
 import FileModel from '@/models/file'
 import config from '../../config'
+import ImageUpload from '@/components/base/ImageUpload'
 export default {
   name: 'ArticleForm',
   components: {
-    Tinymce
+    Tinymce,
+    ImageUpload
   },
   props: {
     title: {
@@ -117,21 +89,12 @@ export default {
     }
   },
   methods: {
-    handleImageSuccess(res, file) {
-      this.article.img = URL.createObjectURL(file.raw)
-    },
     uploadFile(param) { // 上传的函数
       const formData = new FormData()
       formData.append('file', param.file)
       FileModel.uploadFile(68, formData).then(res => {
         this.article.img = res[0].url
       })
-    },
-    previewImg() {
-      this.dialogVisible = true
-    },
-    delImage() {
-      this.article.img = ''
     },
     changeContent(val) {
       this.article.content = val
