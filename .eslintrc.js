@@ -23,7 +23,9 @@ module.exports = {
     Vue规范文档: https://eslint.vuejs.org/rules
     */
     'vue/order-in-components': ['warn', {
-      'order': [ // 组件&实例的选项的顺序(参考: https://cn.vuejs.org/v2/style-guide/index.html#组件-实例的选项的顺序-推荐)
+      // 组件 & 实例的选项的顺序
+      // 参考: https://cn.vuejs.org/v2/style-guide/index.html # 组件-实例的选项的顺序-推荐
+      'order': [
         'el',
         'name',
         'parent',
@@ -62,8 +64,8 @@ module.exports = {
     'vue/prop-name-casing': ['error', 'camelCase'], // prop name 使用小驼峰命名法
     'vue/attribute-hyphenation': ['error', 'always'], // 特性name 使用连字符: <MyComponent my-prop="prop" />
     'vue/no-unused-components': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    /* js 规范
-
+    /*
+    * js 规范
     */
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off', // 使用控制台
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',

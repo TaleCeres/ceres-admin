@@ -8,7 +8,7 @@
         @refresh="getList"/>
     </div>
     <CeresTable
-      v-loading="loading" 
+      v-loading="loading"
       :pagination="pagination"
       :table-column="tableColumn"
       :table-data="tableData"
@@ -72,7 +72,7 @@ export default {
             return (
               <router-link class="path" to={`/admin/dict/data/${row.id}`}>{[row.type]}</router-link>
             )
-          }, 
+          },
           visible: true
         },
         {
@@ -83,7 +83,7 @@ export default {
             return (
               <span>{[row.status ? '正常' : '停用']}</span>
             )
-          }, 
+          },
           visible: true
         },
         { prop: 'remark', label: '备注', visible: true },
