@@ -53,7 +53,6 @@ export default {
       ],
       tableData: [],
       operate: [
-        { name: '子分类', func: 'handleDetail', type: 'success' },
         { name: '编辑', func: 'handleEdit', type: 'primary' },
         { name: '删除', func: 'handleDelete', type: 'danger' },
       ],
