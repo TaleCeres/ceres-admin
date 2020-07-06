@@ -16,7 +16,8 @@ export default {
       path: '/dashboard/index',
       component: 'dashboard/index',
       name: 'DashboardIndex',
-      meta: { title: '一览', icon: 'dashboard', affix: true }
+      meta: { title: '一览', icon: 'dashboard', affix: true },
+      children: []
     }
   ]
 }
