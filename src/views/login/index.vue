@@ -20,17 +20,33 @@
           <svg-icon slot="prefix" icon-class="password" class="el-input__icon input-icon" />
         </el-input>
       </el-form-item>
+      <el-form-item prop="isPassing">
+        <drag-verify
+          ref="dragVerify"
+          :width="320"
+          :is-passing.sync="form.isPassing"
+          text="请按住滑块拖动"
+          success-text="验证通过"
+          handler-icon="el-icon-d-arrow-right"
+          success-icon="el-icon-circle-check"
+        >
+        </drag-verify>
+      </el-form-item>
       <el-form-item style="width:100%;">
-        <el-button :loading="loading" size="medium" type="primary" style="width:100%;margin-top: 15px" @click.native.prevent="handleLogin">
+        <el-button :loading="loading"
+                   size="medium"
+                   type="primary"
+                   style="width:100%"
+                   @click.native.prevent="handleLogin">
           <span v-if="!loading">安 全 登 录</span>
           <span v-else>登 录 中...</span>
         </el-button>
       </el-form-item>
       <el-form-item class="guest">
-        <el-button :loading="loading" size="medium" type="primary" style="width:100%" @click.native.prevent="handleGuestLogin">
-          <span v-if="!loading">访 客 登 录</span>
-          <span v-else>登 录 中...</span>
-        </el-button>
+          <el-button :loading="loading" size="medium" type="text" @click.native.prevent="handleGuestLogin">
+            <span v-if="!loading">访 客 登 录</span>
+            <span v-else>登 录 中...</span>
+          </el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -41,9 +57,12 @@ import UserModel from '@/models/user'
 import { mapState, mapActions } from 'vuex'
 import Background from './images/背景.png'
 import FormBackground from './images/登陆框.png'
+import DragVerify from '@/components/base/DragVerify'
 export default {
   name: 'LoginIndex',
-  components: {},
+  components: {
+    DragVerify
+  },
   data() {
     return {
       FormBackground,
@@ -52,10 +71,20 @@ export default {
       form: {
         username: '999@qq.com',
         password: '123456',
+        isPassing: false,
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', message: '用户名不能为空' }],
         password: [{ required: true, trigger: 'blur', message: '密码不能为空' }],
+        isPassing: [
+          { validator: (rule, value, callback) => {
+            if (!value) {
+              return callback(new Error('拖动滑块验证'))
+            }
+            callback()
+          },
+          trigger: 'blur' }
+        ]
       },
     }
   },
@@ -69,17 +98,23 @@ export default {
       setUser: 'user/setUser',
     }),
     async handleLogin() {
-      const { username: account, password: secret } = this.form
-      this.loading = true
-      try {
-        await UserModel.getToken(account, secret)
-        await this.assignUserInfo()
-        this.loading = false
-        this.$router.push('/')
-        // this.$message.success('登录成功')
-      } catch (e) {
-        this.loading = false
-      }
+      this.$refs.loginForm.validate(async valid => {
+        if (valid) {
+          const { username: account, password: secret } = this.form
+          this.loading = true
+          try {
+            await UserModel.getToken(account, secret)
+            await this.assignUserInfo()
+            this.loading = false
+            this.$router.push('/')
+            // this.$message.success('登录成功')
+          } catch (e) {
+            this.loading = false
+          }
+        } else {
+          return false
+        }
+      })
     },
     async assignUserInfo() {
       const user = await UserModel.getInfo()
@@ -131,6 +166,7 @@ export default {
     }
     .guest {
       width:100%
+      text-align right
       .el-button--primary {
         background-color #707070
         border-color #707070
