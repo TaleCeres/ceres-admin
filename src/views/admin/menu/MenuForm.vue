@@ -1,6 +1,7 @@
 <template>
   <el-dialog
     :title="form.id ? '编辑菜单': '新建菜单'"
+    :close-on-click-modal="false"
     :visible.sync="dialogVisible"
     :before-close="closeDialog"
     width="600px">
@@ -19,7 +20,7 @@
       <el-form-item label="Title">
         <el-input v-model="form.title"></el-input>
       </el-form-item>
-      <el-form-item label="路径">
+      <el-form-item label="路由路径">
         <el-input v-model="form.path"></el-input>
       </el-form-item>
       <el-form-item label="图标">
@@ -88,11 +89,14 @@ export default {
         title: '',
         path: ''
       })
-    }
+    },
+    menuOptions: {
+      type: Array,
+      default: () => []
+    },
   },
   data() {
     return {
-      menuOptions: [],
     }
   },
   computed: {
@@ -100,7 +104,7 @@ export default {
   created() {
   },
   mounted() {
-    this.getTreeSelect()
+    console.log(this.menuOptions)
   },
   methods: {
     // 选择图标
