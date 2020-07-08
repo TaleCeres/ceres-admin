@@ -38,6 +38,7 @@ export default {
       component: 'article/edit',
       name: 'ArticleEdit',
       meta: { title: '编辑文章', icon: 'el-icon-house' },
+      hidden: true,
       children: []
     },
   ],

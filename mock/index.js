@@ -11,7 +11,7 @@ import { getRouteTree } from "./modules/menu";
 import { assignHandle } from '@/utils/request'
 
 Mock.mock('/mock/user', 'get', getUserInfo)
-// Mock.mock('http://192.168.10.80:8010/cms/route/tree', 'get', getRouteTree)
+Mock.mock('http://192.168.10.80:8010/cms/route/tree', 'get', getRouteTree)
 Mock.setup({
   timeout: 0, // Mock数据响应时间
 })

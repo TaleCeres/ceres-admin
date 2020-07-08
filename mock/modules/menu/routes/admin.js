@@ -73,6 +73,7 @@ export default {
         title: '字典数据',
         icon: 'fa fa-group',
       },
+      hidden: true,
       children: []
     },
     {

@@ -1,11 +1,11 @@
 export default {
+  id: 5,
+  order: 1,
+  parent_id: 0,
   path: '/about',
   name: 'About',
   redirect: '/about/index',
   component: undefined,
-  id: 5,
-  order: 1,
-  parent_id: 0,
   meta: {
     title: '关于',
     icon: 'fa fa-info-circle',

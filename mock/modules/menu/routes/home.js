@@ -1,9 +1,9 @@
 export default {
-  path: '/main',
-  name: 'Main',
   id: 1,
   order: 0,
   parent_id: 0,
+  path: '/main',
+  name: 'Main',
   component: undefined,
   meta: {
     title: '首页',
@@ -11,12 +11,12 @@ export default {
   },
   children: [
     {
-      path: '/home',
-      name: 'Home',
-      component: 'home/index',
       id: 3,
       order: 0,
       parent_id: 1,
+      path: '/home',
+      name: 'Home',
+      component: 'home/index',
       meta: {
         title: '主页面',
         icon: 'el-icon-menu',
@@ -25,12 +25,12 @@ export default {
       children: []
     },
     {
-      path: '/guide',
-      name: 'guide',
-      component: 'guide/index',
       id: 4,
       order: 1,
       parent_id: 1,
+      path: '/guide',
+      name: 'guide',
+      component: 'guide/index',
       meta: {
         title: '规范指南',
         icon: 'el-icon-setting',
