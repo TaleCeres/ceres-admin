@@ -81,7 +81,6 @@ export default {
   created() { },
   mounted() {
     this.getRouteTree()
-    // this.getTreeSelect()
   },
   methods: {
     // 树形选择器结构

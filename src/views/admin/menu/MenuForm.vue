@@ -104,7 +104,6 @@ export default {
   created() {
   },
   mounted() {
-    console.log(this.menuOptions)
   },
   methods: {
     // 选择图标
@@ -121,15 +120,6 @@ export default {
         label: node.meta.title,
         children: node.children
       }
-    },
-
-    // 树形选择器结构
-    async getTreeSelect() {
-      this.menuOptions = []
-      const res = (await RouteModel.getRouteTree()) || []
-      const menu = { id: 0, meta: { title: '主类目' }, children: [] }
-      menu.children = [...res]
-      this.menuOptions.push(menu)
     },
 
     closeDialog() {
