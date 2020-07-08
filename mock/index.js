@@ -6,7 +6,7 @@
 import Mock from 'mockjs'
 import axios from 'axios'
 import { Notification } from 'element-ui'
-import { getUserInfo } from './modules/user'
+import { getUserInfo } from './modules/model/user'
 import { getRouteTree } from "./modules/menu";
 import { assignHandle } from '@/utils/request'
 
