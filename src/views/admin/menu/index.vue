@@ -41,7 +41,11 @@
       </el-col>
     </el-row>
 
-    <MenuForm :dialog-visible="dialogVisible" :form="form" @closeDialog="closeDialog" @handleSubmit="onSubmit"></MenuForm>
+    <MenuForm
+      :dialog-visible="dialogVisible"
+      :form="form"
+      :menu-options="menuOptions"
+      @closeDialog="closeDialog" @handleSubmit="onSubmit"></MenuForm>
 
   </div>
 </template>
@@ -79,12 +83,21 @@ export default {
     this.getRouteTree()
   },
   methods: {
-
+    // 树形选择器结构
+    async getTreeSelect() {
+      let options = []
+      const res = (await RouteModel.getRouteTree()) || []
+      const menu = { id: 0, meta: { title: '主类目' }, children: [] }
+      menu.children = [...res]
+      options.push(menu)
+      this.menuOptions = options
+    },
     async getRouteTree() {
       try {
         const res = (await RouteModel.getRouteTree()) || []
         this.routeTree = [...res]
         this.dragFlag = false
+        this.getTreeSelect()
       } catch (e) {
         console.log(e)
       }
