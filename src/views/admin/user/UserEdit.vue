@@ -71,7 +71,6 @@ export default {
   methods: {
     async getAllGroups() {
       this.groups = (await AdminModel.getAllGroups()).items
-      console.log(this.groups)
     },
     async getUser() {
       const res = await User.getUser(this.editId)
