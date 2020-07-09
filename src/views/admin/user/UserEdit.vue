@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     async getAllGroups() {
-      this.groups = await AdminModel.getAllGroups()
+      this.groups = (await AdminModel.getAllGroups()).items
     },
     async getUser() {
       const res = await User.getUser(this.editId)
