@@ -36,7 +36,7 @@ export default {
   height 100%
   text-align left
   .container {
-    padding 0 30px
+    padding 0
   }
 }
 </style>

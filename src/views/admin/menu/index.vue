@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <el-row :gutter="20" style="padding: 20px 0">
+    <el-row :gutter="20">
       <el-col :span="16">
         <el-card>
           <div slot="header">
@@ -27,6 +27,14 @@
                 <span>{{ data.meta.title }}</span>
                 <router-link class="path" :to="data.path.toString()">{{data.path}}</router-link>
                 <div class="btn">
+                  <span>
+                    <el-tag v-if="data.component">菜单</el-tag>
+                    <el-tag v-else effect="dark">目录</el-tag>
+                  </span>
+                  <span style="margin: 0 10px 0 0;">
+                    <el-tag v-if="data.hidden" type="info">隐藏</el-tag>
+                    <el-tag v-else type="success">显示</el-tag>
+                  </span>
                   <el-button type="text" size="mini" :disabled="dragFlag" @click="edit(node, data)">
                     编辑
                   </el-button>
