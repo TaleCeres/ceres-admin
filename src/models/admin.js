@@ -37,7 +37,7 @@ export default class Admin {
   }
 
   static async dispatchPermissions(group_id, auth_ids) {
-    const res = await post('cms/auth', {
+    const res = await put('cms/auth/append', {
       group_id,
       auth_ids,
     })
@@ -45,7 +45,7 @@ export default class Admin {
   }
 
   static async removePermissions(group_id, auth_ids) {
-    const res = await _delete('cms/auth', {
+    const res = await put('cms/auth/remove', {
       group_id,
       auth_ids,
     })
