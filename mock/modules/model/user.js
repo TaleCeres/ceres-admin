@@ -14,3 +14,15 @@ export const getUserInfo = options => {
     msg: '',
   }
 }
+
+export const getToken = options => {
+  // options为前端的 request信息
+  const data = {
+    token: Random.string(),
+  }
+  return {
+    data,
+    error_code: 0,
+    msg: '',
+  }
+}

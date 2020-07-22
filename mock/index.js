@@ -6,12 +6,13 @@
 import Mock from 'mockjs'
 import axios from 'axios'
 import { Notification } from 'element-ui'
-import { getUserInfo } from './modules/model/user'
-import { getRouteTree } from "./modules/menu";
+import { getUserInfo, getToken } from './modules/model/user'
+import { getRouteTree } from "./modules/menu"
 import { assignHandle } from '@/utils/request'
 
-Mock.mock('/mock/user', 'get', getUserInfo)
-Mock.mock('http://192.168.10.80:8010/cms/route/tree', 'get', getRouteTree)
+Mock.mock('http://192.168.10.70:8010/v1/user', 'get', getUserInfo)
+Mock.mock('http://192.168.10.70:8010/v1/token', 'post', getToken)
+Mock.mock('http://192.168.10.70:8010/cms/route/tree', 'get', getRouteTree)
 Mock.setup({
   timeout: 0, // Mock数据响应时间
 })
