@@ -82,7 +82,7 @@ export default {
 .main {
   margin 2px 0 0 2px // 避免过于紧凑
   overflow-x hidden
-  padding 10px 20px
+  padding 10px 10px
   background-color #f3f3f4
 }
 </style>

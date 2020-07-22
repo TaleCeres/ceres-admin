@@ -49,11 +49,8 @@
       </el-col>
     </el-row>
 
-    <MenuForm
-      :dialog-visible="dialogVisible"
-      :form="form"
-      :menu-options="menuOptions"
-      @closeDialog="closeDialog" @handleSubmit="onSubmit"></MenuForm>
+    <MenuForm :dialog-visible="dialogVisible" :form="form" :menu-options="menuOptions"
+              @closeDialog="closeDialog" @handleSubmit="onSubmit" />
 
   </div>
 </template>
@@ -219,7 +216,7 @@ export default {
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
   .container {
-    min-width 900px
+    max-width 900px
     .block {
       .custom-tree-node {
         width 100%
