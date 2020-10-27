@@ -15,35 +15,60 @@
               :closable="false"
               type="info">
             </el-alert>
-            <el-tree
-              :data="routeTree"
-              node-key="id"
-              draggable
-              default-expand-all
-              :expand-on-click-node="false"
-              @node-drop="handleDrop">
-              <div slot-scope="{ node, data }" class="custom-tree-node">
-                <i :class="data.meta.icon"></i>
-                <span>{{ data.meta.title }}</span>
-                <router-link class="path" :to="data.path.toString()">{{data.path}}</router-link>
-                <div class="btn">
-                  <span>
-                    <el-tag v-if="data.component">菜单</el-tag>
-                    <el-tag v-else effect="dark">目录</el-tag>
-                  </span>
-                  <span style="margin: 0 10px 0 0;">
-                    <el-tag v-if="data.hidden" type="info">隐藏</el-tag>
-                    <el-tag v-else type="success">显示</el-tag>
-                  </span>
-                  <el-button type="text" size="mini" :disabled="dragFlag" @click="edit(node, data)">
-                    编辑
-                  </el-button>
-                  <el-button type="text" size="mini" :disabled="dragFlag" @click="remove(node, data)">
-                    删除
-                  </el-button>
+            <MenuTree v-model="routeTree" :drag-flag="dragFlag" @input="handleDrop">
+              <template v-slot="{ data }">
+                <div class="menu-item">
+                  <i :class="data.meta.icon"></i>
+                  <span>{{ data.meta.title }}</span>
+                  <router-link class="path" :to="data.path.toString()">{{data.path}}</router-link>
+                  <div class="btn clearfix">
+                    <span>
+                      <el-tag v-if="data.component">菜单</el-tag>
+                      <el-tag v-else effect="dark">目录</el-tag>
+                    </span>
+                    <span style="margin: 0 10px 0 0;">
+                      <el-tag v-if="data.hidden" type="info">隐藏</el-tag>
+                      <el-tag v-else type="success">显示</el-tag>
+                    </span>
+                    <el-button type="text" size="mini" :disabled="dragFlag" @click="edit(data)">
+                      编辑
+                    </el-button>
+                    <el-button type="text" size="mini" :disabled="dragFlag" @click="remove(data)">
+                      删除
+                    </el-button>
+                  </div>
                 </div>
-              </div>
-            </el-tree>
+              </template>
+            </MenuTree>
+<!--            <el-tree-->
+<!--              :data="routeTree"-->
+<!--              node-key="id"-->
+<!--              draggable-->
+<!--              default-expand-all-->
+<!--              :expand-on-click-node="false"-->
+<!--              @node-drop="handleDrop">-->
+<!--              <div slot-scope="{ node, data }" class="custom-tree-node">-->
+<!--                <i :class="data.meta.icon"></i>-->
+<!--                <span>{{ data.meta.title }}</span>-->
+<!--                <router-link class="path" :to="data.path.toString()">{{data.path}}</router-link>-->
+<!--                <div class="btn">-->
+<!--                  <span>-->
+<!--                    <el-tag v-if="data.component">菜单</el-tag>-->
+<!--                    <el-tag v-else effect="dark">目录</el-tag>-->
+<!--                  </span>-->
+<!--                  <span style="margin: 0 10px 0 0;">-->
+<!--                    <el-tag v-if="data.hidden" type="info">隐藏</el-tag>-->
+<!--                    <el-tag v-else type="success">显示</el-tag>-->
+<!--                  </span>-->
+<!--                  <el-button type="text" size="mini" :disabled="dragFlag" @click="edit(node, data)">-->
+<!--                    编辑-->
+<!--                  </el-button>-->
+<!--                  <el-button type="text" size="mini" :disabled="dragFlag" @click="remove(node, data)">-->
+<!--                    删除-->
+<!--                  </el-button>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </el-tree>-->
           </div>
         </el-card>
       </el-col>
@@ -59,10 +84,14 @@
 import RouteModel from '@/models/route'
 import MenuForm from './MenuForm'
 
+import DragMenuItem from './MenuItem'
+import MenuTree from './MenuTree'
 export default {
   name: 'AdminMenu',
   components: {
-    MenuForm
+    MenuForm,
+    DragMenuItem,
+    MenuTree
   },
   data() {
     return {
@@ -109,7 +138,7 @@ export default {
     },
 
     // 编辑菜单
-    edit(note, data) {
+    edit(data) {
       // 弹出浮层
       // el-tree作为浮动成，而el-table的树形数据与懒加载作为展现成
       // el-tree的拖动影响el-table的展示
@@ -129,7 +158,7 @@ export default {
     },
 
     // 删除菜单
-    remove(node, data) {
+    remove(data) {
       this.$confirm('此操作将永久删除该菜单及其子菜单, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -218,7 +247,7 @@ export default {
   .container {
     max-width 900px
     .block {
-      .custom-tree-node {
+      .menu-item {
         width 100%
         line-height 44px
         span {
@@ -229,7 +258,17 @@ export default {
           margin-left 10px
         }
         .btn {
-          float right !important
+          float right
+        }
+        .clearfix {
+          &:after {
+            visibility hidden
+            display block
+            font-size 0
+            content ' '
+            clear both
+            height 0
+          }
         }
       }
     }
