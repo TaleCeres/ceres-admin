@@ -10,8 +10,9 @@
           @handleCheckAllChange="handleCheckAllChange"
           @refresh="getList"/>
       </div>
-      <CeresTable v-loading="loading"
+      <CeresTable v-loading="loading" :pagination="pagination"
                   :table-column="tableColumn" :table-data="tableData" :operate="operate"
+                  @currentChange="currentChange"
                   @handleEdit="handleEdit" @handleDelete="handleDelete" />
     </div>
     <user-edit v-if="showEdit" :edit-id="editID" @handleHide="handleHide" />
@@ -49,7 +50,7 @@ export default {
       editID: '',
       currentPage: 1,
       pagination: {
-        pageSize: 10,
+        pageSize: this.$pagination.pageSize,
         pageTotal: 0
       },
     }
@@ -67,6 +68,7 @@ export default {
       this.loading = true
       const data = await UserModel.getUserList(this.currentPage, this.pagination.pageSize)
       this.tableData = [...data.items]
+      this.pagination.pageTotal = data.total
       this.loading = false
     },
     handleEdit(val) {
@@ -81,6 +83,10 @@ export default {
       this.showEdit = false
       this.getList()
     },
+    currentChange(val) {
+      this.currentPage = val
+      this.getList()
+    }
   },
 }
 </script>
