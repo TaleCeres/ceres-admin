@@ -33,7 +33,7 @@ export default {
       loading: true,
       currentPage: 1,
       pagination: {
-        pageSize: 10,
+        pageSize: this.$pagination.pageSize,
         pageTotal: 0
       },
       tableColumn: [
@@ -75,7 +75,7 @@ export default {
       // eslint-disable-next-line camelcase
       let query = {
         page: this.currentPage,
-        size: 10
+        size: this.pagination.pageSize
       }
       const { current_page: currentPage, items, total } = await ConfigModel.getList(query)
       this.currentPage = currentPage
@@ -88,6 +88,10 @@ export default {
       this.$message.success('删除成功!')
       await this.getList()
     },
+    currentChange(val) {
+      this.currentPage = val
+      this.getList()
+    }
   },
 }
 </script>
