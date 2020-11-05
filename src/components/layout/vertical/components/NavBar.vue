@@ -71,7 +71,6 @@ export default {
     align-items center
 
   .left-menu
-    min-width 958px
     .icon-font
       margin 0 10px
       font-size 22px

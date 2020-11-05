@@ -1,6 +1,7 @@
 <template>
   <div class="sidebar">
     <el-menu
+      id="menu"
       :router="true"
       mode="horizontal"
       :default-active="defaultActive"
@@ -27,14 +28,12 @@
 
             <!-- 二级菜单有且只有一个三级菜单 -->
               <el-menu-item v-if="!canUnflod(subItem)" :key="subItem.name" :index="defaultRoute(subItem).path">
-                <i :class="subItem.meta.icon"></i>
                 <span>{{ subItem.meta.title }}</span>
               </el-menu-item>
 
             <!-- 二级菜单有多个三级菜单 -->
             <el-submenu v-else-if="subItem.children && subItem.children.length > 0" :key="subItem.name" :index="subItem.path">
               <template slot="title">
-                <i :class="subItem.meta.icon"></i>
                 <span>{{ subItem.meta.title }}</span>
               </template>
               <!-- 三级菜单 -->
@@ -45,7 +44,6 @@
 
             <!-- 二级菜单没有三级菜单 -->
               <el-menu-item v-else :key="subItem.name" :index="subItem.path">
-                <i :class="subItem.meta.icon"></i>
                 <span>{{ subItem.meta.title }}</span>
               </el-menu-item>
 
@@ -59,17 +57,26 @@
 
 <script type="text/ecmascript-6">
 import { mapGetters } from 'vuex'
-import { flatten } from 'lodash'
+import { flatten, cloneDeep } from 'lodash'
 export default {
   name: 'SideBar',
   components: {},
   data() {
-    return {}
+    return {
+      sidebarList: this.$store.getters.sidebarList.concat([{
+        path: '/',
+        name: 'ellipsis',
+        component: undefined,
+        meta: {
+          icon: 'fa fa-ellipsis-h',
+        },
+        children: []
+      }])
+    }
   },
   computed: {
     ...mapGetters([
       'sidebar',
-      'sidebarList'
     ]),
     routes() {
       let { routes } = this.$router.options
@@ -82,9 +89,43 @@ export default {
   },
   created() { },
   mounted() {
-    // this._testRouterAttrs()
+    this.getOverflowedSubMenuItem()
+    // window.onresize = () => {
+    //   this.getOverflowedSubMenuItem()
+    // }
   },
   methods: {
+    getOverflowedSubMenuItem() {
+      let menuList = cloneDeep(this.sidebarList)
+      const ul = document.getElementById('menu')
+      const width = ul.clientWidth
+      const overflowedIndicatorWidth = ul.children[ul.children.length - 1].clientWidth
+      let menuSizes = []
+      for (let i = 0; i < ul.children.length; i += 1) {
+        menuSizes.push(ul.children[i].clientWidth)
+      }
+      const originalTotalWidth = menuSizes.reduce((acc, cur) => acc + cur, 0)
+      let lastVisibleIndex = -1
+      let currentSumWidth = 0
+      menuSizes.forEach(liWidth => {
+        currentSumWidth += liWidth
+        if (currentSumWidth + overflowedIndicatorWidth <= width) {
+          lastVisibleIndex += 1
+        }
+      })
+      for (let i = 0; i < menuList.length; i += 1) {
+        if (i > lastVisibleIndex && i !== menuList.length - 1) {
+          const item = cloneDeep(menuList[i])
+          menuList[menuList.length - 1].children.push(item)
+          menuList.splice(i, 1)
+          i -= 1
+        }
+      }
+      if (menuList[menuList.length - 1].children.length === 0) {
+        menuList.splice(menuList.length - 1, 1)
+      }
+      this.sidebarList = cloneDeep(menuList)
+    },
     defaultRoute(route) {
       return route.children[0]
     },
@@ -136,3 +177,14 @@ export default {
   }
 }
 </style>
+
+<!--<style lang="stylus" rel="stylesheet/stylus">-->
+<!--  .sidebar {-->
+<!--    .el-menu&#45;&#45;horizontal>.el-menu-item {-->
+<!--    width: 145px-->
+<!--    }-->
+<!--  .el-menu&#45;&#45;horizontal>.el-submenu {-->
+<!--    width: 145px-->
+<!--  }-->
+<!--  }-->
+<!--</style>-->
