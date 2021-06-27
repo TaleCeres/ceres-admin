@@ -7,11 +7,6 @@
       <SideBar />
     </div>
     <div class="right-menu">
-      <el-tooltip effect="dark" content="数据大屏" placement="bottom">
-        <router-link to="/data-graph/overview">
-          <fa-icon icon-name="area-chart" style="margin-right: 15px;" />
-        </router-link>
-      </el-tooltip>
       <el-tooltip effect="dark" content="全屏显示" placement="bottom">
         <Screenfull style="margin-right: 15px;" />
       </el-tooltip>

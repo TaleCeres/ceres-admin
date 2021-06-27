@@ -58,7 +58,7 @@ export default {
   created() { },
   async mounted() {
     // await this.$mockApi.inject(this, 'name').get('user')
-    await UserModel.getToken('999@qq.com', '123456')
+    await UserModel.getToken('admin@email.com', '123456')
     await UserModel.getInfo()
     this.getList()
   },

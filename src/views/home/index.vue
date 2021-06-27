@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    Welcome to Your Vue.js App
+    票据管理平台
   </div>
 </template>
 

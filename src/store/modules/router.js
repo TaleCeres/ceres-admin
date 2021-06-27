@@ -91,7 +91,7 @@ const mutations = {
 const actions = {
   getRoutes({ commit }) {
     return new Promise(resolve => {
-      RouteModel.getRouteTree().then(res => {
+      RouteModel.getUserMenu().then(res => {
         let routes = res.map(loadingComponent)
         let sidebarList = res.map(loadingComponent)
         commit('SET_ROUTES', routes)

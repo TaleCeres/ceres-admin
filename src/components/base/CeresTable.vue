@@ -1,10 +1,12 @@
 <template>
   <div class="ceres-table">
-    <el-table :data="tableData" border style="width: 100%" @selection-change="handleSelectionChange">
+    <el-table :data="tableData" border style="width: 100%" @selection-change="handleSelectionChange" @sort-change="sortChange">
       <el-table-column v-if="selection" type="selection" width="55">
       </el-table-column>
-      <el-table-column v-for="item in $tableColumn" :key="item.prop" :prop="item.prop" :label="item.label" :width="item.width"
-                       :formatter="item.render" :show-overflow-tooltip="true">
+      <el-table-column v-for="item in $tableColumn" :key="item.prop" :prop="item.prop" :label="item.label"
+                       :type="item.type" :sortable="item.sortable" :width="item.width"
+                       :formatter="item.render" :show-overflow-tooltip="true"
+      >
       </el-table-column>
       <el-table-column v-if="operate.length > 0" fixed="right" label="操作" width="240">
         <template slot-scope="scope">
@@ -34,10 +36,13 @@
       v-if="pagination"
       class="pagination"
       background
-      layout="total, prev, pager, next"
+      layout="total, sizes, prev, pager, next, jumper"
+      :current-page.sync="currentPage"
+      :page-sizes="pagination.pageSizes ? pagination.pageSizes : [10, 20, 30, 50]"
       :page-size="pagination.pageSize ? pagination.pageSize : 10"
       :total="pagination.pageTotal ? pagination.pageTotal : null"
       @current-change="currentChange"
+      @size-change="handleSizeChange"
     />
   </div>
 </template>
@@ -67,11 +72,16 @@ export default {
       type: [Object, Boolean],
       default: false,
     },
+    currentPage: {
+      // 当前页
+      type: Number,
+      default: 1
+    },
     selection: {
       // 选择
       type: Boolean,
       default: false
-    }
+    },
   },
   data() {
     return {}
@@ -106,11 +116,18 @@ export default {
     currentChange(page) {
       this.$emit('currentChange', page)
     },
+    handleSizeChange(pageSize) {
+      this.$emit('handleSizeChange', pageSize)
+    },
     // 表格行选中
     handleSelectionChange(val) {
       if (this.selection) {
         this.$emit('selectionChange', val)
       }
+    },
+    // 排序改变
+    sortChange(column, prop, order) {
+      this.$emit('sortChange', { column, prop, order })
     }
   },
 }

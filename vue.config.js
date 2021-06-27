@@ -5,6 +5,8 @@ const path = require('path')
 const port = 8080 // dev port
 
 module.exports = {
+  outputDir: '../xSnatch-v2/app/templates',
+  assetsDir: 'static',
   configureWebpack: {
     devtool: 'source-map', // cheap-module-source-map & source-map
   },

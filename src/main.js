@@ -10,10 +10,10 @@ import './assets/icons'
 import '../node_modules/font-awesome/css/font-awesome.css'
 import 'assets/styles/index.styl'
 
-if (process.env.NODE_ENV !== 'production') {
-  // eslint-disable-next-line
-  require('../mock')
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   // eslint-disable-next-line
+//   require('../mock')
+// }
 
 Vue.config.productionTip = false
 

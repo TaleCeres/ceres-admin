@@ -8,7 +8,7 @@
       label-width="0px"
       class="login-form">
       <h3 class="title">
-        Ceres-Admin
+        票据管理平台
       </h3>
       <el-form-item prop="username">
         <el-input v-model="form.username" type="text" auto-complete="off" placeholder="用户名">
@@ -69,7 +69,7 @@ export default {
       Background,
       loading: false, // 加载动画
       form: {
-        username: '999@qq.com',
+        username: 'admin@email.com',
         password: '123456',
         isPassing: false,
       },
@@ -127,7 +127,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style scoped lang="stylus" rel="stylesheet/stylus">
   .login {
     display: flex;
     justify-content: center;
@@ -148,7 +148,7 @@ export default {
     padding: 80px 120px 50px 120px;
     background-image url("./images/登陆框.png")
     background-size 100% 100%
-    .el-input {
+    >>> .el-input {
       height: 38px;
       input {
         padding-left 42px
@@ -167,12 +167,12 @@ export default {
     .guest {
       width:100%
       text-align right
-      .el-button--primary {
+      >>> .el-button--primary {
         background-color #707070
         border-color #707070
       }
     }
-  .el-button--primary {
+  >>> .el-button--primary {
     background-color #46B0E2
     span {
       font-weight bold

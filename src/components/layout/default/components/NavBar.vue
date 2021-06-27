@@ -6,21 +6,10 @@
     </div>
     <div class="right-menu">
       <Search id="header-search" style="margin-right: 15px;" />
-      <el-tooltip effect="dark" content="数据大屏" placement="bottom">
-        <router-link to="/data-graph/overview">
-          <fa-icon icon-name="area-chart" style="margin-right: 15px;" />
-        </router-link>
-      </el-tooltip>
       <el-tooltip effect="dark" content="全屏显示" placement="bottom">
         <Screenfull style="margin-right: 15px;" />
       </el-tooltip>
-      <LangSelect style="margin-right: 15px;" />
       <SizeSelect style="margin-right: 15px;" />
-      <el-tooltip content="文档地址" effect="dark" placement="bottom">
-        <a target="_blank" href="http://blog.ivinetrue.com/ceres-admin/">
-          <fa-icon icon-name="book" style="margin-right: 15px;" />
-        </a>
-      </el-tooltip>
       <UserCard style="margin-right: 10px;" />
     </div>
   </nav>

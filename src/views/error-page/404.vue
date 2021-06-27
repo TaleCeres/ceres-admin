@@ -30,7 +30,7 @@ export default {
     return {
       img404,
       img404Cloud,
-      company: '杭州谷逸网络科技',
+      company: '****',
     }
   },
   computed: {

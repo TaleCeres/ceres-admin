@@ -7,7 +7,7 @@
  */
 
 export default {
-  title: '物耀安全科技(杭州)有限公司',
+  title: '票据管理平台',
   baseURL: process.env.VUE_APP_BASE_URL,
   layout: {
     type: 'default', // 左右布局: default; T型布局: t-type; 上下布局: vertical

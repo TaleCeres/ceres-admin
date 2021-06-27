@@ -60,4 +60,10 @@ export default class Route {
     })
     return data
   }
+
+  // 根据用户ID, 获取菜单
+  static async getUserMenu(id) {
+    const data = await get('cms/menu')
+    return data
+  }
 }
