@@ -61,7 +61,6 @@ export default {
         ruleStringList.forEach((item, index) => {
           const arr = item.split(',')
           if (arr.length !== 9) {
-            console.log('123131')
             this.errorRuleNum += 1
             this.errorRuleList.push({ index, content: item, msg: '参数个数错误' })
           } else {
