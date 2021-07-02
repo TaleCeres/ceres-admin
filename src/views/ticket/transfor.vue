@@ -150,6 +150,7 @@ export default {
         ruleObjList.forEach(ruleItem => {
           let num = (ruleItem.annual_interest * 1000 + paramItem.interestDiff * 1000) / 1000
           let annualInterest = Number(num.toFixed(5))
+          console.log('ruleItem', ruleItem)
           resultObjList.push({
             acceptance: paramItem.acceptance, // 承兑人名称
             annual_interest: annualInterest, // 年化｜利率
@@ -157,9 +158,9 @@ export default {
             amt_end: ruleItem.amt_end, // 票面金额最大值
             dis_day_start: ruleItem.dis_day_start, // 日期区间最小值
             dis_day_end: ruleItem.dis_day_end, // 日期区间最大值
-            is_flaw: ruleItem.is_flaw === 'true', // 是否有瑕疵
+            is_flaw: ruleItem.is_flaw, // 是否有瑕疵
             fee_of_lakh: ruleItem.fee_of_lakh, // 每十万扣息
-            is_open_margin: ruleItem.is_open_margin === 'true' // 是否有保单
+            is_open_margin: ruleItem.is_open_margin // 是否有保单
           })
         })
       })
